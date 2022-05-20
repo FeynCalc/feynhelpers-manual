@@ -1,0 +1,187 @@
+% !TeX program = pdflatex
+% !TeX root = FIRECreateIntegralFile.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{firecreateintegralfile}{
+\section{FIRECreateIntegralFile}\label{firecreateintegralfile}\index{FIRECreateIntegralFile}}
+
+\texttt{FIRECreateIntegralFile[\allowbreak{}ex,\ \allowbreak{}topo,\ \allowbreak{}fireID,\ \allowbreak{}path]}
+extracts \texttt{GLI} symbols from \texttt{ex} that belong to the
+topology \texttt{topo}. The resulting list of integrals is saved to
+\texttt{path/topoName/LoopIntegrals.m} and can be referred to in the
+corresponding FIRE .config file.
+
+If the directory specified in \texttt{path/topoName} does not exist, it
+will be created automatically. If it already exists, its content will be
+automatically overwritten, unless the option \texttt{OverwriteTarget} is
+set to \texttt{False}.
+
+If no \texttt{fireID} is given, i.e.~the function is called as
+\texttt{FIRECreateIntegralFile[\allowbreak{}topo,\ \allowbreak{} path]},
+then the default value \texttt{4242} is used.
+
+Notice that \texttt{ex} may also contain integrals from different
+topologies, as long as all those topologies are provided as a list in
+the \texttt{topo} argument.
+
+It is also possible to invoke the routine as
+\texttt{FIRECreateIntegralFile[\allowbreak{}ex,\ \allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}id1,\ \allowbreak{}id2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}path1,\ \allowbreak{}path2,\ \allowbreak{}...\}]}
+or
+\texttt{FIRECreateIntegralFile[\allowbreak{}ex,\ \allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}path1,\ \allowbreak{}path2,\ \allowbreak{}...\}]}if
+one needs to process a list of topologies.
+
+The syntax
+\texttt{FIRECreateIntegralFile[\allowbreak{}ex,\ \allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}id1,\ \allowbreak{}id2,\ \allowbreak{}...\},\ \allowbreak{}path]}
+or
+\texttt{FIRECreateIntegralFile[\allowbreak{}ex,\ \allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}path]}
+is also allowed. This implies that all config files will go into the
+corresponding subdirectories of path, e.g.~\texttt{path/topoName1},
+\texttt{path/topoName2} etc.
+
+The default name of the file containing loop integrals for the reduction
+is ``LoopIntegrals.m''. It can be changed via the option
+\texttt{FIREIntegrals}.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{firecreateconfigfile}{FIRECreateConfigFile},
+\hyperlink{fireintegrals}{FIREIntegrals}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ints }\ExtensionTok{=}\NormalTok{ la}\SpecialCharTok{\^{}}\DecValTok{8}\SpecialCharTok{*}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{7}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{9}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \SpecialCharTok{+} 
+\NormalTok{    la}\SpecialCharTok{\^{}}\DecValTok{8}\SpecialCharTok{*}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{6}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{8}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \SpecialCharTok{{-}} 
+\NormalTok{    la}\SpecialCharTok{\^{}}\DecValTok{7}\SpecialCharTok{*}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{6}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{8}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \SpecialCharTok{{-}} 
+\NormalTok{    la}\SpecialCharTok{\^{}}\DecValTok{8}\SpecialCharTok{*}\NormalTok{mg}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{6}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{8}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \SpecialCharTok{+} 
+\NormalTok{    la}\SpecialCharTok{\^{}}\DecValTok{8}\SpecialCharTok{*}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{5}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{3}\OperatorTok{,} \DecValTok{7}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \SpecialCharTok{{-}} 
+\NormalTok{    la}\SpecialCharTok{\^{}}\DecValTok{7}\SpecialCharTok{*}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{5}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{7}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \SpecialCharTok{{-}} 
+    \DecValTok{2}\SpecialCharTok{*}\NormalTok{la}\SpecialCharTok{\^{}}\DecValTok{8}\SpecialCharTok{*}\NormalTok{mg}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{5}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{3}\OperatorTok{,} \DecValTok{7}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \SpecialCharTok{+} 
+\NormalTok{    la}\SpecialCharTok{\^{}}\DecValTok{6}\SpecialCharTok{*}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{5}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{7}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \SpecialCharTok{+} 
+\NormalTok{    la}\SpecialCharTok{\^{}}\DecValTok{7}\SpecialCharTok{*}\NormalTok{mg}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{5}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{7}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \SpecialCharTok{+} 
+\NormalTok{    la}\SpecialCharTok{\^{}}\DecValTok{8}\SpecialCharTok{*}\NormalTok{mg}\SpecialCharTok{\^{}}\DecValTok{4}\SpecialCharTok{*}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{5}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{3}\OperatorTok{,} \DecValTok{7}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p3}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{mg}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{p3 . }\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{p1 . }\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{(p1 }\SpecialCharTok{{-}}\NormalTok{ p3)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{q}\OperatorTok{,} \FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCTopology}\left(\text{asyR3prop2Ltopo01310X11111N1},\left\{\frac{1}{(-\text{p1}^2-i \eta )},\frac{1}{(-\text{p3}^2+\text{mg}^2-i \eta )},\frac{1}{(-2 (\text{p3}\cdot q)-i \eta )},\frac{1}{(-2 (\text{p1}\cdot q)-i \eta )},\frac{1}{(-(\text{p1}-\text{p3})^2-i \eta )}\right\},\{\text{p1},\text{p3}\},\{q\},\left\{q^2\to \text{mb}^2\right\},\{\}\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fileName }\ExtensionTok{=}\NormalTok{ FIRECreateIntegralFile}\OperatorTok{[}\NormalTok{ints}\OperatorTok{,}\NormalTok{ topo}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}]]}\NormalTok{;}
+\NormalTok{fileName }\SpecialCharTok{//} \FunctionTok{FilePrint}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateIntegralFile: Number of loop integrals: }10
+\end{dmath*}
+
+\begin{verbatim}
+(*{{4242, {-7, 1, 1, 9, 1}}, {4242, {-6, 0, 2, 8, 1}}, 
+ {4242, {-6, 1, 1, 8, 1}}, {4242, {-6, 1, 2, 8, 1}}, 
+ {4242, {-5, -1, 3, 7, 1}}, {4242, {-5, 0, 2, 7, 1}}, 
+ {4242, {-5, 0, 3, 7, 1}}, {4242, {-5, 1, 1, 7, 1}}, 
+ {4242, {-5, 1, 2, 7, 1}}, {4242, {-5, 1, 3, 7, 1}}}*)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fileName }\ExtensionTok{=}\NormalTok{ FIRECreateIntegralFile}\OperatorTok{[}\NormalTok{ints}\OperatorTok{,}\NormalTok{ topo}\OperatorTok{,} \DecValTok{1500}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}]]}\NormalTok{;}
+\NormalTok{fileName }\SpecialCharTok{//} \FunctionTok{FilePrint}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateIntegralFile: Number of loop integrals: }10
+\end{dmath*}
+
+\begin{verbatim}
+(*{{1500, {-7, 1, 1, 9, 1}}, {1500, {-6, 0, 2, 8, 1}}, 
+ {1500, {-6, 1, 1, 8, 1}}, {1500, {-6, 1, 2, 8, 1}}, 
+ {1500, {-5, -1, 3, 7, 1}}, {1500, {-5, 0, 2, 7, 1}}, 
+ {1500, {-5, 0, 3, 7, 1}}, {1500, {-5, 1, 1, 7, 1}}, 
+ {1500, {-5, 1, 2, 7, 1}}, {1500, {-5, 1, 3, 7, 1}}}*)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIRECreateIntegralFile}\OperatorTok{[}\NormalTok{ints}\OperatorTok{,}\NormalTok{ topo}\OperatorTok{,} \DecValTok{1500}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}],}\NormalTok{ FCVerbose }\OtherTok{{-}\textgreater{}} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ex2 }\ExtensionTok{=}\NormalTok{ c1 GLI}\OperatorTok{[}\NormalTok{prop1l}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \SpecialCharTok{+}\NormalTok{ c2 GLI}\OperatorTok{[}\NormalTok{prop1l}\OperatorTok{,} \OperatorTok{\{}\DecValTok{2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}]} \SpecialCharTok{+}\NormalTok{ c3 GLI}\OperatorTok{[}\NormalTok{tad2l}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}]} \SpecialCharTok{+}\NormalTok{ c4 GLI}\OperatorTok{[}\NormalTok{tad2l}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]} \FunctionTok{l}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{c1} G^{\text{prop1l}}(1,1)+\text{c2} G^{\text{prop1l}}(2,0)+\text{c3} G^{\text{tad2l}}(1,1,0)+\text{c4} l G^{\text{tad2l}}(1,1,1)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topos }\ExtensionTok{=} \OperatorTok{\{}
+\NormalTok{   FCTopology}\OperatorTok{[}\NormalTok{prop1l}\OperatorTok{,} \OperatorTok{\{}\NormalTok{FAD}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ m1}\OperatorTok{\}],}\NormalTok{ FAD}\OperatorTok{[\{}\NormalTok{p1 }\SpecialCharTok{+} \FunctionTok{q}\OperatorTok{,}\NormalTok{ m2}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{\},} \OperatorTok{\{\}],} 
+   
+\NormalTok{   FCTopology}\OperatorTok{[}\NormalTok{tad2l}\OperatorTok{,} \OperatorTok{\{}\NormalTok{FAD}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ m1}\OperatorTok{\}],}\NormalTok{ FAD}\OperatorTok{[\{}\NormalTok{p2}\OperatorTok{,}\NormalTok{ m2}\OperatorTok{\}],}\NormalTok{ FAD}\OperatorTok{[\{}\NormalTok{p1 }\SpecialCharTok{{-}}\NormalTok{ p2}\OperatorTok{,}\NormalTok{ m3}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p2}\OperatorTok{\},} \OperatorTok{\{\},} \OperatorTok{\{\},} \OperatorTok{\{\}]} 
+  \OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{\text{FCTopology}\left(\text{prop1l},\left\{\frac{1}{\text{p1}^2-\text{m1}^2},\frac{1}{(\text{p1}+q)^2-\text{m2}^2}\right\},\{\text{p1}\},\{q\},\{\},\{\}\right),\text{FCTopology}\left(\text{tad2l},\left\{\frac{1}{\text{p1}^2-\text{m1}^2},\frac{1}{\text{p2}^2-\text{m2}^2},\frac{1}{(\text{p1}-\text{p2})^2-\text{m3}^2}\right\},\{\text{p1},\text{p2}\},\{\},\{\},\{\}\right)\right\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fileNames} \ExtensionTok{=}\NormalTok{ FIRECreateIntegralFile}\OperatorTok{[}\NormalTok{ex2}\OperatorTok{,}\NormalTok{ topos}\OperatorTok{,} \OperatorTok{\{}\DecValTok{112}\OperatorTok{,} \DecValTok{113}\OperatorTok{\},} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}]]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateIntegralFile: Number of loop integrals: }2
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateIntegralFile: Number of loop integrals: }2
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]]} \SpecialCharTok{//} \FunctionTok{FilePrint}
+
+\CommentTok{(*\{\{112, \{1, 1\}\}, \{112, \{2, 0}\RegionMarkerTok{\}\}\}}\CommentTok{*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{2}\OperatorTok{]]} \SpecialCharTok{//} \FunctionTok{FilePrint}
+
+\CommentTok{(*\{\{113, \{1, 1, 0\}\}, \{113, \{1, 1, 1}\RegionMarkerTok{\}\}\}}\CommentTok{*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIRECreateIntegralFile}\OperatorTok{[}\NormalTok{ex2}\OperatorTok{,}\NormalTok{ topos}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}],}\NormalTok{ FCVerbose }\OtherTok{{-}\textgreater{}} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} 
+\NormalTok{  FIREIntegrals }\OtherTok{{-}\textgreater{}} \StringTok{"LIs.m"}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\{\text{/home/vs/.Mathematica/Applications/FeynCalc/Database/prop1l/LIs.m},\text{/home/vs/.Mathematica/Applications/FeynCalc/Database/tad2l/LIs.m}\}
+\end{dmath*}
+\end{document}

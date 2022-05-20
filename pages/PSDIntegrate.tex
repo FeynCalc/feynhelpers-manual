@@ -1,0 +1,45 @@
+% !TeX program = pdflatex
+% !TeX root = PSDIntegrate.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{psdintegrate}{
+\section{PSDIntegrate}\label{psdintegrate}\index{PSDIntegrate}}
+
+\texttt{PSDIntegrate[\allowbreak{}]} is an auxiliary function that
+creates input for pySecDec's numerical integration routines. The output
+is returned in form of a string.
+
+\texttt{PSDIntegrate} is used by \texttt{PSDCreatePythonScripts} when
+assembling the integration script.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{psdcreatepythonscripts}{PSDCreatePythonScripts},
+\hyperlink{psdloopintegralfrompropagators}{PSDLoopIntegralFromPropagators},
+\hyperlink{psdlooppackage}{PSDLoopPackage},
+\hyperlink{psdloopregions}{PSDLoopRegions}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PSDIntegrate}\OperatorTok{[}\NormalTok{PSDRealParameterValues }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FloatTok{11.}\OperatorTok{,} \FloatTok{42.}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\{\text{.use$\_$Qmc($\backslash $n)},\text{(real$\_$parameters = num$\_$params$\_$real,$\backslash $ncomplex$\_$parameters = num$\_$params$\_$complex$\backslash $n)},\text{[11., 42.]},\text{[]}\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PSDIntegrate}\OperatorTok{[}\NormalTok{PSDRealParameterValues }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FloatTok{2.}\OperatorTok{,} \FloatTok{4.}\OperatorTok{\},}\NormalTok{ PSDIntegrator }\OtherTok{{-}\textgreater{}} \StringTok{"Vegas"}\OperatorTok{,}\NormalTok{ PSDMinEval }\OtherTok{{-}\textgreater{}} \DecValTok{10}\SpecialCharTok{\^{}}\DecValTok{5}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\{\text{.use$\_$Vegas($\backslash $nminxeval = 100000)},\text{(minxeval = 100000,$\backslash $nreal$\_$parameters = num$\_$params$\_$real,$\backslash $ncomplex$\_$parameters = num$\_$params$\_$complex$\backslash $n)},\text{[2., 4.]},\text{[]}\}
+\end{dmath*}
+\end{document}

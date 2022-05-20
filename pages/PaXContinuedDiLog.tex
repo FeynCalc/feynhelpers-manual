@@ -1,0 +1,69 @@
+% !TeX program = pdflatex
+% !TeX root = PaXContinuedDiLog.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paxcontinueddilog}{
+\section{PaXContinuedDiLog}\label{paxcontinueddilog}\index{PaXContinuedDiLog}}
+
+\texttt{PaXContinuedDiLog} corresponds to \texttt{ContinuedDiLog} in
+Package-X.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{(*Just to load Package{-}X*)}
+\NormalTok{  PaXEvaluate}\OperatorTok{[}\NormalTok{A0}\OperatorTok{[}\DecValTok{1}\OperatorTok{]]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{PaXContinuedDiLog} uses \texttt{X\textasciigrave ContinuedDiLog}
+for numerical evaluations
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PaXContinuedDiLog}\OperatorTok{[\{}\FloatTok{3.2}\OperatorTok{,} \FloatTok{1.0}\OperatorTok{\},} \OperatorTok{\{}\FloatTok{1.1}\OperatorTok{,} \FloatTok{1.0}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+-1.7089
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{X}\NormalTok{\textasciigrave{}ContinuedDiLog}\OperatorTok{[\{}\FloatTok{3.2}\OperatorTok{,} \FloatTok{1.0}\OperatorTok{\},} \OperatorTok{\{}\FloatTok{1.1}\OperatorTok{,} \FloatTok{1.0}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+-1.7089
+\end{dmath*}
+
+The same goes for derivatives and series expansions
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{D}\OperatorTok{[}\NormalTok{PaXContinuedDiLog}\OperatorTok{[\{}\FunctionTok{x}\OperatorTok{,}\NormalTok{ xInf}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{y}\OperatorTok{,}\NormalTok{ yInf}\OperatorTok{\}],} \FunctionTok{x}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+-\frac{y (-\log (x+i \;\text{xInf}\epsilon )-\log (y+i \;\text{yInf}\epsilon ))}{1-x y}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Series}\OperatorTok{[}\NormalTok{PaXContinuedDiLog}\OperatorTok{[\{}\FunctionTok{x}\OperatorTok{,}\NormalTok{ xInf}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{y}\OperatorTok{,}\NormalTok{ yInf}\OperatorTok{\}],} \OperatorTok{\{}\FunctionTok{x}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\mathcal{L}_2(1+i \;\text{xInf}\epsilon ,y+i \;\text{yInf}\epsilon )-\frac{(x-1) y \log (y+i \;\text{yInf}\epsilon )}{y-1}+\frac{(x-1)^2 \left(y^2 \log (y+i \;\text{yInf}\epsilon )-y^2+y\right)}{2 (y-1)^2}+O\left((x-1)^3\right)
+\end{dmath*}
+\end{document}

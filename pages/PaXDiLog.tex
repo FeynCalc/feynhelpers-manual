@@ -1,0 +1,68 @@
+% !TeX program = pdflatex
+% !TeX root = PaXDiLog.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paxdilog}{
+\section{PaXDiLog}\label{paxdilog}\index{PaXDiLog}}
+
+\texttt{PaXDiLog} corresponds to \texttt{DiLog} in Package-X.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{(*Just to load Package{-}X*)}
+\NormalTok{  PaXEvaluate}\OperatorTok{[}\NormalTok{A0}\OperatorTok{[}\DecValTok{1}\OperatorTok{]]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{PaXDiLog} uses \texttt{X\textasciigrave DiLog} for numerical
+evaluations
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PaXDiLog}\OperatorTok{[}\DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{\pi ^2}{6}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{X}\NormalTok{\textasciigrave{}DiLog}\OperatorTok{[}\DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{\pi ^2}{6}
+\end{dmath*}
+
+The same goes for derivatives and series expansions
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{D}\OperatorTok{[}\NormalTok{PaXDiLog}\OperatorTok{[}\FunctionTok{x}\OperatorTok{,} \SpecialCharTok{\textbackslash{}}\OperatorTok{[}\NormalTok{Alpha}\OperatorTok{]],} \FunctionTok{x}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+-\frac{\log (1-x+i \alpha \epsilon )}{x}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Series}\OperatorTok{[}\NormalTok{PaXDiLog}\OperatorTok{[}\FunctionTok{x}\OperatorTok{,} \SpecialCharTok{\textbackslash{}}\OperatorTok{[}\NormalTok{Alpha}\OperatorTok{]],} \OperatorTok{\{}\FunctionTok{x}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{5}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+x+\frac{x^2}{4}+\frac{x^3}{9}+\frac{x^4}{16}+\frac{x^5}{25}+O\left(x^6\right)
+\end{dmath*}
+\end{document}

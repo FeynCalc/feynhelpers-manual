@@ -1,0 +1,51 @@
+% !TeX program = pdflatex
+% !TeX root = FIRERunReduction.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{firerunreduction}{
+\section{FIRERunReduction}\label{firerunreduction}\index{FIRERunReduction}}
+
+\texttt{FIRERunReduction[\allowbreak{}path]} runs C++ FIRE on the FIRE
+.config file specified by path. To that aim the FIRE binary is started
+in the background via \texttt{RunProcess}. The function returns
+\texttt{True} if the evaluation succeeds and \texttt{False} otherwise.
+
+If \texttt{path} represents a full path to a file, then this file is
+used as the .config file. If it is just a path to a directory, then
+\texttt{path/topoName/topoName.config} is assumed to be the full path.
+
+The default path to the FIRE binary is
+\texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FIRE6",\ \allowbreak{}"bin",\ \allowbreak{}"FIRE6"\}]}.
+It can be modified via the option \texttt{FIREBinaryPath}.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{firecreateconfigfile}{FIRECreateConfigFile},
+\hyperlink{firecreatestartfile}{FIRECreateStartFile}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIRERunReduction}\OperatorTok{[}\FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynHelpersDirectory}\OperatorTok{,} \StringTok{"Documentation"}\OperatorTok{,} \StringTok{"Examples"}\OperatorTok{,} \StringTok{"asyR2prop2Ltopo13311X01201N1"}\OperatorTok{\}],}\NormalTok{ FCVerbose }\OtherTok{{-}\textgreater{}} \DecValTok{3}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FIRERunReduction: Full path to the FIRE binary: }\;\text{/home/vs/.Mathematica/Applications/FIRE6/bin/FIRE6}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FIRERunReduction: Working directory: }\;\text{/home/vs/.Mathematica/Applications/FeynCalc/AddOns/FeynHelpers/Documentation/Examples/asyR2prop2Ltopo13311X01201N1/}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FIRERunReduction: Config file: }\;\text{asyR2prop2Ltopo13311X01201N1}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{True}
+\end{dmath*}
+\end{document}

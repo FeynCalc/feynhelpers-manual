@@ -1,0 +1,26 @@
+% !TeX program = pdflatex
+% !TeX root = PaXImplicitPrefactor.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paximplicitprefactor}{
+\section{PaXImplicitPrefactor}\label{paximplicitprefactor}\index{PaXImplicitPrefactor}}
+
+\texttt{PaXImplicitPrefactor} is an option for \texttt{PaXEvaluate}. It
+specifies the prefactor that does not show up explicitly in the input
+expression, but is understood to appear in front of every 1-loop
+integral. For technical reasons, \texttt{PaXImplicitPrefactor} should
+not depend on the number of dimensions \texttt{D}. Instead you should
+explicitly specify what \texttt{D} is (e.g.~\texttt{4-2 Epsilon}). The
+default value is \texttt{1}.
+
+If the standard prefactor \(1/(2 \pi)^D\) is implicit in your
+calculations, use \texttt{ImplicitPrefactor -> 1/(2 Pi)^(4 - 2 Epsilon)}
+.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{paxevaluate}{PaXEvaluate}.
+
+\subsection{Examples}
+\end{document}

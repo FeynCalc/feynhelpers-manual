@@ -1,0 +1,30 @@
+% !TeX program = pdflatex
+% !TeX root = PaXEvaluateIR.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paxevaluateir}{
+\section{PaXEvaluateIR}\label{paxevaluateir}\index{PaXEvaluateIR}}
+
+\texttt{PaXEvaluateIR[\allowbreak{}expr,\ \allowbreak{}q]} is like
+\texttt{PaXEvaluate} but with the difference that it returns only the
+IR-divergent part of the result.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{paxevaluate}{PaXEvaluate},
+\hyperlink{paxevaluateuv}{PaXEvaluateUV},
+\hyperlink{paxevaluateuvirsplit}{PaXEvaluateUVIRSplit}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PaXEvaluateIR}\OperatorTok{[}\NormalTok{B0}\OperatorTok{[}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{p}\OperatorTok{],} \DecValTok{0}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{],}\NormalTok{ PaXSeries }\OtherTok{{-}\textgreater{}} \OperatorTok{\{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{p}\OperatorTok{],} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}\},}\NormalTok{ PaXAnalytic }\OtherTok{{-}\textgreater{}} \ConstantTok{True}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1}{2 \varepsilon _{\text{IR}}}-\frac{p^2}{2 m^2 \varepsilon _{\text{IR}}}
+\end{dmath*}
+\end{document}

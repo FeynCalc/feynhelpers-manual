@@ -1,0 +1,213 @@
+% !TeX program = pdflatex
+% !TeX root = FIRECreateConfigFile.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{firecreateconfigfile}{
+\section{FIRECreateConfigFile}\label{firecreateconfigfile}\index{FIRECreateConfigFile}}
+
+\texttt{FIRECreateConfigFile[\allowbreak{}topo,\ \allowbreak{}fireID,\ \allowbreak{}path]}
+automatically generates a FIRE .config file for the given topology
+\texttt{topo} with the FIRE-identifier \texttt{fireID} and saves it to
+\texttt{path/topoName} as \texttt{topoName.config} where
+\texttt{topoName} is the \texttt{FCTopology}-identifier. The function
+returns the full path to the generated .config file.
+
+If the directory specified in \texttt{path/topoName} does not exist, it
+will be created automatically. If it already exists, its content will be
+automatically overwritten, unless the option \texttt{OverwriteTarget} is
+set to \texttt{False}.
+
+If no \texttt{fireID} is given, i.e.~the function is called as
+\texttt{FIRECreateConfigFile[\allowbreak{}topo,\ \allowbreak{} path]},
+then the default value \texttt{4242} is used.
+
+It is also possible to invoke the routine as
+\texttt{FIRECreateConfigFile[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}id1,\ \allowbreak{}id2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}path1,\ \allowbreak{}path2,\ \allowbreak{}...\}]}
+or
+\texttt{FIRECreateConfigFile[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}path1,\ \allowbreak{}path2,\ \allowbreak{}...\}]}if
+one needs to process a list of topologies.
+
+The syntax
+\texttt{FIRECreateConfigFile[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}id1,\ \allowbreak{}id2,\ \allowbreak{}...\},\ \allowbreak{}path]}
+or
+\texttt{FIRECreateConfigFile[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}path]}
+is also allowed. This implies that all config files will go into the
+corresponding subdirectories of path, e.g.~\texttt{path/topoName1},
+\texttt{path/topoName2} etc.
+
+The default name of the file containing loop integrals for the reduction
+is \texttt{"LoopIntegrals.m"}. It can be changed via the option
+\texttt{FIREIntegrals}.
+
+To customize the content of the .config file one can use following
+options:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{FIREBucket} (corresponds to \texttt{\#{}\allowbreak{}bucket},
+  default value \texttt{29})
+\item
+  \texttt{FIRECompressor} (corresponds to
+  \texttt{\#{}\allowbreak{}compressor}, default value \texttt{"zstd"})
+\item
+  \texttt{FIREFThreads} (corresponds to
+  \texttt{\#{}\allowbreak{}fthreads}, default value
+  \(2 \times N_{CPU}\))
+\item
+  \texttt{FIRELThreads} (corresponds to
+  \texttt{\#{}\allowbreak{}lthreads}, default value \texttt{2})
+\item
+  \texttt{FIREPosPref} (corresponds to
+  \texttt{\#{}\allowbreak{}pospref}, unset by default)
+\item
+  \texttt{FIRESThreads} (corresponds to
+  \texttt{\#{}\allowbreak{}sthreads}, default value \(N_{CPU}\))
+\item
+  \texttt{FIREThreads} (corresponds to
+  \texttt{\#{}\allowbreak{}threads}, default value \(N_{CPU}\))
+\end{itemize}
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{firebucket}{FIREBucket},
+\hyperlink{firecompressor}{FIRECompressor},
+\hyperlink{firefthreads}{FIREFthreads},
+\hyperlink{firelthreads}{FIRELthreads},
+\hyperlink{fireintegrals}{FIREIntegrals},
+\hyperlink{firepospref}{FIREPosPref},
+\hyperlink{firesthreads}{FIRESthreads},
+\hyperlink{firethreads}{FIREThreads}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\StringTok{"asyR1prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p3}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{mg}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{p3 . }\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{(p1 }\SpecialCharTok{+} \FunctionTok{q}\NormalTok{)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,}\NormalTok{ p1 . p3}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{q}\OperatorTok{,} \FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCTopology}\left(\text{asyR1prop2Ltopo01310X11111N1},\left\{\frac{1}{(-\text{p1}^2-i \eta )},\frac{1}{(-\text{p3}^2+\text{mg}^2-i \eta )},\frac{1}{(-2 (\text{p3}\cdot q)-i \eta )},\frac{1}{(-(\text{p1}+q)^2+\text{mb}^2-i \eta )},\frac{1}{(\text{p1}\cdot \text{p3}-i \eta )}\right\},\{\text{p1},\text{p3}\},\{q\},\left\{q^2\to \text{mb}^2\right\},\{\}\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fileName }\ExtensionTok{=}\NormalTok{ FIRECreateConfigFile}\OperatorTok{[}\NormalTok{topo}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}]]}\NormalTok{;}
+\NormalTok{fileName }\SpecialCharTok{//} \FunctionTok{FilePrint}
+
+\CommentTok{(*\#compressor zstd}
+\CommentTok{\#threads 8}
+\CommentTok{\#fthreads s16}
+\CommentTok{\#lthreads 4}
+\CommentTok{\#sthreads 8}
+\CommentTok{\#variables d, mb, mg}
+\CommentTok{\#bucket 29}
+\CommentTok{\#start}
+\CommentTok{\#folder ./}
+\CommentTok{\#problem 4242 asyR1prop2Ltopo01310X11111N1.start}
+\CommentTok{\#integrals LoopIntegrals.m}
+\CommentTok{\#output asyR1prop2Ltopo01310X11111N1.tables*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fileName }\ExtensionTok{=}\NormalTok{ FIRECreateConfigFile}\OperatorTok{[}\NormalTok{topo}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}],}\NormalTok{ FIREIntegrals }\OtherTok{{-}\textgreater{}} \StringTok{"LIs.m"}\OperatorTok{,}\NormalTok{ FIRELthreads }\OtherTok{{-}\textgreater{}} \DecValTok{4}\OperatorTok{]}\NormalTok{;}
+\NormalTok{fileName }\SpecialCharTok{//} \FunctionTok{FilePrint}
+
+\CommentTok{(*\#compressor zstd}
+\CommentTok{\#threads 8}
+\CommentTok{\#fthreads s16}
+\CommentTok{\#lthreads 4}
+\CommentTok{\#sthreads 8}
+\CommentTok{\#variables d, mb, mg}
+\CommentTok{\#bucket 29}
+\CommentTok{\#start}
+\CommentTok{\#folder ./}
+\CommentTok{\#problem 4242 asyR1prop2Ltopo01310X11111N1.start}
+\CommentTok{\#integrals LIs.m}
+\CommentTok{\#output asyR1prop2Ltopo01310X11111N1.tables*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fileName }\ExtensionTok{=}\NormalTok{ FIRECreateConfigFile}\OperatorTok{[}\NormalTok{topo}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}],}\NormalTok{ FIREIntegrals }\OtherTok{{-}\textgreater{}} \StringTok{"LIs.m"}\OperatorTok{,}\NormalTok{ FIRELthreads }\OtherTok{{-}\textgreater{}} \DecValTok{4}\OperatorTok{]}\NormalTok{;}
+\NormalTok{fileName }\SpecialCharTok{//} \FunctionTok{FilePrint}
+
+\CommentTok{(*\#compressor zstd}
+\CommentTok{\#threads 8}
+\CommentTok{\#fthreads s16}
+\CommentTok{\#lthreads 4}
+\CommentTok{\#sthreads 8}
+\CommentTok{\#variables d, mb, mg}
+\CommentTok{\#bucket 29}
+\CommentTok{\#start}
+\CommentTok{\#folder ./}
+\CommentTok{\#problem 4242 asyR1prop2Ltopo01310X11111N1.start}
+\CommentTok{\#integrals LIs.m}
+\CommentTok{\#output asyR1prop2Ltopo01310X11111N1.tables*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topos }\ExtensionTok{=} \OperatorTok{\{}
+\NormalTok{   FCTopology}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p3}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{mg}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{p3 . }\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{p1 . }\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{(p1 }\SpecialCharTok{{-}}\NormalTok{ p3)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{q}\OperatorTok{,} \FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},}  \OperatorTok{\{\}],} 
+   
+\NormalTok{   FCTopology}\OperatorTok{[}\StringTok{"asyR1prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p3}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{mg}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{2}\SpecialCharTok{*}\NormalTok{p3 . }\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{(p1 }\SpecialCharTok{+} \FunctionTok{q}\NormalTok{)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,}\NormalTok{ p1 . p3}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{q}\OperatorTok{,} \FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{\}]} 
+  \OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{\text{FCTopology}\left(\text{asyR3prop2Ltopo01310X11111N1},\left\{\frac{1}{(-\text{p1}^2-i \eta )},\frac{1}{(-\text{p3}^2+\text{mg}^2-i \eta )},\frac{1}{(-2 (\text{p3}\cdot q)-i \eta )},\frac{1}{(-2 (\text{p1}\cdot q)-i \eta )},\frac{1}{(-(\text{p1}-\text{p3})^2-i \eta )}\right\},\{\text{p1},\text{p3}\},\{q\},\left\{q^2\to \text{mb}^2\right\},\{\}\right),\text{FCTopology}\left(\text{asyR1prop2Ltopo01310X11111N1},\left\{\frac{1}{(-\text{p1}^2-i \eta )},\frac{1}{(-\text{p3}^2+\text{mg}^2-i \eta )},\frac{1}{(-2 (\text{p3}\cdot q)-i \eta )},\frac{1}{(-(\text{p1}+q)^2+\text{mb}^2-i \eta )},\frac{1}{(\text{p1}\cdot \text{p3}-i \eta )}\right\},\{\text{p1},\text{p3}\},\{q\},\left\{q^2\to \text{mb}^2\right\},\{\}\right)\right\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fileNames} \ExtensionTok{=}\NormalTok{ FIRECreateConfigFile}\OperatorTok{[}\NormalTok{topos}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1150}\OperatorTok{,} \DecValTok{1160}\OperatorTok{\},} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}]]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{FilePrint}\OperatorTok{[}\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]]]}\NormalTok{;}
+
+\CommentTok{(*\#compressor zstd}
+\CommentTok{\#threads 8}
+\CommentTok{\#fthreads s16}
+\CommentTok{\#lthreads 4}
+\CommentTok{\#sthreads 8}
+\CommentTok{\#variables d, mb, mg}
+\CommentTok{\#bucket 29}
+\CommentTok{\#start}
+\CommentTok{\#folder ./}
+\CommentTok{\#problem 1150 asyR3prop2Ltopo01310X11111N1.start}
+\CommentTok{\#integrals LoopIntegrals.m}
+\CommentTok{\#output asyR3prop2Ltopo01310X11111N1.tables*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{FilePrint}\OperatorTok{[}\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{2}\OperatorTok{]]]}\NormalTok{;}
+
+\CommentTok{(*\#compressor zstd}
+\CommentTok{\#threads 8}
+\CommentTok{\#fthreads s16}
+\CommentTok{\#lthreads 4}
+\CommentTok{\#sthreads 8}
+\CommentTok{\#variables d, mb, mg}
+\CommentTok{\#bucket 29}
+\CommentTok{\#start}
+\CommentTok{\#folder ./}
+\CommentTok{\#problem 1160 asyR1prop2Ltopo01310X11111N1.start}
+\CommentTok{\#integrals LoopIntegrals.m}
+\CommentTok{\#output asyR1prop2Ltopo01310X11111N1.tables*)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{document}

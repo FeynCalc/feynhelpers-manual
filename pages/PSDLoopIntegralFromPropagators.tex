@@ -1,0 +1,58 @@
+% !TeX program = pdflatex
+% !TeX root = PSDLoopIntegralFromPropagators.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{psdloopintegralfrompropagators}{
+\section{PSDLoopIntegralFromPropagators}\label{psdloopintegralfrompropagators}\index{PSDLoopIntegralFromPropagators}}
+
+\texttt{PSDLoopIntegralFromPropagators[\allowbreak{}int,\ \allowbreak{}topo]}
+is an auxiliary function that converts the given loop integral (in the
+\texttt{GLI} representation) belonging to the topology \texttt{topo}
+into input for pySecDec's \texttt{LoopIntegralFromPropagators} routine.
+The output is given as a list of two elements, containing a string and
+the prefactor of the integral. \texttt{PSDLoopIntegralFromPropagators}
+
+\texttt{PSDLoopIntegralFromPropagators} is used by
+\texttt{PSDCreatePythonScripts} when assembling the generation script.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{psdcreatepythonscripts}{PSDCreatePythonScripts},
+\hyperlink{psdintegrate}{PSDIntegrate},
+\hyperlink{psdlooppackage}{PSDLoopPackage},
+\hyperlink{psdloopregions}{PSDLoopRegions}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\StringTok{"prop3lX1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[\{}\NormalTok{p3}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1 }\SpecialCharTok{{-}}\NormalTok{ p2 }\SpecialCharTok{{-}}\NormalTok{ p3}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1 }\SpecialCharTok{{-}}\NormalTok{ p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p1 }\SpecialCharTok{+}\NormalTok{ p3}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p2 }\SpecialCharTok{+}\NormalTok{ p3}\OperatorTok{]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p2}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{Q}\OperatorTok{\},} \OperatorTok{\{\},} \OperatorTok{\{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCTopology}\left(\text{prop3lX1},\left\{\frac{1}{(\text{p1}^2-m^2+i \eta )},\frac{1}{(\text{p2}^2+i \eta )},\frac{1}{(\text{p3}^2-m^2+i \eta )},\frac{1}{((-\text{p1}-\text{p2}-\text{p3}+Q)^2+i \eta )},\frac{1}{((-\text{p1}-\text{p2}+Q)^2+i \eta )},\frac{1}{((Q-\text{p1})^2+i \eta )},\frac{1}{((Q-\text{p2})^2+i \eta )},\frac{1}{((\text{p1}+\text{p3})^2+i \eta )},\frac{1}{((\text{p2}+\text{p3})^2+i \eta )}\right\},\{\text{p1},\text{p2},\text{p3}\},\{Q\},\{\},\{\}\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PSDLoopIntegralFromPropagators}\OperatorTok{[}\NormalTok{GLI}\OperatorTok{[}\StringTok{"prop3lX1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ topo}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\{\text{LoopIntegralFromPropagators($\backslash $n['p2**2', '(-p1 + Q)**2', '-m**2 + p3**2', '-m**2 + p1**2', '(-p1 - p2 + Q)**2', '(-p1 - p2 - p3 + Q)**2'],$\backslash $nloop$\_$momenta = ['p1', 'p2', 'p3'],$\backslash $npowerlist = [1, 1, 1, 1, 1, 1],$\backslash $ndimensionality = '4 - 2*eps',$\backslash $nFeynman$\_$parameters = 'x',$\backslash $nreplacement$\_$rules = [],$\backslash $nregulators = ['eps']$\backslash $n)},1\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PSDLoopIntegralFromPropagators}\OperatorTok{[}\NormalTok{GLI}\OperatorTok{[}\StringTok{"prop3lX1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ topo}\OperatorTok{,}\NormalTok{ FinalSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{FCI@SPD}\OperatorTok{[}\FunctionTok{Q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ QQ}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{{-}\textgreater{}}\NormalTok{ mm}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\{\text{LoopIntegralFromPropagators($\backslash $n['p2**2', '-m**2 + p3**2', '-m**2 + p1**2', '(-p1 - p2 + Q)**2', '(-p1 - p2 - p3 + Q)**2'],$\backslash $nloop$\_$momenta = ['p1', 'p2', 'p3'],$\backslash $npowerlist = [1, 1, 1, 1, 1],$\backslash $ndimensionality = '4 - 2*eps',$\backslash $nFeynman$\_$parameters = 'x',$\backslash $nreplacement$\_$rules = [('Q**2','QQ'), ('m**2','mm')],$\backslash $nregulators = ['eps']$\backslash $n)},1\}
+\end{dmath*}
+\end{document}

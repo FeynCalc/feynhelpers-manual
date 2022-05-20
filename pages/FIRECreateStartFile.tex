@@ -1,0 +1,79 @@
+% !TeX program = pdflatex
+% !TeX root = FIRECreateStartFile.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{firecreatestartfile}{
+\section{FIRECreateStartFile}\label{firecreatestartfile}\index{FIRECreateStartFile}}
+
+\texttt{FIRECreateStartFile[\allowbreak{}path]} creates a FIRE .start
+file using the script \texttt{CreateStartFile.m} in \texttt{path}. To
+that aim a Mathematica kernel is started in the background via
+\texttt{RunProcess}. The function returns \texttt{True} if the
+evaluation succeeds and \texttt{False} otherwise.
+
+Alternatively, one can use
+\texttt{FIRECreateStartFile[\allowbreak{}path,\ \allowbreak{}topo]}
+where \texttt{topo} is an \texttt{FCTopology} symbol and the full path
+is implied to be \texttt{path/topoName/CreateStartFile.m}.
+
+If you need to process a list of topologies, following syntaxes are
+possible
+\texttt{FIRECreateStartFile[\allowbreak{}\{\allowbreak{}path1,\ \allowbreak{}path2,\ \allowbreak{}...\}]},
+\texttt{FIRECreateStartFile[\allowbreak{}path,\ \allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\}]}
+
+The path to the Mathematica Kernel can be specified via
+\texttt{FIREMathematicaKernelPath}. The default value is
+\texttt{Automatic}.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{firecreateconfigfile}{FIRECreateConfigFile},
+\hyperlink{firepreparestartfile}{FIREPrepareStartFile},
+\hyperlink{firemathematicakernelpath}{FIREMathematicaKernelPath}
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\StringTok{"prop3lX1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[\{}\NormalTok{p3}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1 }\SpecialCharTok{{-}}\NormalTok{ p2 }\SpecialCharTok{{-}}\NormalTok{ p3}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1 }\SpecialCharTok{{-}}\NormalTok{ p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p1 }\SpecialCharTok{+}\NormalTok{ p3}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p2 }\SpecialCharTok{+}\NormalTok{ p3}\OperatorTok{]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p2}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{Q}\OperatorTok{\},} \OperatorTok{\{\},} \OperatorTok{\{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCTopology}\left(\text{prop3lX1},\left\{\frac{1}{(\text{p1}^2-m^2+i \eta )},\frac{1}{(\text{p2}^2+i \eta )},\frac{1}{(\text{p3}^2-m^2+i \eta )},\frac{1}{((-\text{p1}-\text{p2}-\text{p3}+Q)^2+i \eta )},\frac{1}{((-\text{p1}-\text{p2}+Q)^2+i \eta )},\frac{1}{((Q-\text{p1})^2+i \eta )},\frac{1}{((Q-\text{p2})^2+i \eta )},\frac{1}{((\text{p1}+\text{p3})^2+i \eta )},\frac{1}{((\text{p2}+\text{p3})^2+i \eta )}\right\},\{\text{p1},\text{p2},\text{p3}\},\{Q\},\{\},\{\}\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fileName }\ExtensionTok{=}\NormalTok{ FIREPrepareStartFile}\OperatorTok{[}\NormalTok{topo}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{/home/vs/.Mathematica/Applications/FeynCalc/Database/prop3lX1/CreateStartFile.m}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIRECreateStartFile}\OperatorTok{[}\NormalTok{fileName}\OperatorTok{,}\NormalTok{ FCVerbose }\OtherTok{{-}\textgreater{}} \DecValTok{3}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateStartFile: Full path to the Math Kernel binary: }\text{/media/Data/Software/Mathematica/13.0/Executables/math}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateStartFile: Working directory: }\text{/home/vs/.Mathematica/Applications/FeynCalc/Database/prop3lX1/}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateStartFile: Script file: }\text{CreateStartFile.m}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{True}
+\end{dmath*}
+\end{document}

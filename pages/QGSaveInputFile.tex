@@ -1,0 +1,28 @@
+% !TeX program = pdflatex
+% !TeX root = QGSaveInputFile.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{qgsaveinputfile}{
+\section{QGSaveInputFile}\label{qgsaveinputfile}\index{QGSaveInputFile}}
+
+\texttt{QGSaveInputFile} is an option for \texttt{QGCreateAmp}, which
+specifies where to save the QGRAF input file \texttt{"qgraf.dat"}. This
+file is automatically created from the input parameters of
+\texttt{QGCreateAmp} but it must be located in the same directory as the
+QGRAF binary when QGRAF is invoked. The default value is False, which
+means that \texttt{"qgraf.dat"} will be deleted after the successful
+QGRAF run. When set to \texttt{True}, \texttt{"qgraf.dat"} will be
+copied to the current directory.
+
+Specifying an explicit path will make \texttt{QGCreateAmp} put
+\texttt{"qgraf.dat"} there. Notice that only the file for generating the
+amplitudes is saved. The file for generating the diagrams (if exists) is
+identical except for the difference in the style line.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{qgcreateamp}{QGCreateAmp}.
+
+\subsection{Examples}
+\end{document}

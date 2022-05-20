@@ -1,0 +1,104 @@
+% !TeX program = pdflatex
+% !TeX root = LToolsImplicitPrefactor.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{ltoolsimplicitprefactor}{
+\section{LToolsImplicitPrefactor}\label{ltoolsimplicitprefactor}\index{LToolsImplicitPrefactor}}
+
+\texttt{LToolsImplicitPrefactor} is an option for
+\texttt{LToolsEvaluate}. It specifies a prefactor that does not show up
+explicitly in the input expression, but is understood to appear in front
+of every Passarino-Veltman function. The default value is \texttt{1}.
+
+You may want to use \texttt{LToolsImplicitPrefactor->1/(2Pi)^D} when
+working with 1-loop amplitudes, if no explicit prefactor has been
+introduced from the very beginning.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{ltoolsevaluate}{LToolsEvaluate}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsLoadLibrary}\OperatorTok{[]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{LoopTools library loaded.}
+\end{dmath*}
+
+\begin{verbatim}
+(* ====================================================
+   FF 2.0, a package to evaluate one-loop integrals
+ written by G. J. van Oldenborgh, NIKHEF-H, Amsterdam
+ ====================================================
+ for the algorithms used see preprint NIKHEF-H 89/17,
+ 'New Algorithms for One-loop Integrals', by G.J. van
+ Oldenborgh and J.A.M. Vermaseren, published in 
+ Zeitschrift fuer Physik C46(1990)425.
+ ====================================================*)
+\end{verbatim}
+
+Here the prefactor \(i \pi^2\) arises from the conversion of
+\(\int d^D q\, 1/(q^2-m^2)\) to \(A_0(m^2)\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{FAD}\OperatorTok{[\{}\FunctionTok{q}\OperatorTok{,} \FunctionTok{m}\OperatorTok{\}],} \FunctionTok{q}\OperatorTok{,}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m} \OtherTok{{-}\textgreater{}} \DecValTok{5}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{0.\, +246.74 i}{\varepsilon }-(0.\, +972.359 i)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{FAD}\OperatorTok{[\{}\FunctionTok{q}\OperatorTok{,} \FunctionTok{m}\OperatorTok{\}],} \FunctionTok{q}\OperatorTok{,}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m} \OtherTok{{-}\textgreater{}} \DecValTok{5}\OperatorTok{\},} \FunctionTok{Head} \OtherTok{{-}\textgreater{}}\NormalTok{ keep}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{i \pi ^2 \;\text{keep}(25.)}{\varepsilon }+i \pi ^2 (\text{keep}(-55.4719)-\gamma  \;\text{keep}(25.)-\text{keep}(25.) \log (\pi ))
+\end{dmath*}
+
+This recovers the textbook prefactor
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{FAD}\OperatorTok{[\{}\FunctionTok{q}\OperatorTok{,} \FunctionTok{m}\OperatorTok{\}],} \FunctionTok{q}\OperatorTok{,}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m} \OtherTok{{-}\textgreater{}} \DecValTok{5}\OperatorTok{\},}\NormalTok{ LToolsImplicitPrefactor }\OtherTok{{-}\textgreater{}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{(}\DecValTok{2} \FunctionTok{Pi}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{4} \SpecialCharTok{{-}} \DecValTok{2}\NormalTok{ Epsilon)}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{0.\, +0.158314 i}{\varepsilon }-(0.\, +0.0419639 i)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(PaXEvaluate}\OperatorTok{[}\NormalTok{FAD}\OperatorTok{[\{}\FunctionTok{q}\OperatorTok{,} \FunctionTok{m}\OperatorTok{\}],} \FunctionTok{q}\OperatorTok{,}\NormalTok{ PaXImplicitPrefactor }\OtherTok{{-}\textgreater{}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{(}\DecValTok{2} \FunctionTok{Pi}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{4} \SpecialCharTok{{-}} \DecValTok{2}\NormalTok{ Epsilon)}\OperatorTok{]} \OtherTok{/.} \OperatorTok{\{}\FunctionTok{m} \OtherTok{{-}\textgreater{}} \DecValTok{5}\OperatorTok{,}\NormalTok{ ScaleMu}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\}}\NormalTok{) }\SpecialCharTok{//} \FunctionTok{N}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{0.\, +0.158314 i}{\varepsilon }-(0.\, +0.0419639 i)
+\end{dmath*}
+
+If the input expression contains both loop and non-loop terms, only the
+terms containing a \texttt{PaVe}-function will be multiplied by the
+implicit prefactor
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{extra }\SpecialCharTok{+}\NormalTok{ FAD}\OperatorTok{[\{}\FunctionTok{q}\OperatorTok{,} \FunctionTok{m}\OperatorTok{\}],} \FunctionTok{q}\OperatorTok{,}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m} \OtherTok{{-}\textgreater{}} \DecValTok{2}\OperatorTok{\},}\NormalTok{ LToolsExpandInEpsilon }\OtherTok{{-}\textgreater{}} \ConstantTok{False}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{(0.\, +4. i) \pi ^{2-\varepsilon } \Gamma (\varepsilon +1) \Gamma (1-\varepsilon )^2}{\varepsilon  \Gamma (1-2 \varepsilon )}-\frac{(0.\, +1.54518 i) \pi ^{2-\varepsilon } \Gamma (\varepsilon +1) \Gamma (1-\varepsilon )^2}{\Gamma (1-2 \varepsilon )}+\text{extra}
+\end{dmath*}
+\end{document}

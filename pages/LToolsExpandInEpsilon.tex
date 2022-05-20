@@ -1,0 +1,77 @@
+% !TeX program = pdflatex
+% !TeX root = LToolsExpandInEpsilon.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{ltoolsexpandinepsilon}{
+\section{LToolsExpandInEpsilon}\label{ltoolsexpandinepsilon}\index{LToolsExpandInEpsilon}}
+
+\texttt{LToolsExpandInEpsilon} is an option for \texttt{LToolsEvaluate}.
+When set to \texttt{True} (default), the result returned by LoopTools
+and multiplied with proper conversion factors will be expanded around
+\(\varepsilon = 0\) to \(\mathcal{O}(\varepsilon^0)\).
+
+The \(\varepsilon\)-dependent conversion factors arise from the
+differences in the normalization between Passarino-Veltman functions in
+FeynCalc and LoopTools. In addition to that, the prefactor specified via
+\texttt{LToolsImplicitPrefactor} may also depend on \(\varepsilon\).
+
+Setting this option to \texttt{False} will leave the prefactors
+unexpanded, which might sometimes be useful when examining the obtained
+results.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{ltoolsevaluate}{LToolsEvaluate},
+\hyperlink{ltoolsimplicitprefactor}{LToolsImplicitPrefactor}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsLoadLibrary}\OperatorTok{[]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{LoopTools library loaded.}
+\end{dmath*}
+
+\begin{verbatim}
+(* ====================================================
+   FF 2.0, a package to evaluate one-loop integrals
+ written by G. J. van Oldenborgh, NIKHEF-H, Amsterdam
+ ====================================================
+ for the algorithms used see preprint NIKHEF-H 89/17,
+ 'New Algorithms for One-loop Integrals', by G.J. van
+ Oldenborgh and J.A.M. Vermaseren, published in 
+ Zeitschrift fuer Physik C46(1990)425.
+ ====================================================*)
+\end{verbatim}
+
+The default behavior of \texttt{LToolsEvaluate} is to do the
+\(\varepsilon\)-expansion automatically
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{FAD}\OperatorTok{[}\FunctionTok{q}\OperatorTok{,} \FunctionTok{q} \SpecialCharTok{{-}} \FunctionTok{p}\OperatorTok{],} \FunctionTok{q}\OperatorTok{,}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{p}\OperatorTok{]} \OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{0.\, +9.8696 i}{\varepsilon }-(31.0063\, -2.74429 i)
+\end{dmath*}
+
+This can be disabled by setting \texttt{LToolsExpandInEpsilon} to
+\texttt{False}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{FAD}\OperatorTok{[}\FunctionTok{q}\OperatorTok{,} \FunctionTok{q} \SpecialCharTok{{-}} \FunctionTok{p}\OperatorTok{],} \FunctionTok{q}\OperatorTok{,}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{p}\OperatorTok{]} \OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\},}\NormalTok{ LToolsExpandInEpsilon }\OtherTok{{-}\textgreater{}} \ConstantTok{False}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{(0.\, +1. i) \pi ^{2-\varepsilon } \Gamma (1-\varepsilon )^2 \Gamma (\varepsilon +1)}{\varepsilon  \Gamma (1-2 \varepsilon )}-\frac{(3.14159\, -2. i) \pi ^{2-\varepsilon } \Gamma (1-\varepsilon )^2 \Gamma (\varepsilon +1)}{\Gamma (1-2 \varepsilon )}
+\end{dmath*}
+\end{document}

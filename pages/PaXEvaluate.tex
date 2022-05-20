@@ -1,0 +1,72 @@
+% !TeX program = pdflatex
+% !TeX root = PaXEvaluate.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paxevaluate}{
+\section{PaXEvaluate}\label{paxevaluate}\index{PaXEvaluate}}
+
+\texttt{PaXEvaluate[\allowbreak{}expr,\ \allowbreak{}q]} evaluates
+scalar 1-loop integrals (up to 4-point functions) in \texttt{expr} that
+depend on the loop momentum \texttt{q} in \texttt{D} dimensions.
+
+The evaluation is using H. Patel's Package-X.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{paxevaluateir}{PaXEvaluateIR},
+\hyperlink{paxevaluateuv}{PaXEvaluateUV},
+\hyperlink{paxevaluateuvirsplit}{PaXEvaluateUVIRSplit}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FAD}\OperatorTok{[\{}\FunctionTok{q}\OperatorTok{,} \FunctionTok{m}\OperatorTok{\}]}
+\NormalTok{PaXEvaluate}\OperatorTok{[}\SpecialCharTok{\%}\OperatorTok{,} \FunctionTok{q}\OperatorTok{,}\NormalTok{ PaXImplicitPrefactor }\OtherTok{{-}\textgreater{}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{(}\DecValTok{2} \FunctionTok{Pi}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{4} \SpecialCharTok{{-}} \DecValTok{2}\NormalTok{ Epsilon)}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1}{q^2-m^2}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\frac{i m^2}{16 \pi ^2 \varepsilon }-\frac{i m^2 \left(-\log \left(\frac{\mu ^2}{m^2}\right)+\gamma -1-\log (4 \pi )\right)}{16 \pi ^2}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FAD}\OperatorTok{[\{}\FunctionTok{l}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q} \SpecialCharTok{+} \FunctionTok{l}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}]}
+\NormalTok{PaXEvaluate}\OperatorTok{[}\SpecialCharTok{\%}\OperatorTok{,} \FunctionTok{l}\OperatorTok{,}\NormalTok{ PaXImplicitPrefactor }\OtherTok{{-}\textgreater{}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{(}\DecValTok{2} \FunctionTok{Pi}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{4} \SpecialCharTok{{-}} \DecValTok{2}\NormalTok{ Epsilon)}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1}{l^2.(l+q)^2}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\frac{i}{16 \pi ^2 \varepsilon }+\frac{i \log \left(-\frac{4 \pi  \mu ^2}{q^2}\right)}{16 \pi ^2}-\frac{i (\gamma -2)}{16 \pi ^2}
+\end{dmath*}
+
+\texttt{PaVe} functions do not require the second argument specifying
+the loop momentum
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PaVe}\OperatorTok{[}\DecValTok{0}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,}\NormalTok{ Pair}\OperatorTok{[}\NormalTok{Momentum}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{D}\OperatorTok{],}\NormalTok{ Momentum}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{D}\OperatorTok{]],}\NormalTok{ Pair}\OperatorTok{[}\NormalTok{Momentum}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{D}\OperatorTok{],}\NormalTok{ Momentum}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{D}\OperatorTok{]]\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \FunctionTok{M}\OperatorTok{\}]}
+\NormalTok{PaXEvaluate}\OperatorTok{[}\SpecialCharTok{\%}\OperatorTok{]} 
+  
+ 
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{C}_0\left(0,p^2,p^2,0,0,M\right)
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\frac{1}{\varepsilon  M-\varepsilon  p^2}-\frac{\gamma -\log \left(\frac{\mu ^2}{\pi  M}\right)}{M-p^2}+\frac{\log \left(\frac{M}{M-p^2}\right)}{M-p^2}+\frac{M \log \left(\frac{M}{M-p^2}\right)}{p^2 \left(M-p^2\right)}
+\end{dmath*}
+\end{document}

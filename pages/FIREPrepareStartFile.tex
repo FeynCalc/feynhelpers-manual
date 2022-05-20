@@ -1,0 +1,67 @@
+% !TeX program = pdflatex
+% !TeX root = FIREPrepareStartFile.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{firepreparestartfile}{
+\section{FIREPrepareStartFile}\label{firepreparestartfile}\index{FIREPrepareStartFile}}
+
+\texttt{FIREPrepareStartFile[\allowbreak{}topo,\ \allowbreak{}path]} can
+be used to convert an \texttt{FCTopology} object \texttt{topo} into a
+FIRE. start-file.
+
+The functions creates the corresponding Mathematica script
+\texttt{CreateStartFile.m} and saves it in \texttt{path/topoName}.
+Notice that the script still needs to be evaluated in Mathematica to
+generate the actual FIRE .start-file. This can be conveniently done
+using \texttt{FIRECreateStartFile}.
+
+Using
+\texttt{FIREPrepareStartFile[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{} path]}
+will save the scripts to \texttt{path/topoName1},
+\texttt{path/topoName2} etc. The syntax
+\texttt{FIREPrepareStartFile[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{} \{\allowbreak{}path1,\ \allowbreak{}path2,\ \allowbreak{}...\}]}
+is also possible.
+
+The default path to the FIRE package is
+\texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FIRE6",\ \allowbreak{}"FIRE6.m"\}]}.
+It can be adjusted using the option \texttt{FIREPath}.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{firecreateconfigfile}{FIRECreateConfigFile},
+\hyperlink{firecreatestartfile}{FIRECreateStartFile},
+\hyperlink{firerunreduction}{FIRERunReduction}
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\StringTok{"prop3lX1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[\{}\NormalTok{p3}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1 }\SpecialCharTok{{-}}\NormalTok{ p2 }\SpecialCharTok{{-}}\NormalTok{ p3}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1 }\SpecialCharTok{{-}}\NormalTok{ p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p1 }\SpecialCharTok{+}\NormalTok{ p3}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p2 }\SpecialCharTok{+}\NormalTok{ p3}\OperatorTok{]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p2}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{Q}\OperatorTok{\},} \OperatorTok{\{\},} \OperatorTok{\{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCTopology}\left(\text{prop3lX1},\left\{\frac{1}{(\text{p1}^2-m^2+i \eta )},\frac{1}{(\text{p2}^2+i \eta )},\frac{1}{(\text{p3}^2-m^2+i \eta )},\frac{1}{((-\text{p1}-\text{p2}-\text{p3}+Q)^2+i \eta )},\frac{1}{((-\text{p1}-\text{p2}+Q)^2+i \eta )},\frac{1}{((Q-\text{p1})^2+i \eta )},\frac{1}{((Q-\text{p2})^2+i \eta )},\frac{1}{((\text{p1}+\text{p3})^2+i \eta )},\frac{1}{((\text{p2}+\text{p3})^2+i \eta )}\right\},\{\text{p1},\text{p2},\text{p3}\},\{Q\},\{\},\{\}\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fileName }\ExtensionTok{=}\NormalTok{ FIREPrepareStartFile}\OperatorTok{[}\NormalTok{topo}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}]]}\NormalTok{;}
+\NormalTok{fileName }\SpecialCharTok{//} \FunctionTok{FilePrint}
+
+\CommentTok{(*(* Generated on Sun 15 May 2022 20:01:25 *)}
+
+\FunctionTok{Get}\OperatorTok{[}\StringTok{"/home/vs/.Mathematica/Applications/FIRE6/FIRE6.m"}\OperatorTok{]}\NormalTok{;}
+\NormalTok{Internal}\ExtensionTok{=}\OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p2}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\}}\NormalTok{;}
+\NormalTok{External}\ExtensionTok{=}\OperatorTok{\{}\FunctionTok{Q}\OperatorTok{\}}\NormalTok{;}
+\NormalTok{Propagators}\ExtensionTok{=}\OperatorTok{\{}\SpecialCharTok{{-}}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ p1}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,}\NormalTok{ p2}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ p3}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,}\NormalTok{ p1}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p1}\SpecialCharTok{*}\NormalTok{p2 }\SpecialCharTok{+}\NormalTok{ p2}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p1}\SpecialCharTok{*}\NormalTok{p3 }\SpecialCharTok{+} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p2}\SpecialCharTok{*}\NormalTok{p3 }\SpecialCharTok{+}\NormalTok{ p3}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p1}\SpecialCharTok{*}\FunctionTok{Q} \SpecialCharTok{{-}} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p2}\SpecialCharTok{*}\FunctionTok{Q} \SpecialCharTok{{-}} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p3}\SpecialCharTok{*}\FunctionTok{Q} \SpecialCharTok{+} \FunctionTok{Q}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,}\NormalTok{ p1}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p1}\SpecialCharTok{*}\NormalTok{p2 }\SpecialCharTok{+}\NormalTok{ p2}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p1}\SpecialCharTok{*}\FunctionTok{Q} \SpecialCharTok{{-}} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p2}\SpecialCharTok{*}\FunctionTok{Q} \SpecialCharTok{+} \FunctionTok{Q}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,}\NormalTok{ p1}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p1}\SpecialCharTok{*}\FunctionTok{Q} \SpecialCharTok{+} \FunctionTok{Q}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,}\NormalTok{ p2}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p2}\SpecialCharTok{*}\FunctionTok{Q} \SpecialCharTok{+} \FunctionTok{Q}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,}\NormalTok{ p1}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p1}\SpecialCharTok{*}\NormalTok{p3 }\SpecialCharTok{+}\NormalTok{ p3}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,}\NormalTok{ p2}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p2}\SpecialCharTok{*}\NormalTok{p3 }\SpecialCharTok{+}\NormalTok{ p3}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}}\NormalTok{;}
+\NormalTok{Replacements}\ExtensionTok{=}\OperatorTok{\{\}}\NormalTok{;}
+\NormalTok{PrepareIBP}\OperatorTok{[]}\NormalTok{;}
+\NormalTok{Prepare}\OperatorTok{[}\NormalTok{AutoDetectRestrictions }\OtherTok{{-}\textgreater{}} \ConstantTok{True}\OperatorTok{]}\NormalTok{;}
+\NormalTok{SaveStart}\OperatorTok{[}\StringTok{"/home/vs/.Mathematica/Applications/FeynCalc/Database/prop3lX1/prop3lX1"}\OperatorTok{]}\NormalTok{;}\SpecialCharTok{*}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{document}

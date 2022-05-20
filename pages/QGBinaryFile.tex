@@ -1,0 +1,25 @@
+% !TeX program = pdflatex
+% !TeX root = QGBinaryFile.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{qgbinaryfile}{
+\section{QGBinaryFile}\label{qgbinaryfile}\index{QGBinaryFile}}
+
+\texttt{QGBinaryFile} is an option for \texttt{QGCreateAmp}, which
+specifies the full path to the QGRAF binary. When set to
+\texttt{Automatic}, the default binary is\texttt{"qgraf"} on Linux and
+macOS or \texttt{"qgraf.exe"} on Windows, which resides in
+\texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$FeynHelpersDirectory,\ \allowbreak{}"ExternalTools",\ \allowbreak{}"QGRAF",\ \allowbreak{}"Binary"\}]}.
+
+If you provide a different location, you must ensure that the containing
+directory is user-writable, since \texttt{QGCreateAmp} will need to save
+an automatically generated \texttt{"qgraf.dat"} in that directory and
+delete it afterwards.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{qgcreateamp}{QGCreateAmp}.
+
+\subsection{Examples}
+\end{document}

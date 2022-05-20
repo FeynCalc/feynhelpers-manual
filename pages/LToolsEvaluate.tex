@@ -1,0 +1,171 @@
+% !TeX program = pdflatex
+% !TeX root = LToolsEvaluate.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{ltoolsevaluate}{
+\section{LToolsEvaluate}\label{ltoolsevaluate}\index{LToolsEvaluate}}
+
+\texttt{LToolsEvaluate[\allowbreak{}expr,\ \allowbreak{}q]} evaluates
+Passarino-Veltman functions in \texttt{expr} numerically using LoopTools
+by T. Hahn.
+
+In contrast to the default behavior of LoopTools, the function returns
+not just the finite part but also the singular pieces proportional to
+\(1\varepsilon\) and \(1\varepsilon^2\). This behavior is controlled by
+the option \texttt{LToolsFullResult}.
+
+Notice that the normalization of Passarino-Veltman functions differs
+between FeynCalc and LoopTools, cf.~Section 1.2 of the LoopTools manual.
+In FeynCalc the overall prefactor is just \(1/(i \pi^2)\), while
+LoopTools employs \(1/(i \pi^{D/2} r_{\Gamma})\) with
+\(D = 4 -2 \varepsilon\) and
+\(r_{\Gamma} = \Gamma^2 (1 - \varepsilon) \Gamma (1 + \varepsilon) / \Gamma(1-2 \varepsilon)\).
+
+When the option \texttt{LToolsFullResult} is set to \texttt{True},
+\texttt{LToolsEvaluate} will automatically account for this difference
+by multiplying the LoopTools output with
+\(1/\pi^{\varepsilon} r_\Gamma\).
+
+However, for \texttt{LToolsFullResult -> False} no such conversion will
+occur. This is because the proper conversion between different
+\(\varepsilon\)-dependent normalizations requires the knowledge of the
+poles: when terms proportional to \(\varepsilon\) multiply the poles,
+they generate finite contributions. In this sense it is not recommended
+to use \texttt{LToolsEvaluate} with \texttt{LToolsFullResult} set to
+\texttt{False}, unless you precisely understand what you are doing.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{ltoolsexpandinepsilon}{LToolsExpandInEpsilon},
+\hyperlink{ltoolsfullresult}{LToolsFullResult},
+\hyperlink{ltoolsimplicitprefactor}{LToolsImplicitPrefactor},
+\hyperlink{ltoolssetmudim}{LToolsSetMudim},
+\hyperlink{ltoolssetlambda}{LToolsSetLambda}.
+
+\subsection{Examples}
+
+Before using \texttt{LToolsEvaluate} we need to evaluate
+\texttt{LToolsLoadLibray[\allowbreak{}]} to establish a connection with
+the Mathlink executable. The value of the option \texttt{LToolsPath}
+contains the full path to this file. You might need to adjust it
+accordingly if LoopTools is installed in a different directory.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{OptionValue}\OperatorTok{[}\NormalTok{LToolsLoadLibrary}\OperatorTok{,}\NormalTok{ LToolsPath}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{/home/vs/.Mathematica/Applications/FeynCalc/AddOns/FeynHelpers/ExternalTools/LoopTools/LoopTools}
+\end{dmath*}
+
+Notice that \texttt{LToolsEvaluate} can also load the library by itself
+on the first run, in case you forget to do so.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsLoadLibrary}\OperatorTok{[]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{LoopTools library loaded.}
+\end{dmath*}
+
+\begin{verbatim}
+(* ====================================================
+   FF 2.0, a package to evaluate one-loop integrals
+ written by G. J. van Oldenborgh, NIKHEF-H, Amsterdam
+ ====================================================
+ for the algorithms used see preprint NIKHEF-H 89/17,
+ 'New Algorithms for One-loop Integrals', by G.J. van
+ Oldenborgh and J.A.M. Vermaseren, published in 
+ Zeitschrift fuer Physik C46(1990)425.
+ ====================================================*)
+\end{verbatim}
+
+The value of the scale \(\mu\) can be set via the option
+\texttt{LToolsSetMudim}. Evaluating the \texttt{PaVe}-function
+\(A_0(m^2)\) at \(m^2 = 1/10\) with \(\mu^2=20\) yields
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{A0}\OperatorTok{[}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{],}\NormalTok{ LToolsSetMudim }\OtherTok{{-}\textgreater{}} \DecValTok{20}\OperatorTok{,}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{{-}\textgreater{}} \DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+0.457637\, +\frac{0.1}{\varepsilon }
+\end{dmath*}
+
+Cross-checking this result with Package-X yields the same value
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(PaXEvaluate}\OperatorTok{[}\NormalTok{A0}\OperatorTok{[}\DecValTok{1}\SpecialCharTok{/}\DecValTok{10}\OperatorTok{]]} \OtherTok{/.}\NormalTok{ ScaleMu}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{{-}\textgreater{}} \DecValTok{20}\NormalTok{) }\SpecialCharTok{//} \FunctionTok{N}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+0.457637\, +\frac{0.1}{\varepsilon }
+\end{dmath*}
+
+More complicated input is also possible
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{exp} \ExtensionTok{=} \FunctionTok{a}\NormalTok{ FAD}\OperatorTok{[\{}\FunctionTok{q}\OperatorTok{,} \FunctionTok{m}\OperatorTok{\},} \FunctionTok{q} \SpecialCharTok{{-}} \FunctionTok{p}\OperatorTok{]} \SpecialCharTok{+} \FunctionTok{b}\NormalTok{ FAD}\OperatorTok{[\{}\FunctionTok{q}\OperatorTok{,} \FunctionTok{M}\OperatorTok{,} \DecValTok{2}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{a}{\left(q^2-m^2\right).(q-p)^2}+\frac{b}{\left(q^2-M^2\right)^2}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\ExtensionTok{=}\NormalTok{ LToolsEvaluate}\OperatorTok{[}\FunctionTok{exp}\OperatorTok{,} \FunctionTok{q}\OperatorTok{,}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m} \OtherTok{{-}\textgreater{}} \FloatTok{0.12352}\OperatorTok{,} \FunctionTok{M} \OtherTok{{-}\textgreater{}} \FloatTok{5.14321}\OperatorTok{,}\NormalTok{ SPD}\OperatorTok{[}\FunctionTok{p}\OperatorTok{]} \OtherTok{{-}\textgreater{}} \FloatTok{0.8813}\OperatorTok{\},}\NormalTok{ LToolsImplicitPrefactor }\OtherTok{{-}\textgreater{}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{(}\DecValTok{2} \FunctionTok{Pi}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{4} \SpecialCharTok{{-}} \DecValTok{2}\NormalTok{ Epsilon)}\OperatorTok{,}\NormalTok{ LToolsSetMudim }\OtherTok{{-}\textgreater{}} \DecValTok{23}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{(0.\, +0.00633257 i) ((1.\, +0. i) a+(1.\, +0. i) b)}{\varepsilon }+(0.0661028\, +0.01955 i) ((0.\, +1. i) a+(0.128951\, +0.436013 i) b)
+\end{dmath*}
+
+Compare to Package-X
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chk }\ExtensionTok{=}\NormalTok{ (PaXEvaluate}\OperatorTok{[}\FunctionTok{exp}\OperatorTok{,} \FunctionTok{q}\OperatorTok{,}\NormalTok{ PaXImplicitPrefactor }\OtherTok{{-}\textgreater{}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{(}\DecValTok{2} \FunctionTok{Pi}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{4} \SpecialCharTok{{-}} \DecValTok{2}\NormalTok{ Epsilon)}\OperatorTok{]} \OtherTok{/.} \OperatorTok{\{}\NormalTok{ScaleMu}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{{-}\textgreater{}}\DecValTok{23}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m} \OtherTok{{-}\textgreater{}} \FloatTok{0.12352}\OperatorTok{,} \FunctionTok{M} \OtherTok{{-}\textgreater{}} \FloatTok{5.14321}\OperatorTok{,}\NormalTok{ FCI@SPD}\OperatorTok{[}\FunctionTok{p}\OperatorTok{]} \OtherTok{{-}\textgreater{}} \FloatTok{0.8813}\OperatorTok{\}}\NormalTok{) }\SpecialCharTok{//} \FunctionTok{N}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{(0.\, +0.00633257 i) (a+b)}{\varepsilon }-(0.\, +0.00633257 i) (-14.4075 a-4.94944 b)+(-0.01955-0.0251337 i) a
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FCCompareNumbers}\OperatorTok{[}\NormalTok{res}\OperatorTok{,}\NormalTok{ chk}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCCompareNumbers: Minimal number of significant digits to agree in: }6
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FCCompareNumbers: Chop is set to }\text{1.$\grave{ }$*${}^{\wedge}$-10}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FCCompareNumbers: No number is set to 0. by Chop at this stage. }
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+0
+\end{dmath*}
+\end{document}

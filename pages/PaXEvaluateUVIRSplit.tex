@@ -1,0 +1,32 @@
+% !TeX program = pdflatex
+% !TeX root = PaXEvaluateUVIRSplit.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paxevaluateuvirsplit}{
+\section{PaXEvaluateUVIRSplit}\label{paxevaluateuvirsplit}\index{PaXEvaluateUVIRSplit}}
+
+\texttt{PaXEvaluateUVIRSplit[\allowbreak{}expr,\ \allowbreak{}q]} is
+like \texttt{PaXEvaluate}, but with the difference that it explicitly
+distinguishes between UV- and IR-divergences.
+
+The evaluation is using H. Patel's Package-X.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{paxevaluateir}{PaXEvaluateIR},
+\hyperlink{paxevaluateuv}{PaXEvaluateUV},
+\hyperlink{paxevaluate}{PaXEvaluate}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PaXEvaluateUVIRSplit}\OperatorTok{[}\NormalTok{B0}\OperatorTok{[}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{p}\OperatorTok{],} \DecValTok{0}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{],}\NormalTok{ PaXSeries }\OtherTok{{-}\textgreater{}} \OperatorTok{\{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{p}\OperatorTok{],} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}\},}\NormalTok{ PaXAnalytic }\OtherTok{{-}\textgreater{}} \ConstantTok{True}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{m^2-p^2}{2 m^2 \varepsilon _{\text{IR}}}-\frac{\left(3 m^2-p^2\right) \left(-\log \left(\frac{\mu ^2}{m^2}\right)+\gamma -2+\log (\pi )\right)}{2 m^2}+\frac{1}{\varepsilon _{\text{UV}}}
+\end{dmath*}
+\end{document}

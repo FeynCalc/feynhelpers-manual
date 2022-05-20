@@ -1,0 +1,123 @@
+% !TeX program = pdflatex
+% !TeX root = LToolsFullResult.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{ltoolsfullresult}{
+\section{LToolsFullResult}\label{ltoolsfullresult}\index{LToolsFullResult}}
+
+\texttt{LToolsFullResult} is an option for \texttt{LToolsEvaluate}. When
+set to \texttt{True} (default), \texttt{LToolsEvaluate} will return the
+full result including singularities and accompanying terms. Otherwise,
+only the finite part (standard output of LoopTools) will be provided.
+
+The full result is assembled from pieces returned by LoopTools for the
+\(\lambda^2\)-parameter set to \(-2\), \(-1\) and \(0\) respectively.
+The correct prefactor that accounts for the normalization differences
+between Passarino-Veltman function in FeynCalc and LoopTools is added as
+well.
+
+As long as \texttt{LToolsFullResult} is set to \texttt{True}, the value
+of the \texttt{LToolsSetLambda} option is ignored.
+
+Disabling \texttt{LToolsFullResult} will most likely lead to incorrect
+normalization of the results (especially if you are only interested in
+the finite part). The reason for this are missing contributions to the
+finite part generated from poles being multiplied by terms proportional
+to \(\varepsilon\) or \(\varepsilon^2\).
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{ltoolsevaluate}{LToolsEvaluate}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsLoadLibrary}\OperatorTok{[]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{LoopTools library loaded.}
+\end{dmath*}
+
+\begin{verbatim}
+(* ====================================================
+   FF 2.0, a package to evaluate one-loop integrals
+ written by G. J. van Oldenborgh, NIKHEF-H, Amsterdam
+ ====================================================
+ for the algorithms used see preprint NIKHEF-H 89/17,
+ 'New Algorithms for One-loop Integrals', by G.J. van
+ Oldenborgh and J.A.M. Vermaseren, published in 
+ Zeitschrift fuer Physik C46(1990)425.
+ ====================================================*)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{A0}\OperatorTok{[}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{],}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1.}{\varepsilon }-0.721946
+\end{dmath*}
+
+Setting \texttt{LToolsFullResult} to \texttt{False} will make
+\texttt{LToolsEvaluate} return only the finite part since the default
+value for \texttt{LToolsSetLambda} is \texttt{0}. However, the
+normalization does not agree with the FeynCalc convention
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{A0}\OperatorTok{[}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{],}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\},}\NormalTok{ LToolsFullResult }\OtherTok{{-}\textgreater{}} \ConstantTok{False}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+1.
+\end{dmath*}
+
+Even though \texttt{LToolsEvaluate} includes the correct prefactor to
+convert to the FeynCalc normalization, the finite contribution generated
+by the \(1/\varepsilon\)-pole is missing here.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{finRes }\ExtensionTok{=}\NormalTok{ LToolsEvaluate}\OperatorTok{[}\NormalTok{A0}\OperatorTok{[}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{],}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\},}\NormalTok{ LToolsFullResult }\OtherTok{{-}\textgreater{}} \ConstantTok{False}\OperatorTok{,}\NormalTok{ LToolsExpandInEpsilon }\OtherTok{{-}\textgreater{}} \ConstantTok{False}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1. \pi ^{-\varepsilon } \Gamma (1-\varepsilon )^2 \Gamma (\varepsilon +1)}{\Gamma (1-2 \varepsilon )}
+\end{dmath*}
+
+By setting \texttt{LToolsSetLambda->-1} we can get the coefficient of
+the pole. Here it is obvious that the function is IR-finite so that we
+do not need to check for the \(1/\varepsilon^2\)-pole
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{poleRes }\ExtensionTok{=}\NormalTok{ LToolsEvaluate}\OperatorTok{[}\NormalTok{A0}\OperatorTok{[}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{],}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\},}\NormalTok{ LToolsFullResult }\OtherTok{{-}\textgreater{}} \ConstantTok{False}\OperatorTok{,}\NormalTok{ LToolsExpandInEpsilon }\OtherTok{{-}\textgreater{}} \ConstantTok{False}\OperatorTok{,}\NormalTok{ LToolsSetLambda }\OtherTok{{-}\textgreater{}} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1. \pi ^{-\varepsilon } \Gamma (1-\varepsilon )^2 \Gamma (\varepsilon +1)}{\Gamma (1-2 \varepsilon )}
+\end{dmath*}
+
+Combining both pieces and expanding in \(\varepsilon\) up to zeroth
+order we recover the same result as when using the option
+\texttt{LToolsFullResult}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Series}\OperatorTok{[}\DecValTok{1}\SpecialCharTok{/}\NormalTok{Epsilon poleRes }\SpecialCharTok{+}\NormalTok{ finRes}\OperatorTok{,} \OperatorTok{\{}\NormalTok{Epsilon}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}]} \SpecialCharTok{//} \FunctionTok{Normal}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1.}{\varepsilon }-0.721946
+\end{dmath*}
+\end{document}

@@ -1,0 +1,354 @@
+% !TeX program = pdflatex
+% !TeX root = FeynHelpers.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+FeynHelpers is a collection of interfaces that allow you to use other
+HEP-related tools from your \href{https://feyncalc.github.io}{FeynCalc}
+session.
+
+\hypertarget{useful information}{
+\section{Useful information}\label{useful information}\index{Useful information}}
+
+\begin{itemize}
+\tightlist
+\item
+  \hyperlink{cite}{Cite}
+\item
+  \hyperlink{install}{Install}
+\end{itemize}
+
+\hypertarget{package-x interface}{
+\section{Package-X interface}\label{package-x interface}\index{Package-X interface}}
+
+\begin{itemize}
+\tightlist
+\item
+  \hyperlink{../paxevaluate}{../PaXEvaluate},
+  \hyperlink{../paxevaluateuv}{../PaXEvaluateUV},
+  \hyperlink{../paxevaluateir}{../PaXEvaluateIR},
+  \hyperlink{../paxevaluateuvirsplit}{../PaXEvaluateUVIRSplit} -
+  evaluates the given scalar 1-loop integral or Passarino-Veltman
+  function analytically using Package-X
+\item
+  \hyperlink{../paxcontinueddilog}{../PaXContinuedDiLog},
+  \hyperlink{../paxdilog}{../PaXDiLog},
+  \hyperlink{../paxdiscb}{../PaXDiscB},
+  \hyperlink{../paxepsilonbar}{../PaXEpsilonBar},
+  \hyperlink{../paxkallenlambda}{../PaXKallenLambda},
+  \hyperlink{../paxkibblephi}{../PaXKibblePhi},
+  \hyperlink{../paxkibblephi}{../PaXKibblePhi},
+  \hyperlink{../paxln}{../PaXLn}, \hyperlink{../paxpva}{../PaXpvA},
+  \hyperlink{../paxpvb}{../PaXpvB}, \hyperlink{../paxpvc}{../PaXpvC},
+  \hyperlink{../paxpvd}{../PaXpvD} - placeholders for certain Package-X
+  symbols
+\item
+  \hyperlink{../paxanalytic}{../PaXAnalytic},
+  \hyperlink{../paxc0expand}{../PaXC0Expand},
+  \hyperlink{../paxd0expand}{../PaXD0Expand},
+  \hyperlink{../paxdiscexpand}{../PaXDiscExpand},
+  \hyperlink{../paxexpandinepsilon}{../PaXExpandInEpsilon},
+  \hyperlink{../paximplicitprefactor}{../PaXImplicitPrefactor},
+  \hyperlink{../paxkallenexpand}{../PaXKallenExpand},
+  \hyperlink{../paxkibbleexpand}{../PaXKibbleExpand},
+  \hyperlink{../paxlooprefineoptions}{../PaXLoopRefineOptions},
+  \hyperlink{../paxpath}{../PaXPath},
+  \hyperlink{../paxseries}{../PaXSeries},
+  \hyperlink{../paxsimplifyepsilon}{../PaXSimplifyEpsilon},
+  \hyperlink{../paxsubstituteepsilon}{../PaXSubstituteEpsilon} - options
+  of functions related to the Package-X interface
+\end{itemize}
+
+\hypertarget{c++ fire interface}{
+\section{C++ FIRE interface}\label{c++ fire interface}\index{C++ FIRE interface}}
+
+\begin{itemize}
+\tightlist
+\item
+  \hyperlink{../firecreateconfigfile}{../FIRECreateConfigFile} - creates
+  the FIRE .config file
+\item
+  \hyperlink{../firecreateintegralfile}{../FIRECreateIntegralFile} -
+  creates list of integrals that need to be reduced
+\item
+  \hyperlink{../firecreatestartfile}{../FIRECreateStartFile} - runs
+  Mathematica scripts that creates the relevant FIRE .start file
+\item
+  \hyperlink{../fireimportresults}{../FIREImportResults} - converts
+  reduction results from .table files to \texttt{GLI}s
+\item
+  \hyperlink{../firepreparestartfile}{../FIREPrepareStartFile} -
+  prepares a Mathematica script that generates the relevant FIRE .start
+  file
+\item
+  \hyperlink{../firerunreduction}{../FIRERunReduction} - starts
+  reduction using C++ FIRE from the current notebook
+\item
+  \hyperlink{../firetofctopology}{../FIREToFCTopology} - converts the
+  given FIRE topology to \texttt{FCTopology}
+\item
+  \hyperlink{../firebinarypath}{../FIREBinaryPath},
+  \hyperlink{../firebucket}{../FIREBucket},
+  \hyperlink{../firecompressor}{../FIRECompressor},
+  \hyperlink{../firefthreads}{../FIREFthreads},
+  \hyperlink{../fireintegrals}{../FIREIntegrals},
+  \hyperlink{../firelthreads}{../FIRELthreads},
+  \hyperlink{../firemathematicakernelpath}{../FIREMathematicaKernelPath},
+  \hyperlink{../firepospref}{../FIREPosPref},
+  \hyperlink{../firesthreads}{../FIRESthreads},
+  \hyperlink{../firethreads}{../FIREThreads} - options of functions
+  related to the C++ FIRE interface
+\end{itemize}
+
+\hypertarget{mathematica fire interface}{
+\section{Mathematica FIRE interface}\label{mathematica fire interface}\index{Mathematica FIRE interface}}
+
+\begin{itemize}
+\tightlist
+\item
+  \hyperlink{../fireburn}{../FIREBurn} - reduced the given integral
+  using Mathematica version of FIRE
+\item
+  \hyperlink{../fireaddpropagators}{../FIREAddPropagators},
+  \hyperlink{../fireconfigfiles}{../FIREConfigFiles},
+  \hyperlink{../firepath}{../FIREPath},
+  \hyperlink{../firerun}{../FIRERun},
+  \hyperlink{../firesilentmode}{../FIRESilentMode},
+  \hyperlink{../firestartfile}{../FIREStartFile},
+  \hyperlink{../fireusingfermat}{../FIREUsingFermat} - options of
+  functions related to the Mathematica FIRE interface
+\end{itemize}
+
+\hypertarget{looptools interface}{
+\section{LoopTools interface}\label{looptools interface}\index{LoopTools interface}}
+
+\begin{itemize}
+\tightlist
+\item
+  \hyperlink{../ltoolsevaluate}{../LToolsEvaluate} - evaluates
+  Passarino-Veltman functions numerically using LoopTools
+\item
+  \hyperlink{../ltoolsloadlibrary}{../LToolsLoadLibrary} - loads the
+  LoopTools library
+\item
+  \hyperlink{../ltoolsunloadlibrary}{../LToolsUnLoadLibrary} - unloads
+  the LoopTools library
+\item
+  \hyperlink{../ltoolsexpandinepsilon}{../LToolsExpandInEpsilon},
+  \hyperlink{../ltoolsfullresult}{../LToolsFullResult},
+  \hyperlink{../ltoolsimplicitprefactor}{../LToolsImplicitPrefactor},
+  \hyperlink{../ltoolssetlambda}{../LToolsSetLambda},
+  \hyperlink{../ltoolssetmudim}{../LToolsSetMudim},
+  \hyperlink{../ltoolspath}{../LToolsPath} - options of functions
+  related to the LoopTools interface
+\item
+  \hyperlink{../ltoolsa0}{../LToolsA0},
+  \hyperlink{../ltoolsa00}{../LToolsA00},
+  \hyperlink{../ltoolsa0i}{../LToolsA0i},
+  \hyperlink{../ltoolsb0}{../LToolsB0},
+  \hyperlink{../ltoolsb00}{../LToolsB00},
+  \hyperlink{../ltoolsb0i}{../LToolsB0i},
+  \hyperlink{../ltoolsb1}{../LToolsB1},
+  \hyperlink{../ltoolsb001}{../LToolsB001},
+  \hyperlink{../ltoolsb11}{../LToolsB11},
+  \hyperlink{../ltoolsb111}{../LToolsB111},
+  \hyperlink{../ltoolsc0}{../LToolsC0},
+  \hyperlink{../ltoolsc0i}{../LToolsC0i},
+  \hyperlink{../ltoolsclearcache}{../LToolsClearCache},
+  \hyperlink{../ltoolsd0}{../LToolsD0},
+  \hyperlink{../ltoolsd0i}{../LToolsD0i},
+  \hyperlink{../ltoolsdb0}{../LToolsDB0},
+  \hyperlink{../ltoolsdb00}{../LToolsDB00},
+  \hyperlink{../ltoolsdb1}{../LToolsDB1},
+  \hyperlink{../ltoolsdb11}{../LToolsDB11},
+  \hyperlink{../ltoolsdebuga}{../LToolsDebugA},
+  \hyperlink{../ltoolsdebugall}{../LToolsDebugAll},
+  \hyperlink{../ltoolsdebugb}{../LToolsDebugB},
+  \hyperlink{../ltoolsdebugc}{../LToolsDebugC},
+  \hyperlink{../ltoolsdebugd}{../LToolsDebugD},
+  \hyperlink{../ltoolsdebuge}{../LToolsDebugE},
+  \hyperlink{../ltoolsdr1eps}{../LToolsDR1eps},
+  \hyperlink{../ltoolsdrresult}{../LToolsDRResult},
+  \hyperlink{../ltoolse0}{../LToolsE0},
+  \hyperlink{../ltoolse0i}{../LToolsE0i},
+  \hyperlink{../ltoolsgetcmpbits}{../LToolsGetCmpBits},
+  \hyperlink{../ltoolsgetdebugkey}{../LToolsGetDebugKey},
+  \hyperlink{../ltoolsgetdelta}{../LToolsGetDelta},
+  \hyperlink{../ltoolsgetdiffeps}{../LToolsGetDiffEps},
+  \hyperlink{../ltoolsgeterrdigits}{../LToolsGetErrDigits},
+  \hyperlink{../ltoolsgetlambda}{../LToolsGetLambda},
+  \hyperlink{../ltoolsgetmaxdev}{../LToolsGetMaxDev},
+  \hyperlink{../ltoolsgetminmass}{../LToolsGetMinMass},
+  \hyperlink{../ltoolsgetmudim}{../LToolsGetMudim},
+  \hyperlink{../ltoolsgetuvdiv}{../LToolsGetUVDiv},
+  \hyperlink{../ltoolsgetversionkey}{../LToolsGetVersionKey},
+  \hyperlink{../ltoolsgetwarndigits}{../LToolsGetWarnDigits},
+  \hyperlink{../ltoolsgetzeroeps}{../LToolsGetZeroEps},
+  \hyperlink{../ltoolskeya0}{../LToolsKeyA0},
+  \hyperlink{../ltoolskeyall}{../LToolsKeyAll},
+  \hyperlink{../ltoolskeybget}{../LToolsKeyBget},
+  \hyperlink{../ltoolskeyc0}{../LToolsKeyC0},
+  \hyperlink{../ltoolskeyceget}{../LToolsKeyCEget},
+  \hyperlink{../ltoolskeyd0}{../LToolsKeyD0},
+  \hyperlink{../ltoolskeye0}{../LToolsKeyE0},
+  \hyperlink{../ltoolskeyeget}{../LToolsKeyEget},
+  \hyperlink{../ltoolsli2}{../LToolsLi2},
+  \hyperlink{../ltoolsli2omx}{../LToolsLi2omx},
+  \hyperlink{../ltoolsmarkcache}{../LToolsMarkCache},
+  \hyperlink{../ltoolspave}{../LToolsPaVe},
+  \hyperlink{../ltoolsrestorecache}{../LToolsRestoreCache},
+  \hyperlink{../ltoolssetcmpbits}{../LToolsSetCmpBits},
+  \hyperlink{../ltoolssetdebugkey}{../LToolsSetDebugKey},
+  \hyperlink{../ltoolssetdebugrange}{../LToolsSetDebugRange},
+  \hyperlink{../ltoolssetdelta}{../LToolsSetDelta},
+  \hyperlink{../ltoolssetdiffeps}{../LToolsSetDiffEps},
+  \hyperlink{../ltoolsseterrdigits}{../LToolsSetErrDigits},
+  \hyperlink{../ltoolssetmaxdev}{../LToolsSetMaxDev},
+  \hyperlink{../ltoolssetminmass}{../LToolsSetMinMass},
+  \hyperlink{../ltoolssetuvdiv}{../LToolsSetUVDiv},
+  \hyperlink{../ltoolssetversionkey}{../LToolsSetVersionKey},
+  \hyperlink{../ltoolssetwarndigits}{../LToolsSetWarnDigits} -
+  placeholders for certain LoopTools symbols
+\end{itemize}
+
+\hypertarget{pysecdec interface}{
+\section{pySecDec interface}\label{pysecdec interface}\index{pySecDec interface}}
+
+\begin{itemize}
+\tightlist
+\item
+  \hyperlink{../psdcreatepythonscripts}{../PSDCreatePythonScripts} -
+  creates Python scripts for evaluating the given integral with pySecDec
+\item
+  \hyperlink{../psdintegrate}{../PSDIntegrate} - creates input for
+  pySecDec's numerical integration routines
+\item
+  \hyperlink{../psdloopintegralfrompropagators}{../PSDLoopIntegralFromPropagators}
+  - converts the given loop integral into input for pySecDec's
+  \texttt{LoopIntegralFromPropagators}
+\item
+  \hyperlink{../psdlooppackage}{../PSDLoopPackage} - creates input for
+  pySecDec's \texttt{loop_package}
+\item
+  \hyperlink{../psdloopregions}{../PSDLoopRegions} - creates input for
+  pySecDec's \texttt{loop_regions}
+\item
+  \hyperlink{../psdsumpackage}{../PSDSumPackage} - creates input for
+  pySecDec's \texttt{sum_package}
+\item
+  \hyperlink{../psdadditionalprefactor}{../PSDAdditionalPrefactor},
+  \hyperlink{../psdaddmonomialregulatorpower}{../PSDAddMonomialRegulatorPower},
+  \hyperlink{../psdcoefficients}{../PSDCoefficients},
+  \hyperlink{../psdcomplexparameterrules}{../PSDComplexParameterRules},
+  \hyperlink{../psdcomplexparameters}{../PSDComplexParameters},
+  \hyperlink{../psdcomplexparametervalues}{../PSDComplexParameterValues},
+  \hyperlink{../psdcontourdeformation}{../PSDContourDeformation},
+  \hyperlink{../psdcputhreads}{../PSDCPUThreads},
+  \hyperlink{../psddecompositionmethod}{../PSDDecompositionMethod},
+  \hyperlink{../psddecreasetopercentage}{../PSDDecreaseToPercentage},
+  \hyperlink{../psddeformationparametersdecreasefactor}{../PSDDeformationParametersDecreaseFactor},
+  \hyperlink{../psddeformationparametersmaximum}{../PSDDeformationParametersMaximum},
+  \hyperlink{../psddeformationparametersminimum}{../PSDDeformationParametersMinimum},
+  \hyperlink{../psdenforcecomplex}{../PSDEnforceComplex},
+  \hyperlink{../psdepsabs}{../PSDEpsAbs},
+  \hyperlink{../psdepsrel}{../PSDEpsRel},
+  \hyperlink{../psderrormode}{../PSDErrorMode},
+  \hyperlink{../psderrormodeqmc}{../PSDErrorModeQmc},
+  \hyperlink{../psdevaluateminn}{../PSDEvaluateMinn},
+  \hyperlink{../psdexpansionbyregionsorder}{../PSDExpansionByRegionsOrder},
+  \hyperlink{../psdexpansionbyregionsparameter}{../PSDExpansionByRegionsParameter},
+  \hyperlink{../psdfitfunction}{../PSDFitFunction},
+  \hyperlink{../psdflags}{../PSDFlags},
+  \hyperlink{../psdformexecutable}{../PSDFormExecutable},
+  \hyperlink{../psdformmemoryuse}{../PSDFormMemoryUse},
+  \hyperlink{../psdformoptimizationlevel}{../PSDFormOptimizationLevel},
+  \hyperlink{../psdformthreads}{../PSDFormThreads},
+  \hyperlink{../psdformworkspace}{../PSDFormWorkSpace},
+  \hyperlink{../psdgeneratefilename}{../PSDGenerateFileName},
+  \hyperlink{../psdgeneratingvectors}{../PSDGeneratingVectors},
+  \hyperlink{../psdintegratefilename}{../PSDIntegrateFileName},
+  \hyperlink{../psdintegrator}{../PSDIntegrator},
+  \hyperlink{../psdloopintegralname}{../PSDLoopIntegralName},
+  \hyperlink{../psdmaxepsabs}{../PSDMaxEpsAbs},
+  \hyperlink{../psdmaxepsrel}{../PSDMaxEpsRel},
+  \hyperlink{../psdmaxeval}{../PSDMaxEval},
+  \hyperlink{../psdmaxincreasefac}{../PSDMaxIncreaseFac},
+  \hyperlink{../psdmindecreasefactor}{../PSDMinDecreaseFactor},
+  \hyperlink{../psdminepsabs}{../PSDMinEpsAbs},
+  \hyperlink{../psdminepsrel}{../PSDMinEpsRel},
+  \hyperlink{../psdmineval}{../PSDMinEval},
+  \hyperlink{../psdminm}{../PSDMinm},
+  \hyperlink{../psdminn}{../PSDMinn},
+  \hyperlink{../psdnormalizexecutable}{../PSDNormalizExecutable},
+  \hyperlink{../psdnumberofpresamples}{../PSDNumberOfPresamples},
+  \hyperlink{../psdnumberofthreads}{../PSDNumberOfThreads},
+  \hyperlink{../psdoutputdirectory}{../PSDOutputDirectory},
+  \hyperlink{../psdoverwritepackagedirectory}{../PSDOverwritePackageDirectory},
+  \hyperlink{../psdpylinkqmctransforms}{../PSDPyLinkQMCTransforms},
+  \hyperlink{../psdrealparameterrules}{../PSDRealParameterRules},
+  \hyperlink{../psdrealparameters}{../PSDRealParameters},
+  \hyperlink{../psdrealparametervalues}{../PSDRealParameterValues},
+  \hyperlink{../psdregulators}{../PSDRegulators},
+  \hyperlink{../psdrequestedorder}{../PSDRequestedOrder},
+  \hyperlink{../psdresetcudaafter}{../PSDResetCudaAfter},
+  \hyperlink{../psdsplit}{../PSDSplit},
+  \hyperlink{../psdtransform}{../PSDTransform},
+  \hyperlink{../psdverbose}{../PSDVerbose},
+  \hyperlink{../psdverbosity}{../PSDVerbosity} - options of functions
+  related to the pySecDec interface
+\end{itemize}
+
+\hypertarget{qgraf interface}{
+\section{QGRAF interface}\label{qgraf interface}\index{QGRAF interface}}
+
+\begin{itemize}
+\tightlist
+\item
+  \hyperlink{../qgconverttofc}{../QGConvertToFC} - converts QGRAF output
+  into FeynCalc input
+\item
+  \hyperlink{../qgcreateamp}{../QGCreateAmp} - generates Feynman
+  amplitudes and diagrams
+\item
+  \hyperlink{../qgloadinsertions}{../QGLoadInsertions} - loads sets of
+  Feynman rules
+\item
+  \hyperlink{../qgpreparediagramstex}{../QGPrepareDiagramsTeX} -
+  prepares TeX form of Feynman diagrams
+\item
+  \hyperlink{../qgpropagator}{../QGPropagator} - placeholder for the
+  propagator of a field
+\item
+  \hyperlink{../qgtruncatedpolarization}{../QGTruncatedPolarization} -
+  placeholder for the truncated external state of a field
+\item
+  \hyperlink{../qgvertex}{../QGVertex} - placeholder for the interaction
+  vertex of some fields
+\item
+  \hyperlink{../dollarqginsertionsdirectory}{../\$QGInsertionsDirectory},
+  \hyperlink{../dollarqglogoutputamplitudes}{../\$QGLogOutputAmplitudes},
+  \hyperlink{../dollarqglogoutputdiagrams}{../\$QGLogOutputDiagrams},
+  \hyperlink{../dollarqgmodelsdirectory}{../\$QGModelsDirectory},
+  \hyperlink{../dollarqgstylesdirectory}{../\$QGStylesDirectory},
+  \hyperlink{../dollarqgtexdirectory}{../\$QGTeXDirectory},
+  \hyperlink{../qgamplitudestyle}{../QGAmplitudeStyle},
+  \hyperlink{../qgbinaryfile}{../QGBinaryFile},
+  \hyperlink{../qgcleanupoutputdirectory}{../QGCleanUpOutputDirectory},
+  \hyperlink{../qgdiagramstyle}{../QGDiagramStyle},
+  \hyperlink{../qginsertionrule}{../QGInsertionRule},
+  \hyperlink{../qgloopmomentum}{../QGLoopMomentum},
+  \hyperlink{../qgmodel}{../QGModel},
+  \hyperlink{../qgoptionalstatements}{../QGOptionalStatements},
+  \hyperlink{../qgoptions}{../QGOptions},
+  \hyperlink{../qgoutputamplitudes}{../QGOutputAmplitudes},
+  \hyperlink{../qgoutputdiagrams}{../QGOutputDiagrams},
+  \hyperlink{../qgoutputdirectory}{../QGOutputDirectory},
+  \hyperlink{../qgoverwriteexistingamplitudes}{../QGOverwriteExistingAmplitudes},
+  \hyperlink{../qgoverwriteexistingdiagrams}{../QGOverwriteExistingDiagrams},
+  \hyperlink{../qgsaveinputfile}{../QGSaveInputFile},
+  \hyperlink{../qgshowoutput}{../QGShowOutput},
+  \hyperlink{../qgtexepilog}{../QGTeXEpilog},
+  \hyperlink{../qgtexprolog}{../QGTeXProlog} - options of functions
+  related to the QGRAF interface
+\end{itemize}
+\end{document}

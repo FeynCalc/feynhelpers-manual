@@ -1,0 +1,35 @@
+% !TeX program = pdflatex
+% !TeX root = PSDLoopRegions.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{psdloopregions}{
+\section{PSDLoopRegions}\label{psdloopregions}\index{PSDLoopRegions}}
+
+\texttt{PSDLoopRegions[\allowbreak{}name,\ \allowbreak{}loopIntegral,\ \allowbreak{}order,\ \allowbreak{}smallnessParameter]}
+is an auxiliary function that creates input for pySecDec's
+\texttt{loop_regions} routine. The results is returned as a string.
+
+\texttt{PSDLoopPackage} is used by \texttt{PSDCreatePythonScripts} when
+assembling the generation script for an asymptotic expansion.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{psdcreatepythonscripts}{PSDCreatePythonScripts},
+\hyperlink{psdintegrate}{PSDIntegrate},
+\hyperlink{psdloopintegralfrompropagators}{PSDLoopIntegralFromPropagators},
+\hyperlink{psdlooppackage}{PSDLoopPackage}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PSDLoopRegions}\OperatorTok{[}\StringTok{"loopint"}\OperatorTok{,} \StringTok{"li"}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \FunctionTok{z}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{loop$\_$regions($\backslash $nname = 'loopint',$\backslash $nloop$\_$integral = li,$\backslash $nsmallness$\_$parameter = 'z',$\backslash $nexpansion$\_$by$\_$regions$\_$order = 2,$\backslash $ndecomposition$\_$method = 'geometric'$\backslash $n)}
+\end{dmath*}
+\end{document}

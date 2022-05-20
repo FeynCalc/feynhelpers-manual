@@ -1,0 +1,68 @@
+% !TeX program = pdflatex
+% !TeX root = PaXLn.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paxln}{
+\section{PaXLn}\label{paxln}\index{PaXLn}}
+
+\texttt{PaXLn} corresponds to \texttt{Ln} in Package-X.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{(*Just to load Package{-}X*)}
+\NormalTok{  PaXEvaluate}\OperatorTok{[}\NormalTok{A0}\OperatorTok{[}\DecValTok{1}\OperatorTok{]]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{PaXLn} uses \texttt{X\textasciigrave Ln} for numerical
+evaluations
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PaXLn}\OperatorTok{[}\SpecialCharTok{{-}}\FloatTok{4.5}\OperatorTok{,} \DecValTok{1}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+1.50408\, +3.14159 i
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{X}\NormalTok{\textasciigrave{}Ln}\OperatorTok{[}\SpecialCharTok{{-}}\FloatTok{4.5}\OperatorTok{,} \DecValTok{1}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+1.50408\, +3.14159 i
+\end{dmath*}
+
+The same goes for derivatives and series expansions
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{D}\OperatorTok{[}\NormalTok{PaXLn}\OperatorTok{[}\FunctionTok{x}\OperatorTok{,} \SpecialCharTok{\textbackslash{}}\OperatorTok{[}\NormalTok{Alpha}\OperatorTok{]],} \FunctionTok{x}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1}{x}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Series}\OperatorTok{[}\NormalTok{PaXLn}\OperatorTok{[}\FunctionTok{x}\OperatorTok{,} \SpecialCharTok{\textbackslash{}}\OperatorTok{[}\NormalTok{Alpha}\OperatorTok{]],} \OperatorTok{\{}\FunctionTok{x}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\log (1+i \alpha \epsilon )+(x-1)-\frac{1}{2} (x-1)^2+O\left((x-1)^3\right)
+\end{dmath*}
+\end{document}

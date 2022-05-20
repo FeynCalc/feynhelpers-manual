@@ -1,0 +1,216 @@
+% !TeX program = pdflatex
+% !TeX root = LToolsSetDebugKey.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{ltoolssetdebugkey}{
+\section{LToolsSetDebugKey}\label{ltoolssetdebugkey}\index{LToolsSetDebugKey}}
+
+\texttt{LToolsSetDebugKey} corresponds to the \texttt{SetDebugKey}
+function in LoopTools.
+
+See \texttt{?LoopTools\textasciigrave SetDebugKey} for further
+information regarding this LoopTools symbol.
+
+Use \texttt{LToolsSetDebugKey[\allowbreak{}-1]} to obtain the most
+complete debugging output. This can be useful when investigating issues
+with the evaluation of certain kinematic limits in LoopTools.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{ltoolsgetdebugkey}{LToolsGetDebugKey}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsLoadLibrary}\OperatorTok{[]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{LoopTools library loaded.}
+\end{dmath*}
+
+\begin{verbatim}
+(* ====================================================
+   FF 2.0, a package to evaluate one-loop integrals
+ written by G. J. van Oldenborgh, NIKHEF-H, Amsterdam
+ ====================================================
+ for the algorithms used see preprint NIKHEF-H 89/17,
+ 'New Algorithms for One-loop Integrals', by G.J. van
+ Oldenborgh and J.A.M. Vermaseren, published in 
+ Zeitschrift fuer Physik C46(1990)425.
+ ====================================================*)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{C0}\OperatorTok{[}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{],} \FunctionTok{q}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/127qwxc1krziv.pdf}
+\end{figure}
+\FloatBarrier
+
+\begin{dmath*}\breakingcomma
+\text{FeynCalc$\grave{ }$LoopTools$\grave{ }$Private$\grave{ }$ltFailed}\left(\text{C}_0(0,0,0,0,0,1)\right)+\frac{1.}{\varepsilon }
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsSetDebugKey}\OperatorTok{[}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+-1
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsEvaluate}\OperatorTok{[}\NormalTok{C0}\OperatorTok{[}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{],} \FunctionTok{q}\OperatorTok{]}
+
+\CommentTok{(* Bcoeff           4}
+\CommentTok{   p     =   0.0000000000000000     }
+\CommentTok{   m1    =   0.0000000000000000     }
+\CommentTok{   m2    =   0.0000000000000000     }
+\CommentTok{ bb0       =              ({-}1.7219455507509331,0.0000000000000000)}
+\CommentTok{ bb1       =              (0.86097277537546657,0.0000000000000000)}
+\CommentTok{ bb11      =             ({-}0.57398185025031101,0.0000000000000000)}
+\CommentTok{ bb111     =              (0.43048638768773329,0.0000000000000000)}
+\CommentTok{ dbb0      =   (9.99999999999999978E+122,9.99999999999999978E+122)}
+\CommentTok{ dbb0:1    =   (9.99999999999999978E+122,9.99999999999999978E+122)}
+\CommentTok{ dbb1      =   (9.99999999999999978E+122,9.99999999999999978E+122)}
+\CommentTok{ dbb1:1    =   (9.99999999999999978E+122,9.99999999999999978E+122)}
+\CommentTok{ dbb00     =              (0.14349546256257775,0.0000000000000000)}
+\CommentTok{ dbb001    =        ({-}7.17477312812888762E{-}002,0.0000000000000000)}
+\CommentTok{ ====================================================}
+\CommentTok{ Bcoeff           5}
+\CommentTok{   p     =   0.0000000000000000     }
+\CommentTok{   m1    =   0.0000000000000000     }
+\CommentTok{   m2    =   1.0000000000000000     }
+\CommentTok{ bb0       =            ({-}0.72194555075093314,{-}0.0000000000000000)}
+\CommentTok{ bb0:1     =               (1.0000000000000000,0.0000000000000000)}
+\CommentTok{ bb1       =              (0.61097277537546657,0.0000000000000000)}
+\CommentTok{ bb1:1     =             ({-}0.50000000000000000,0.0000000000000000)}
+\CommentTok{ bb00      =        ({-}5.54863876877332851E{-}002,0.0000000000000000)}
+\CommentTok{ bb00:1    =              (0.25000000000000000,0.0000000000000000)}
+\CommentTok{ bb11      =            ({-}0.46287073913919996,{-}0.0000000000000000)}
+\CommentTok{ bb11:1    =              (0.33333333333333331,0.0000000000000000)}
+\CommentTok{ bb001     =         (6.47687029029332950E{-}002,0.0000000000000000)}
+\CommentTok{ bb001:1   =             ({-}0.16666666666666666,0.0000000000000000)}
+\CommentTok{ bb111     =              (0.36798638768773329,0.0000000000000000)}
+\CommentTok{ bb111:1   =             ({-}0.25000000000000000,0.0000000000000000)}
+\CommentTok{ dbb0      =       (0.50000000000000000,{-}1.00000000000000001E{-}050)}
+\CommentTok{ dbb1      =       ({-}0.16666666666666669,5.00000000000000004E{-}051)}
+\CommentTok{ dbb00     =  (7.40510181181333327E{-}002,{-}8.33333333333333290E{-}052)}
+\CommentTok{ dbb00:1   =        ({-}8.33333333333333287E{-}002,0.0000000000000000)}
+\CommentTok{ dbb11     =  (8.33333333333333148E{-}002,{-}3.33333333333333316E{-}051)}
+\CommentTok{ dbb001    =  ({-}4.74421757257333238E{-}002,4.16666666666666645E{-}052)}
+\CommentTok{ dbb001:1  =         (4.16666666666666644E{-}002,0.0000000000000000)}
+\CommentTok{ ====================================================}
+\CommentTok{ Ccoeff           6}
+\CommentTok{   p1    =   0.0000000000000000     }
+\CommentTok{   p2    =   0.0000000000000000     }
+\CommentTok{   p1p2  =   0.0000000000000000     }
+\CommentTok{   m1    =   0.0000000000000000     }
+\CommentTok{   m2    =   0.0000000000000000     }
+\CommentTok{   m3    =   1.0000000000000000     }
+\CommentTok{collinear C0, perm = 312}
+\CommentTok{C0collDR, perm = 123}
+\CommentTok{ p1 =   0.0000000000000000     }
+\CommentTok{ p2 =   0.0000000000000000     }
+\CommentTok{ p3 =   0.0000000000000000     }
+\CommentTok{ m1 =   0.0000000000000000     }
+\CommentTok{ m2 =   0.0000000000000000     }
+\CommentTok{ m3 =   1.0000000000000000     }
+\CommentTok{ C0collDR: qltri3}
+\CommentTok{ C0collDR:0 =                                             (NaN,NaN)}
+\CommentTok{ C0collDR:1 =               (1.0000000000000000,0.0000000000000000)}
+\CommentTok{ C0collDR:2 =               (0.0000000000000000,0.0000000000000000)}
+\CommentTok{ cc0       =                                             (NaN,NaN)}
+\CommentTok{ cc0:1     =               (1.0000000000000000,0.0000000000000000)}
+\CommentTok{ cc1       =                                             (NaN,NaN)}
+\CommentTok{ cc1:1     =                                             (NaN,NaN)}
+\CommentTok{ cc1:2     =                                             (NaN,NaN)}
+\CommentTok{ cc2       =                                             (NaN,NaN)}
+\CommentTok{ cc2:1     =                                             (NaN,NaN)}
+\CommentTok{ cc2:2     =                                             (NaN,NaN)}
+\CommentTok{ cc00      =                                             (NaN,NaN)}
+\CommentTok{ cc00:1    =                                             (NaN,NaN)}
+\CommentTok{ cc00:2    =                                             (NaN,NaN)}
+\CommentTok{ cc11      =                                             (NaN,NaN)}
+\CommentTok{ cc11:1    =                                             (NaN,NaN)}
+\CommentTok{ cc11:2    =                                             (NaN,NaN)}
+\CommentTok{ cc12      =                                             (NaN,NaN)}
+\CommentTok{ cc12:1    =                                             (NaN,NaN)}
+\CommentTok{ cc12:2    =                                             (NaN,NaN)}
+\CommentTok{ cc22      =                                             (NaN,NaN)}
+\CommentTok{ cc22:1    =                                             (NaN,NaN)}
+\CommentTok{ cc22:2    =                                             (NaN,NaN)}
+\CommentTok{ cc001     =                                             (NaN,NaN)}
+\CommentTok{ cc001:1   =                                             (NaN,NaN)}
+\CommentTok{ cc001:2   =                                             (NaN,NaN)}
+\CommentTok{ cc002     =                                             (NaN,NaN)}
+\CommentTok{ cc002:1   =                                             (NaN,NaN)}
+\CommentTok{ cc002:2   =                                             (NaN,NaN)}
+\CommentTok{ cc111     =                                             (NaN,NaN)}
+\CommentTok{ cc111:1   =                                             (NaN,NaN)}
+\CommentTok{ cc111:2   =                                             (NaN,NaN)}
+\CommentTok{ cc112     =                                             (NaN,NaN)}
+\CommentTok{ cc112:1   =                                             (NaN,NaN)}
+\CommentTok{ cc112:2   =                                             (NaN,NaN)}
+\CommentTok{ cc122     =                                             (NaN,NaN)}
+\CommentTok{ cc122:1   =                                             (NaN,NaN)}
+\CommentTok{ cc122:2   =                                             (NaN,NaN)}
+\CommentTok{ cc222     =                                             (NaN,NaN)}
+\CommentTok{ cc222:1   =                                             (NaN,NaN)}
+\CommentTok{ cc222:2   =                                             (NaN,NaN)}
+\CommentTok{ cc0000    =                                             (NaN,NaN)}
+\CommentTok{ cc0000:1  =                                             (NaN,NaN)}
+\CommentTok{ cc0000:2  =                                             (NaN,NaN)}
+\CommentTok{ cc0011    =                                             (NaN,NaN)}
+\CommentTok{ cc0011:1  =                                             (NaN,NaN)}
+\CommentTok{ cc0011:2  =                                             (NaN,NaN)}
+\CommentTok{ cc0012    =                                             (NaN,NaN)}
+\CommentTok{ cc0012:1  =                                             (NaN,NaN)}
+\CommentTok{ cc0012:2  =                                             (NaN,NaN)}
+\CommentTok{ cc0022    =                                             (NaN,NaN)}
+\CommentTok{ cc0022:1  =                                             (NaN,NaN)}
+\CommentTok{ cc0022:2  =                                             (NaN,NaN)}
+\CommentTok{ cc1111    =                                             (NaN,NaN)}
+\CommentTok{ cc1111:1  =                                             (NaN,NaN)}
+\CommentTok{ cc1111:2  =                                             (NaN,NaN)}
+\CommentTok{ cc1112    =                                             (NaN,NaN)}
+\CommentTok{ cc1112:1  =                                             (NaN,NaN)}
+\CommentTok{ cc1112:2  =                                             (NaN,NaN)}
+\CommentTok{ cc1122    =                                             (NaN,NaN)}
+\CommentTok{ cc1122:1  =                                             (NaN,NaN)}
+\CommentTok{ cc1122:2  =                                             (NaN,NaN)}
+\CommentTok{ cc1222    =                                             (NaN,NaN)}
+\CommentTok{ cc1222:1  =                                             (NaN,NaN)}
+\CommentTok{ cc1222:2  =                                             (NaN,NaN)}
+\CommentTok{ cc2222    =                                             (NaN,NaN)}
+\CommentTok{ cc2222:1  =                                             (NaN,NaN)}
+\CommentTok{ cc2222:2  =                                             (NaN,NaN)}
+\CommentTok{ ====================================================*)}
+\end{Highlighting}
+\end{Shaded}
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/1l4kn1yut71v8.pdf}
+\end{figure}
+\FloatBarrier
+
+\begin{dmath*}\breakingcomma
+\text{FeynCalc$\grave{ }$LoopTools$\grave{ }$Private$\grave{ }$ltFailed}\left(\text{C}_0(0,0,0,0,0,1)\right)+\frac{1.}{\varepsilon }
+\end{dmath*}
+\end{document}

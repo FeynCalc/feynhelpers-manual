@@ -1,0 +1,97 @@
+% !TeX program = pdflatex
+% !TeX root = FIREImportResults.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{fireimportresults}{
+\section{FIREImportResults}\label{fireimportresults}\index{FIREImportResults}}
+
+\texttt{FIREImportResults[\allowbreak{}topoName,\ \allowbreak{}path]}
+imports the content of a FIRE .tables file and converts the results to
+replacement rules for \texttt{GLI}s with the id \texttt{topoName}.
+
+Notice that \texttt{topoName} can be also a list of replacement rules
+that link FIRE ids to \texttt{FCTopology} ids. For the sake of
+convenience one can also use full \texttt{FCTopology} objects instead of
+their ids as in
+\texttt{FIREImportResults[\allowbreak{}topo,\ \allowbreak{}path]} or
+\texttt{FIREImportResults[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}path]}.
+
+If \texttt{path} represents a full path to a file, then this file is
+loaded. If it is just a path to a directory, then
+\texttt{path/topoName/topoName} is assumed to be the full path.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{firecreateconfigfile}{FIRECreateConfigFile},
+\hyperlink{firecreatestartfile}{FIRECreateStartFile},
+\hyperlink{firerunreduction}{FIRERunReduction}
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ibpTables }\ExtensionTok{=} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynHelpersDirectory}\OperatorTok{,} \StringTok{"Documentation"}\OperatorTok{,} \StringTok{"Examples"}\OperatorTok{,} \StringTok{"prop3L1topo010000100.tables"}\OperatorTok{\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ibpRules }\ExtensionTok{=}\NormalTok{ FIREImportResults}\OperatorTok{[}\StringTok{"prop3L1topo010000100"}\OperatorTok{,}\NormalTok{ ibpTables}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ibpRules }\SpecialCharTok{//} \FunctionTok{Length}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+112
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ibpRules}\OperatorTok{[[}\DecValTok{1}\NormalTok{ ;; }\DecValTok{2}\OperatorTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{G^{\text{prop3L1topo010000100}}(1,1,-2,1,1,-2,1,1,0)\to \frac{\left(d^2-8 d+16\right) \;\text{m1}^8 G^{\text{prop3L1topo010000100}}(0,1,1,1,1,1,1,0,0)}{16 d^2-32 d+16}+\frac{\left(-35 d^5+456 d^4-2092 d^3+4048 d^2-3136 d+768\right) \;\text{m1}^6 G^{\text{prop3L1topo010000100}}(0,0,1,1,1,1,1,0,0)}{216 d^5-1296 d^4+3000 d^3-3360 d^2+1824 d-384}+\frac{\left(42 d^6-484 d^5+2333 d^4-5568 d^3+6572 d^2-3456 d+576\right) \;\text{m1}^4 G^{\text{prop3L1topo010000100}}(0,0,1,1,1,1,0,0,0)}{216 d^6-1620 d^5+4944 d^4-7860 d^3+6864 d^2-3120 d+576},G^{\text{prop3L1topo010000100}}(1,1,-1,1,1,-1,1,1,-1)\to \frac{\left(6 d-3 d^2\right) \;\text{m1}^6 G^{\text{prop3L1topo010000100}}(0,1,1,1,1,1,1,0,0)}{32 d^2-64 d+32}+\frac{\left(-61 d^4+380 d^3-860 d^2+864 d-320\right) \;\text{m1}^4 G^{\text{prop3L1topo010000100}}(0,0,1,1,1,1,1,0,0)}{144 d^4-768 d^3+1488 d^2-1248 d+384}+\frac{\left(42 d^4-253 d^3+550 d^2-520 d+176\right) \;\text{m1}^2 G^{\text{prop3L1topo010000100}}(0,0,1,1,1,1,0,0,0)}{72 d^4-384 d^3+744 d^2-624 d+192}\right\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ibpRulesTest }\ExtensionTok{=}\NormalTok{ FIREImportResults}\OperatorTok{[\{}\DecValTok{3110} \OtherTok{{-}\textgreater{}} \StringTok{"prop3L1topo010000100"}\OperatorTok{\},}\NormalTok{ ibpTables}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ibpRules }\ExtensionTok{===}\NormalTok{ ibpRulesTest}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{True}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ibpRulesTest}\OperatorTok{[[}\DecValTok{3}\NormalTok{ ;; }\DecValTok{4}\OperatorTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{G^{\text{prop3L1topo010000100}}(1,1,-1,1,1,-2,1,1,0)\to \frac{(4-d) \;\text{m1}^6 G^{\text{prop3L1topo010000100}}(0,1,1,1,1,1,1,0,0)}{8 d-8}+\frac{(8-5 d) \;\text{m1}^4 G^{\text{prop3L1topo010000100}}(0,0,1,1,1,1,1,0,0)}{12 d-12}+\frac{(3 d-8) \;\text{m1}^2 G^{\text{prop3L1topo010000100}}(0,0,1,1,1,1,0,0,0)}{6 d-6},G^{\text{prop3L1topo010000100}}(1,1,-2,1,1,-1,1,1,0)\to \frac{(4-d) \;\text{m1}^6 G^{\text{prop3L1topo010000100}}(0,1,1,1,1,1,1,0,0)}{8 d-8}+\frac{(8-5 d) \;\text{m1}^4 G^{\text{prop3L1topo010000100}}(0,0,1,1,1,1,1,0,0)}{12 d-12}+\frac{(3 d-8) \;\text{m1}^2 G^{\text{prop3L1topo010000100}}(0,0,1,1,1,1,0,0,0)}{6 d-6}\right\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\NormalTok{prop3L1topo010000100}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{m1}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{p3}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{(p1 }\SpecialCharTok{{-}}\NormalTok{ p2)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{(p2 }\SpecialCharTok{{-}}\NormalTok{ p3)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{(p1 }\SpecialCharTok{+}\NormalTok{ q1)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{(p2 }\SpecialCharTok{+}\NormalTok{ q1)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{m1}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\SpecialCharTok{*}\NormalTok{(p3 }\SpecialCharTok{+}\NormalTok{ q1)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\NormalTok{p1 . p3}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p2}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\NormalTok{q1}\OperatorTok{\},} \OperatorTok{\{}\NormalTok{SPD}\OperatorTok{[}\NormalTok{q1}\OperatorTok{,}\NormalTok{ q1}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ m1}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\end{document}

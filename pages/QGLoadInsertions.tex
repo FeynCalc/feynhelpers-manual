@@ -1,0 +1,27 @@
+% !TeX program = pdflatex
+% !TeX root = QGLoadInsertions.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{qgloadinsertions}{
+\section{QGLoadInsertions}\label{qgloadinsertions}\index{QGLoadInsertions}}
+
+\texttt{QGLoadInsertions[\allowbreak{}"insertions.m"]} loads insertion
+rules from \texttt{insertions.m} for amplitudes generated with QGRAF.
+
+Specifying only the file name means that \texttt{QGLoadInsertions} will
+search for the file first in \texttt{\$QGInsertionsDirectory} and then
+in the current directory. Specifying the full path will force the
+function to load the file from there directly.
+
+Evaluating \texttt{QGLoadInsertions[\allowbreak{}]} loads some common
+insertions from \texttt{QGCommonInsertions.m} that are shipped with this
+interface.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{qgconverttofc}{QGConvertToFC},
+\hyperlink{qgcreateamp}{QGCreateAmp}.
+
+\subsection{Examples}
+\end{document}

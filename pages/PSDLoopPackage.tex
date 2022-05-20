@@ -1,0 +1,46 @@
+% !TeX program = pdflatex
+% !TeX root = PSDLoopPackage.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{psdlooppackage}{
+\section{PSDLoopPackage}\label{psdlooppackage}\index{PSDLoopPackage}}
+
+\texttt{PSDLoopPackage[\allowbreak{}name,\ \allowbreak{}loopIntegral,\ \allowbreak{}order]}
+is an auxiliary function that creates input for pySecDec's
+\texttt{loop_package} routine. The result is returned as a string.
+
+\texttt{PSDLoopPackage} is used by \texttt{PSDCreatePythonScripts} when
+assembling the generation script.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{psdcreatepythonscripts}{PSDCreatePythonScripts},
+\hyperlink{psdintegrate}{PSDIntegrate},
+\hyperlink{psdloopintegralfrompropagators}{PSDLoopIntegralFromPropagators},
+\hyperlink{psdloopregions}{PSDLoopRegions}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PSDLoopPackage}\OperatorTok{[}\StringTok{"loopint"}\OperatorTok{,} \StringTok{"li"}\OperatorTok{,} \DecValTok{2}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{loop$\_$package($\backslash $nname = 'loopint',$\backslash $nloop$\_$integral = li,$\backslash $nrequested$\_$orders = [2],$\backslash $ndecomposition$\_$method = 'geometric'$\backslash $n)}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PSDLoopPackage}\OperatorTok{[}\StringTok{"loopint"}\OperatorTok{,} \StringTok{"li"}\OperatorTok{,} \DecValTok{0}\OperatorTok{,}\NormalTok{ PSDDecompositionMethod }\OtherTok{{-}\textgreater{}} \StringTok{"iterative"}\OperatorTok{,} 
+\NormalTok{  PSDAdditionalPrefactor }\OtherTok{{-}\textgreater{}} \StringTok{"2"}\OperatorTok{,}\NormalTok{ PSDContourDeformation }\OtherTok{{-}\textgreater{}} \ConstantTok{False}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{loop$\_$package($\backslash $nname = 'loopint',$\backslash $nloop$\_$integral = li,$\backslash $nrequested$\_$orders = [0],$\backslash $ncontour$\_$deformation = False,$\backslash $nadditional$\_$prefactor = '2',$\backslash $ndecomposition$\_$method = 'iterative'$\backslash $n)}
+\end{dmath*}
+\end{document}

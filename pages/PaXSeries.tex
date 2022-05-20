@@ -1,0 +1,23 @@
+% !TeX program = pdflatex
+% !TeX root = PaXSeries.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paxseries}{
+\section{PaXSeries}\label{paxseries}\index{PaXSeries}}
+
+\texttt{PaXSeries} is an option for \texttt{PaXEvaluate}. It allows to
+expand Passarino-Veltman functions around given variables.
+
+The expansion is done by \texttt{LoopRefineSeries} and the syntax is the
+same as with the ordinary \texttt{Series},
+e.g.~\texttt{PaXSeries -> \{\allowbreak{}\{\allowbreak{}m0,\ \allowbreak{}0,\ \allowbreak{}2\}\}}
+or
+\texttt{PaXSeries -> \{\allowbreak{}\{\allowbreak{}SPD[\allowbreak{}p1,\ \allowbreak{}p1],\ \allowbreak{}pp1,\ \allowbreak{}0\},\ \allowbreak{}\{\allowbreak{}SPD[\allowbreak{}p2,\ \allowbreak{}p2],\ \allowbreak{}pp2,\ \allowbreak{}0\}\}}.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{paxevaluate}{PaXEvaluate}.
+
+\subsection{Examples}
+\end{document}

@@ -1,0 +1,31 @@
+name: Build LaTeX document
+on: [push, workflow_dispatch]
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest    
+    container:
+      image: ghcr.io/vsht/feyncalc/latex-docker:latest
+      credentials:
+        username: ${{ secrets.GHCR_USERNAME }}
+        password: ${{ secrets.GHCR_TOKEN }}
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Compile LaTeX document
+        run: |
+          DATE_TIME=$(date "+%F %T %Z")
+          echo "DATE_TIME=$(date "+%F %T %Z")" >> $GITHUB_ENV
+          GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)
+          sed -i -e "s|DATE_TIME|$DATE_TIME|g" FeynHelpersManual.tex
+          sed -i -e "s|GITHUB_SHA_SHORT|$GITHUB_SHA_SHORT|g" FeynHelpersManual.tex
+          echo  "FeynHelpers manual (development version). Last update: $DATE_TIME" > body.md
+          latexmk -pdf FeynHelpersManual.tex
+      - name: Upload the resulting PDF
+        uses: ncipollo/release-action@v1
+        with:
+          tag: "dev-manual"
+          name: "FeynHelpers manual (updated on ${{ env.DATE_TIME }})"
+          bodyFile: "body.md"
+          allowUpdates: true
+          artifacts: "FeynHelpersManual.pdf,*.aux,*.log"

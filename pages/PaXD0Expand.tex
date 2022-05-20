@@ -1,0 +1,87 @@
+% !TeX program = pdflatex
+% !TeX root = PaXD0Expand.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paxd0expand}{
+\section{PaXD0Expand}\label{paxd0expand}\index{PaXD0Expand}}
+
+\texttt{PaXD0Expand} is an option for \texttt{PaXEvaluate}. If set to
+\texttt{True}, Package-X function \texttt{D0Expand} will be applied to
+the output of Package-X.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{paxevaluate}{PaXEvaluate}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{D0}\OperatorTok{[}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \FunctionTok{s}\OperatorTok{,} \FunctionTok{t}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{]}
+\NormalTok{PaXEvaluate}\OperatorTok{[}\SpecialCharTok{\%}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{D}_0\left(0,0,0,0,s,t,m^2,m^2,m^2,m^2\right)
+\end{dmath*}
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/0nwzbpg5gzgtm.pdf}
+\end{figure}
+\FloatBarrier
+
+\begin{dmath*}\breakingcomma
+\text{D}_0\left(0,0,0,0,s,t,m^2,m^2,m^2,m^2\right)
+\end{dmath*}
+
+The full result is a \texttt{ConditionalExpression}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{D0}\OperatorTok{[}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \FunctionTok{s}\OperatorTok{,} \FunctionTok{t}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{]}
+\NormalTok{res }\ExtensionTok{=}\NormalTok{ PaXEvaluate}\OperatorTok{[}\SpecialCharTok{\%}\OperatorTok{,}\NormalTok{ PaXC0Expand }\OtherTok{{-}\textgreater{}} \ConstantTok{True}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{D}_0\left(0,0,0,0,s,t,m^2,m^2,m^2,m^2\right)
+\end{dmath*}
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/18tyhteyfoyw5.pdf}
+\end{figure}
+\FloatBarrier
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\SpecialCharTok{//} \FunctionTok{Short}
+\NormalTok{res }\SpecialCharTok{//} \FunctionTok{Last}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{D}_0\left(0,0,0,0,s,t,m^2,m^2,m^2,m^2\right)
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+m^2
+\end{dmath*}
+
+Use \texttt{Normal} to get the actual expression
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(res }\SpecialCharTok{//} \FunctionTok{Normal}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{D}_0\left(0,0,0,0,s,t,m^2,m^2,m^2,m^2\right)
+\end{dmath*}
+\end{document}

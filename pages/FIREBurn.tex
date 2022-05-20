@@ -1,0 +1,47 @@
+% !TeX program = pdflatex
+% !TeX root = FIREBurn.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{fireburn}{
+\section{FIREBurn}\label{fireburn}\index{FIREBurn}}
+
+\texttt{FIREBurn[\allowbreak{}expr,\ \allowbreak{}\{\allowbreak{}q1,\ \allowbreak{}q2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}p1,\ \allowbreak{}p2,\ \allowbreak{}...\}]}
+reduces loop integrals with loop momenta
+\texttt{q1,\ \allowbreak{}q2,\ \allowbreak{}...} and external momenta
+\texttt{p1,\ \allowbreak{}p2,\ \allowbreak{}...} with
+integration-by-parts (IBP) relations.
+
+\texttt{FIREBurn} expects that the input does not contain any loop
+integrals with linearly dependent propagators. Therefore, prior to
+starting the reduction, use \texttt{ApartFF}.
+
+The evaluation is done on a parallel kernel using A.V. Smirnov's and
+V.A. Smirnov's FIRE.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{int }\ExtensionTok{=}\NormalTok{ SFAD}\OperatorTok{[\{}\FunctionTok{p}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \DecValTok{2}\OperatorTok{\},} \OperatorTok{\{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{2} \FunctionTok{p}\NormalTok{ . }\FunctionTok{k}\OperatorTok{\},} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \DecValTok{3}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1}{(p^2-m^2+i \eta )^2.(2 (k\cdot p)-m^2+i \eta )^3}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIREBurn}\OperatorTok{[}\NormalTok{int}\OperatorTok{,} \OperatorTok{\{}\FunctionTok{p}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{k}\OperatorTok{\},} \FunctionTok{Timing} \OtherTok{{-}\textgreater{}} \ConstantTok{False}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+-\frac{(D-5) (D-3) k^2 \left(D m^2-4 k^2-6 m^2\right)}{m^4 \left(m^2-4 k^2\right)^3 (2 (k\cdot p)-m^2+i \eta ).(p^2-m^2+i \eta )}-\frac{(D-2) \left(2 D^2 k^2-24 D k^2+66 k^2+m^2\right)}{2 m^4 \left(m^2-4 k^2\right)^3 (p^2-m^2+i \eta )}
+\end{dmath*}
+\end{document}

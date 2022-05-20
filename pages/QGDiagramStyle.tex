@@ -1,0 +1,25 @@
+% !TeX program = pdflatex
+% !TeX root = QGDiagramStyle.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{qgdiagramstyle}{
+\section{QGDiagramStyle}\label{qgdiagramstyle}\index{QGDiagramStyle}}
+
+\texttt{QGDiagramStyle} is an option for \texttt{QGCreateAmp}, which
+specifies the QGRAF style file for generating the diagrams. If you
+provide only the file name, they style will be loaded from the standard
+directory containing model and style files
+(\texttt{\$QGStylesDirectory}).
+
+If you specify the full path, the style file will be loaded from there.
+The default value is a custom style file for FeynMP
+\texttt{"latex.sty"}. If the option value is set to an empty string, no
+diagram file will be generated.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{qgcreateamp}{QGCreateAmp}.
+
+\subsection{Examples}
+\end{document}

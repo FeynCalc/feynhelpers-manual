@@ -1,0 +1,80 @@
+% !TeX program = pdflatex
+% !TeX root = PaXC0Expand.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paxc0expand}{
+\section{PaXC0Expand}\label{paxc0expand}\index{PaXC0Expand}}
+
+\texttt{PaXC0Expand} is an option for \texttt{PaXEvaluate}. If set to
+\texttt{True}, Package-X function \texttt{C0Expand} will be applied to
+the output of Package-X.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{paxevaluate}{PaXEvaluate}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PaVe}\OperatorTok{[}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SP}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{p}\OperatorTok{],}\NormalTok{ SP}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{p}\OperatorTok{],} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}]}
+\NormalTok{PaXEvaluate}\OperatorTok{[}\SpecialCharTok{\%}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{C}_{001}\left(\overline{p}^2,\overline{p}^2,m^2,m^2,m^2,m^2\right)
+\end{dmath*}
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/04ohum5f7la9s.pdf}
+\end{figure}
+\FloatBarrier
+
+\begin{dmath*}\breakingcomma
+-\frac{9 m^2 \overline{p}^4 \;\text{C}_0\left(m^2,\overline{p}^2,\overline{p}^2,m^2,m^2,m^2\right)}{2 \left(m^2-4 \overline{p}^2\right)^2}+\frac{\overline{p}^6 \;\text{C}_0\left(m^2,\overline{p}^2,\overline{p}^2,m^2,m^2,m^2\right)}{\left(m^2-4 \overline{p}^2\right)^2}-\frac{m^6 \;\text{C}_0\left(m^2,\overline{p}^2,\overline{p}^2,m^2,m^2,m^2\right)}{2 \left(m^2-4 \overline{p}^2\right)^2}+\frac{3 m^4 \overline{p}^2 \;\text{C}_0\left(m^2,\overline{p}^2,\overline{p}^2,m^2,m^2,m^2\right)}{\left(m^2-4 \overline{p}^2\right)^2}-\frac{\sqrt{3} \pi  m^2 \overline{p}^2}{\left(m^2-4 \overline{p}^2\right)^2}-\frac{11 m^2}{36 \left(m^2-4 \overline{p}^2\right)}+\frac{\pi  \overline{p}^4}{\sqrt{3} \left(m^2-4 \overline{p}^2\right)^2}+\frac{19 \overline{p}^2}{18 \left(m^2-4 \overline{p}^2\right)}-\frac{7 m^2 \sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \log \left(\frac{\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)}-\overline{p}^2+2 m^2}{2 m^2}\right)}{3 \left(m^2-4 \overline{p}^2\right)^2}-\frac{\overline{p}^2 \sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \log \left(\frac{\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)}-\overline{p}^2+2 m^2}{2 m^2}\right)}{3 \left(m^2-4 \overline{p}^2\right)^2}+\frac{\sqrt{3} \pi  m^4}{4 \left(m^2-4 \overline{p}^2\right)^2}+\frac{2 m^4 \sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \log \left(\frac{\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)}-\overline{p}^2+2 m^2}{2 m^2}\right)}{3 \overline{p}^2 \left(m^2-4 \overline{p}^2\right)^2}-\frac{1}{12 \varepsilon }+\frac{1}{12} \left(-\log \left(\frac{\mu ^2}{m^2}\right)+\gamma -\log (4 \pi )+2 \log (2 \pi )\right)
+\end{dmath*}
+
+The full result is a \texttt{ConditionalExpression}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PaVe}\OperatorTok{[}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SP}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{p}\OperatorTok{],}\NormalTok{ SP}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{p}\OperatorTok{],} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}]}
+\NormalTok{res }\ExtensionTok{=}\NormalTok{ PaXEvaluate}\OperatorTok{[}\SpecialCharTok{\%}\OperatorTok{,}\NormalTok{ PaXC0Expand }\OtherTok{{-}\textgreater{}} \ConstantTok{True}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{C}_{001}\left(\overline{p}^2,\overline{p}^2,m^2,m^2,m^2,m^2\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\SpecialCharTok{//} \FunctionTok{Short}
+\NormalTok{res }\SpecialCharTok{//} \FunctionTok{Last}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\fbox{$\frac{1}{12} \left(-\log (4 \pi )+\gamma -\frac{1}{\varepsilon }\right)-\frac{1}{12} \log \left(\frac{\mu ^2}{m^2}\right)+\langle\langle 6\rangle\rangle +\frac{1}{6} \log (2 \pi )\text{ if }m^4-\langle\langle 1\rangle\rangle >0$}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+m^4-4 m^2 \overline{p}^2>0
+\end{dmath*}
+
+Use \texttt{Normal} to get the actual expression
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(res }\SpecialCharTok{//} \FunctionTok{Normal}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1}{12} \left(-\log (4 \pi )+\gamma -\frac{1}{\varepsilon }\right)-\frac{1}{12} \log \left(\frac{\mu ^2}{m^2}\right)+\frac{\log \left(\frac{2 m^2-\overline{p}^2+\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)}}{2 m^2}\right) \sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \left(2 m^4-7 \overline{p}^2 m^2-\overline{p}^4\right)}{3 \left(m^2-4 \overline{p}^2\right)^2 \overline{p}^2}+\frac{\pi  \left(3 m^4-12 \overline{p}^2 m^2+4 \overline{p}^4\right)}{4 \sqrt{3} \left(m^2-4 \overline{p}^2\right)^2}-\frac{1}{2 \left(m^2-4 \overline{p}^2\right)^2}\left(m^6-6 \overline{p}^2 m^4+9 \overline{p}^4 m^2-2 \overline{p}^6\right) \left(-\frac{\text{Li}_2\left(\frac{-\left(\left(m^2-2 \overline{p}^2\right) m^2\right)-\sqrt{m^4-4 m^2 \overline{p}^2} m^2}{-\left(\left(m^2-2 \overline{p}^2\right) m^2\right)-\sqrt{3} \sqrt{-m^4} \sqrt{m^4-4 m^2 \overline{p}^2}}i \left(-m^2+2 \overline{p}^2+\sqrt{m^4-4 m^2 \overline{p}^2}\right)\epsilon \right)}{\sqrt{m^2 \left(m^2-4 \overline{p}^2\right)}}+\frac{\text{Li}_2\left(\frac{m^2 \sqrt{m^4-4 m^2 \overline{p}^2}-m^2 \left(m^2-2 \overline{p}^2\right)}{-\left(\left(m^2-2 \overline{p}^2\right) m^2\right)-\sqrt{3} \sqrt{-m^4} \sqrt{m^4-4 m^2 \overline{p}^2}}i \left(-m^2+2 \overline{p}^2+\sqrt{m^4-4 m^2 \overline{p}^2}\right)\epsilon \right)}{\sqrt{m^2 \left(m^2-4 \overline{p}^2\right)}}-\frac{\text{Li}_2\left(\frac{-\left(\left(m^2-2 \overline{p}^2\right) m^2\right)-\sqrt{m^4-4 m^2 \overline{p}^2} m^2}{\sqrt{3} \sqrt{-m^4} \sqrt{m^4-4 m^2 \overline{p}^2}-m^2 \left(m^2-2 \overline{p}^2\right)}+i \left(m^2-2 \overline{p}^2+\sqrt{m^4-4 m^2 \overline{p}^2}\right)\epsilon \right)}{\sqrt{m^2 \left(m^2-4 \overline{p}^2\right)}}+\frac{\text{Li}_2\left(\frac{m^2 \sqrt{m^4-4 m^2 \overline{p}^2}-m^2 \left(m^2-2 \overline{p}^2\right)}{\sqrt{3} \sqrt{-m^4} \sqrt{m^4-4 m^2 \overline{p}^2}-m^2 \left(m^2-2 \overline{p}^2\right)}+i \left(m^2-2 \overline{p}^2+\sqrt{m^4-4 m^2 \overline{p}^2}\right)\epsilon \right)}{\sqrt{m^2 \left(m^2-4 \overline{p}^2\right)}}-\frac{2 \;\text{Li}_2\left(\frac{m^2 \overline{p}^2-\overline{p}^2 \sqrt{m^4-4 m^2 \overline{p}^2}}{m^2 \overline{p}^2-\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \sqrt{m^4-4 m^2 \overline{p}^2}}+i \left(m^2+\sqrt{m^4-4 m^2 \overline{p}^2}\right)\epsilon \right)}{\sqrt{m^2 \left(m^2-4 \overline{p}^2\right)}}+\frac{2 \;\text{Li}_2\left(\frac{\overline{p}^2 m^2+\overline{p}^2 \sqrt{m^4-4 m^2 \overline{p}^2}}{m^2 \overline{p}^2-\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \sqrt{m^4-4 m^2 \overline{p}^2}}+i \left(m^2+\sqrt{m^4-4 m^2 \overline{p}^2}\right)\epsilon \right)}{\sqrt{m^2 \left(m^2-4 \overline{p}^2\right)}}-\frac{2 \;\text{Li}_2\left(\frac{m^2 \overline{p}^2-\overline{p}^2 \sqrt{m^4-4 m^2 \overline{p}^2}}{\overline{p}^2 m^2+\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \sqrt{m^4-4 m^2 \overline{p}^2}}i \left(\sqrt{m^4-4 m^2 \overline{p}^2}-m^2\right)\epsilon \right)}{\sqrt{m^2 \left(m^2-4 \overline{p}^2\right)}}+\frac{2 \;\text{Li}_2\left(\frac{\overline{p}^2 m^2+\overline{p}^2 \sqrt{m^4-4 m^2 \overline{p}^2}}{\overline{p}^2 m^2+\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \sqrt{m^4-4 m^2 \overline{p}^2}}i \left(\sqrt{m^4-4 m^2 \overline{p}^2}-m^2\right)\epsilon \right)}{\sqrt{m^2 \left(m^2-4 \overline{p}^2\right)}}\right)-\frac{11 m^2-38 \overline{p}^2}{36 \left(m^2-4 \overline{p}^2\right)}+\frac{1}{6} \log (2 \pi )
+\end{dmath*}
+\end{document}

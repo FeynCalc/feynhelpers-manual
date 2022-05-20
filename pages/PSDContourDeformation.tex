@@ -1,0 +1,22 @@
+% !TeX program = pdflatex
+% !TeX root = PSDContourDeformation.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{psdcontourdeformation}{
+\section{PSDContourDeformation}\label{psdcontourdeformation}\index{PSDContourDeformation}}
+
+\texttt{PSDContourDeformation} is an option for \texttt{PSDLoopPackage}
+and other functions of the pySecDec interface. It is a boolean switch
+that will be passed to pySecDec's \texttt{loop_package} argument
+\texttt{contour_deformation}. The default value is \texttt{True}.
+However, if you know in advance that your integral has no imaginary
+part, setting this option to \texttt{False} will greatly improve the
+peformance.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{psdlooppackage}{PSDLoopPackage}.
+
+\subsection{Examples}
+\end{document}

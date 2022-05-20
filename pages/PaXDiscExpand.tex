@@ -1,0 +1,49 @@
+% !TeX program = pdflatex
+% !TeX root = PaXDiscExpand.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{paxdiscexpand}{
+\section{PaXDiscExpand}\label{paxdiscexpand}\index{PaXDiscExpand}}
+
+\texttt{PaXDiscExpand} is an option for \texttt{PaXEvaluate}. If set to
+\texttt{True}, Package-X function \texttt{DiscExpand} will be applied to
+the output of Package-X thus replacing \texttt{DiscB} by its explicit
+form.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{paxevaluate}{PaXEvaluate}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PaVe}\OperatorTok{[}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SP}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{p}\OperatorTok{],} \DecValTok{0}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}]}
+\NormalTok{PaXEvaluate}\OperatorTok{[}\SpecialCharTok{\%}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{C}_{001}\left(0,\overline{p}^2,m^2,m^2,m^2,m^2\right)
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+-\frac{35 m^2}{36 \left(m^2-\overline{p}^2\right)}+\frac{2 \overline{p}^2}{9 \left(m^2-\overline{p}^2\right)}+\frac{m^2 \sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \log \left(\frac{\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)}-\overline{p}^2+2 m^2}{2 m^2}\right)}{2 \left(m^2-\overline{p}^2\right)^2}-\frac{\overline{p}^2 \sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \log \left(\frac{\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)}-\overline{p}^2+2 m^2}{2 m^2}\right)}{12 \left(m^2-\overline{p}^2\right)^2}+\frac{\pi  \left(9 \sqrt{3}+\pi \right) m^4}{36 \left(m^2-\overline{p}^2\right)^2}+\frac{m^4 \log ^2\left(\frac{\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)}-\overline{p}^2+2 m^2}{2 m^2}\right)}{4 \left(m^2-\overline{p}^2\right)^2}+\frac{m^4 \sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)} \log \left(\frac{\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)}-\overline{p}^2+2 m^2}{2 m^2}\right)}{3 \overline{p}^2 \left(m^2-\overline{p}^2\right)^2}-\frac{1}{12 \varepsilon }+\frac{1}{12} \left(-\log \left(\frac{\mu ^2}{m^2}\right)+\gamma -\log (4 \pi )+2 \log (2 \pi )\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PaVe}\OperatorTok{[}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SP}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{p}\OperatorTok{],} \DecValTok{0}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}]}
+\NormalTok{PaXEvaluate}\OperatorTok{[}\SpecialCharTok{\%}\OperatorTok{,}\NormalTok{ PaXDiscExpand }\OtherTok{{-}\textgreater{}} \ConstantTok{False}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{C}_{001}\left(0,\overline{p}^2,m^2,m^2,m^2,m^2\right)
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\frac{m^2 \overline{p}^2 \left(\Lambda (\overline{p}^2,m,m)\right)}{2 \left(m^2-\overline{p}^2\right)^2}-\frac{\overline{p}^4 \left(\Lambda (\overline{p}^2,m,m)\right)}{12 \left(m^2-\overline{p}^2\right)^2}+\frac{m^4 \left(\Lambda (\overline{p}^2,m,m)\right)}{3 \left(m^2-\overline{p}^2\right)^2}-\frac{m^2 \overline{p}^2 \left(-6 \log \left(\frac{\mu ^2}{m^2}\right)+6 \gamma -43+6 \log (\pi )\right)}{36 \left(m^2-\overline{p}^2\right)^2}+\frac{\overline{p}^4 \left(-3 \log \left(\frac{\mu ^2}{m^2}\right)+3 \gamma -8+3 \log (\pi )\right)}{36 \left(m^2-\overline{p}^2\right)^2}+\frac{m^4 \left(-3 \log \left(\frac{\mu ^2}{m^2}\right)+\pi ^2+9 \sqrt{3} \pi +3 \gamma -35-3 \log (4 \pi )+6 \log (2 \pi )\right)}{36 \left(m^2-\overline{p}^2\right)^2}+\frac{m^4 \log ^2\left(\frac{\sqrt{\overline{p}^2 \left(\overline{p}^2-4 m^2\right)}-\overline{p}^2+2 m^2}{2 m^2}\right)}{4 \left(m^2-\overline{p}^2\right)^2}-\frac{1}{12 \varepsilon }
+\end{dmath*}
+\end{document}
