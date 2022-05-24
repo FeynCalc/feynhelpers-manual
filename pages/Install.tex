@@ -3,5 +3,228 @@
 
 \documentclass[../FeynHelpersManual.tex]{subfiles}
 \begin{document}
+\hypertarget{installation}{
+\section{Installation}\label{installation}\index{Installation}}
 
+The installation of FeynHelpers from scratch is a two step process.
+Apart from installing the actual FeynCalc addon (step 1) it is also
+necessary to set up the tools to which FeynHelpers provides FeynCalc
+interfaces (step 2).
+
+Due to the fact that these tools are written in different programming
+languages and usually must be compiled on user's machine, it is not
+possible to fully automatize this second step. Instead, we expect the
+user to install the relevant tools manually.
+
+In the following we provide some relevant instructions but without any
+warranty that this will work on your machine. \emph{If you are
+experiencing issues setting up a particular tools please contact the
+corresponding developer team.}
+
+\hypertarget{feynhelpers}{%
+\subsection{FeynHelpers}\label{feynhelpers}}
+
+\hypertarget{automatic-installation}{%
+\subsubsection{Automatic installation}\label{automatic-installation}}
+
+\begin{itemize}
+\item
+  Run the following instruction in a Kernel or Notebook session of
+  Mathematica to install the stable version
+
+\begin{verbatim}
+Import["https://raw.githubusercontent.com/FeynCalc/feynhelpers/master/install.m"]
+InstallFeynHelpers[]
+\end{verbatim}
+\item
+  If you like the bleeding edge and you are already using the
+  development version of FeynCalc, you can also install the development
+  version of FeynHelpers
+\end{itemize}
+
+\begin{verbatim}
+Import["https://raw.githubusercontent.com/FeynCalc/feynhelpers/master/install.m"]
+InstallFeynHelpers[InstallFeynHelpersDevelopmentVersion->True]
+\end{verbatim}
+
+\hypertarget{manual-installation}{%
+\subsubsection{Manual installation}\label{manual-installation}}
+
+\begin{itemize}
+\item
+  Create a directory \emph{FeynHelpers} inside
+
+\begin{verbatim}
+FileNameJoin[{$UserBaseDirectory, "Applications", "FeynCalc", "AddOns"}]
+\end{verbatim}
+
+  and put the source code there.
+\end{itemize}
+
+\hypertarget{fermat}{%
+\subsection{Fermat}\label{fermat}}
+
+You can download FERMAT binaries for Linux or macOS from the
+\href{https://home.bway.net/lewis/zip.html}{developer's website}.
+
+\hypertarget{linux}{%
+\subsubsection{Linux}\label{linux}}
+
+\begin{itemize}
+\tightlist
+\item
+  Copy the directory \texttt{ferl64} to
+  \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"Fermat"\}]}.
+\end{itemize}
+
+\hypertarget{macos}{%
+\subsubsection{macOS}\label{macos}}
+
+\begin{itemize}
+\tightlist
+\item
+  Copy the directory \texttt{ferm64} to
+  \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"Fermat"\}]}.
+\end{itemize}
+
+\hypertarget{windows}{%
+\subsubsection{Windows}\label{windows}}
+
+\begin{itemize}
+\tightlist
+\item
+  Currently there is no native Windows version of FERMAT. The Linux
+  version appears to be usable via WSL, but currently there is no
+  support for that in FeynHelpers.
+\end{itemize}
+
+\hypertarget{fire}{%
+\subsection{FIRE}\label{fire}}
+
+You can download the source code of FIRE from the
+\href{https://bitbucket.org/feynmanIntegrals/fire}{developer's website}.
+The content should be extracted to
+\texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FIRE"\}]}.
+
+\hypertarget{linux-1}{%
+\subsubsection{Linux}\label{linux-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  The instructions for compiling FIRE from source on Linux are provided
+  \href{https://bitbucket.org/feynmanIntegrals/fire/src/master/README.md}{here}.
+\end{itemize}
+
+\hypertarget{macos-1}{%
+\subsubsection{macOS}\label{macos-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  The instructions for compiling FIRE from source on macOS can be found
+  \href{https://bitbucket.org/feynmanIntegrals/fire/issues/10/issue-of-the-installation-on-macos}{here}.
+\end{itemize}
+
+\hypertarget{windows-1}{%
+\subsubsection{Windows}\label{windows-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  There is no native Windows port of FIRE. It should be possible to
+  compile FIRE on WSL with an Ubuntu installation, but currently there
+  is no support for that in FeynHelpers.
+\end{itemize}
+
+\hypertarget{looptools}{%
+\subsection{LoopTools}\label{looptools}}
+
+On the \href{http://www.feynarts.de/looptools/}{developer's website} you
+can download not only the source code but also precompiled binaries
+
+\hypertarget{linux-or-macos}{%
+\subsubsection{Linux or macOS}\label{linux-or-macos}}
+
+\begin{itemize}
+\tightlist
+\item
+  Copy the self-compiled or precompiled MathLink executable
+  \texttt{LoopTools} to
+  \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"LoopTools"\}]}.
+\end{itemize}
+
+\hypertarget{windows-2}{%
+\subsubsection{Windows}\label{windows-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  Rename the self-compiled or precompiled MathLink executable
+  \texttt{LoopTools.exe} to \texttt{LoopTools} and copy it to
+  \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"LoopTools"\}]}.
+\end{itemize}
+
+\hypertarget{pysecdec}{%
+\subsection{pySecDec}\label{pysecdec}}
+
+The installation instructions for pySecDec can be found
+\href{https://secdec.readthedocs.io/en/stable/installation.html\#download-the-program-and-install}{here}.
+FeynHelpers does not require pySecDec to \emph{generate} the
+corresponding Python scripts. However, in order to actually compute the
+given loop integrals one has to run those scripts, which is possible
+only when pySecDec is installed.
+
+\hypertarget{linux-or-macos-1}{%
+\subsubsection{Linux or macOS}\label{linux-or-macos-1}}
+
+It should be possible to install pySecDec via pip automatically.
+
+\hypertarget{windows-3}{%
+\subsubsection{Windows}\label{windows-3}}
+
+It could be possible to set up pySecDec on WSL, but currently it is
+unclear whether this can work.
+
+\hypertarget{package-x}{%
+\subsection{Package-X}\label{package-x}}
+
+Currently the installation of Package-X is handled by the automatic
+installer. Since Package-X is a Mathematica package that only needs to
+be copied to the correct location, the installation is easy to
+automatize.
+
+Alternatively, you can download Package-X from the
+\href{https://packagex.hepforge.org/}{developer's website} and copy the
+folder \texttt{X} to
+\texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications"\}]}.
+If you can load Package-X by evaluating \texttt{X\textasciigrave } in a
+notebook, then the installation was successful.
+
+\hypertarget{qgraf}{%
+\subsection{QGRAF}\label{qgraf}}
+
+You can download the source code of QFRAF from the
+\href{http://cfif.ist.utl.pt/~paulo/qgraf.html}{developer's website}.
+
+\hypertarget{linux-and-macos}{%
+\subsubsection{Linux and macOS}\label{linux-and-macos}}
+
+The compilation instructions can be found in the section ``Compiling''
+of the manual \texttt{qgraf-3.6.0.pdf} inside the tarball. Having
+compiled the program you need to rename the binary to \texttt{qgraf} and
+put it to
+\texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"QGRAF",\ \allowbreak{}"Binary"\}]}.
+
+\hypertarget{windows-4}{%
+\subsubsection{Windows}\label{windows-4}}
+
+You can download and install the
+\href{https://sourceforge.net/projects/mingw-w64/files/mingw-w64}{MinGW
+compiler}. Do not forget to change the architecture from i686 to x86\_64
+in the install wizard. Then it should be possible to compile QGRAF with
+statically linked libraries via
+\texttt{gfortran.exe -static qgraf-3.x.y.f08}. Finally rename the
+resulting binary to \texttt{qgraf.exe} and put it to
+\texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"QGRAF",\ \allowbreak{}"Binary"\}]}.
 \end{document}
