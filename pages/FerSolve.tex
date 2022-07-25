@@ -1,0 +1,135 @@
+% !TeX program = pdflatex
+% !TeX root = FerSolve.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{fersolve}{
+\section{FerSolve}\label{fersolve}\index{FerSolve}}
+
+\texttt{FerSolve[\allowbreak{}eqs,\ \allowbreak{}vars]} solves the
+system of linear equations \texttt{eqs} for the variables \texttt{vars}
+by calculating the row-reduced form of the corresponding augmented
+matrix using Fermat by R. Lewis.
+
+The location of script, input and output files is controlled by the
+options \texttt{FerScriptFile}, \texttt{FerInputFile},
+\texttt{FerOutputFile}. When set to \texttt{Automatic} (default), these
+files will be automatically created via
+\texttt{CreateTemporary[\allowbreak{}]}. If the option \texttt{Delete}
+is set to \texttt{True} (default), the files will be deleted after a
+successful Fermat run.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{ferrowreduce}{FerRowReduce}.
+
+\subsection{Examples}
+
+The syntax of FerSolve is very similar to that of \texttt{Solve}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerSolve}\OperatorTok{[\{}\FunctionTok{a} \FunctionTok{x} \SpecialCharTok{+} \FunctionTok{y} \ExtensionTok{==} \DecValTok{7}\OperatorTok{,} \FunctionTok{b} \FunctionTok{x} \SpecialCharTok{{-}} \FunctionTok{y} \ExtensionTok{==} \DecValTok{1}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{x}\OperatorTok{,} \FunctionTok{y}\OperatorTok{\}]}
+
+\CommentTok{(*FerRunScript: Running Fermat.}
+\CommentTok{FerRunScript: Done running Fermat, timing: 0.6790}
+\CommentTok{FerSolve: Verifying the result.}
+\CommentTok{FerSolve: Done verifying the result, timing: 0.000630*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{x\to \frac{8}{a+b},y\to -\frac{a-7 b}{a+b}\right\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Solve}\OperatorTok{[\{}\FunctionTok{a} \FunctionTok{x} \SpecialCharTok{+} \FunctionTok{y} \ExtensionTok{==} \DecValTok{7}\OperatorTok{,} \FunctionTok{b} \FunctionTok{x} \SpecialCharTok{{-}} \FunctionTok{y} \ExtensionTok{==} \DecValTok{1}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{x}\OperatorTok{,} \FunctionTok{y}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{\left\{x\to \frac{8}{a+b},y\to -\frac{a-7 b}{a+b}\right\}\right\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerSolve}\OperatorTok{[\{}\DecValTok{2} \FunctionTok{x} \SpecialCharTok{+} \FunctionTok{y} \FunctionTok{c} \ExtensionTok{==} \DecValTok{2}\OperatorTok{,} \DecValTok{4} \FunctionTok{x} \ExtensionTok{==} \FunctionTok{c}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{x}\OperatorTok{,} \FunctionTok{y}\OperatorTok{\}]}
+
+\CommentTok{(*FerRunScript: Running Fermat.}
+\CommentTok{FerRunScript: Done running Fermat, timing: 0.1560}
+\CommentTok{FerSolve: Verifying the result.}
+\CommentTok{FerSolve: Done verifying the result, timing: 0.000496*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{x\to \frac{c}{4},y\to -\frac{c-4}{2 c}\right\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Solve}\OperatorTok{[\{}\DecValTok{2} \FunctionTok{x} \SpecialCharTok{+} \FunctionTok{y} \FunctionTok{c} \ExtensionTok{==} \DecValTok{2}\OperatorTok{,} \DecValTok{4} \FunctionTok{x} \ExtensionTok{==} \FunctionTok{c}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{x}\OperatorTok{,} \FunctionTok{y}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{\left\{x\to \frac{c}{4},y\to -\frac{c-4}{2 c}\right\}\right\}
+\end{dmath*}
+
+However, for larger systems of equations \texttt{FerSolve} is superior
+to \texttt{Solve} owing to better algorithms implemented in Fermat
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eqs }\ExtensionTok{=} \OperatorTok{\{}\NormalTok{M0 }\ExtensionTok{==}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ f1 }\SpecialCharTok{{-}}\NormalTok{ f2 }\SpecialCharTok{{-}}\NormalTok{ f3 }\SpecialCharTok{{-}}\NormalTok{ f4 }\SpecialCharTok{{-}}\NormalTok{ f5 }\SpecialCharTok{{-}}\NormalTok{ f6 }\SpecialCharTok{{-}}\NormalTok{ f7 }\SpecialCharTok{{-}}\NormalTok{ f8 }\SpecialCharTok{{-}}\NormalTok{ f9 }\SpecialCharTok{{-}}\NormalTok{ f10 }\SpecialCharTok{{-}} 
+\NormalTok{             f11 }\SpecialCharTok{{-}}\NormalTok{ f12 }\SpecialCharTok{{-}}\NormalTok{ f13 }\SpecialCharTok{{-}}\NormalTok{ f14 }\SpecialCharTok{{-}}\NormalTok{ f15 }\SpecialCharTok{{-}}\NormalTok{ f16)}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M1 }\ExtensionTok{==}\NormalTok{ f1}\SpecialCharTok{*}\NormalTok{m0 }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ f1 }\SpecialCharTok{{-}}\NormalTok{ f2 }\SpecialCharTok{{-}}\NormalTok{ f3 }\SpecialCharTok{{-}}\NormalTok{ f4 }\SpecialCharTok{{-}}\NormalTok{ f5 }\SpecialCharTok{{-}}\NormalTok{ f6 }\SpecialCharTok{{-}}\NormalTok{ f7 }\SpecialCharTok{{-}}\NormalTok{ f8 }\SpecialCharTok{{-}}\NormalTok{ f9 }\SpecialCharTok{{-}} 
+\NormalTok{               f10 }\SpecialCharTok{{-}}\NormalTok{ f11 }\SpecialCharTok{{-}}\NormalTok{ f12 }\SpecialCharTok{{-}}\NormalTok{ f13 }\SpecialCharTok{{-}}\NormalTok{ f14 }\SpecialCharTok{{-}}\NormalTok{ f15 }\SpecialCharTok{{-}}\NormalTok{ f16)}\SpecialCharTok{*}\NormalTok{m1}\OperatorTok{,} 
+\NormalTok{     M2 }\ExtensionTok{==}\NormalTok{ f1}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+} 
+\NormalTok{         f2}\SpecialCharTok{*}\NormalTok{m0 }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}}\NormalTok{ f1 }\SpecialCharTok{{-}}\NormalTok{ f2 }\SpecialCharTok{{-}}\NormalTok{ f3 }\SpecialCharTok{{-}}\NormalTok{ f4 }\SpecialCharTok{{-}}\NormalTok{ f5 }\SpecialCharTok{{-}}\NormalTok{ f6 }\SpecialCharTok{{-}}\NormalTok{ f7 }\SpecialCharTok{{-}}\NormalTok{ f8 }\SpecialCharTok{{-}}\NormalTok{ f9 }\SpecialCharTok{{-}}\NormalTok{ f10 }\SpecialCharTok{{-}} 
+\NormalTok{               f11 }\SpecialCharTok{{-}}\NormalTok{ f12 }\SpecialCharTok{{-}}\NormalTok{ f13 }\SpecialCharTok{{-}}\NormalTok{ f14 }\SpecialCharTok{{-}}\NormalTok{ f15 }\SpecialCharTok{{-}}\NormalTok{ f16)}\SpecialCharTok{*}\NormalTok{m2}\OperatorTok{,} 
+\NormalTok{     M4 }\ExtensionTok{==}\NormalTok{ f1}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f2}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f3}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f4}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M5 }\ExtensionTok{==}\NormalTok{ f2}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f3}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f4}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f5}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M6 }\ExtensionTok{==}\NormalTok{ f3}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f4}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f5}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f6}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M7 }\ExtensionTok{==}\NormalTok{ f4}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f5}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f6}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f7}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M8 }\ExtensionTok{==}\NormalTok{ f5}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f6}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f7}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f8}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M9 }\ExtensionTok{==}\NormalTok{ f6}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f7}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f8}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f9}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M10 }\ExtensionTok{==}\NormalTok{ f7}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f8}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f9}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f10}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M11 }\ExtensionTok{==}\NormalTok{ f8}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f9}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f10}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f11}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M12 }\ExtensionTok{==}\NormalTok{ f9}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f10}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f11}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f12}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M13 }\ExtensionTok{==}\NormalTok{ f10}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f11}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f12}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f13}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M14 }\ExtensionTok{==}\NormalTok{ f11}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f12}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f13}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f14}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M15 }\ExtensionTok{==}\NormalTok{ f12}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f13}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f14}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f15}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{,} 
+\NormalTok{     M16 }\ExtensionTok{==}\NormalTok{ f13}\SpecialCharTok{*}\NormalTok{m3 }\SpecialCharTok{+}\NormalTok{ f14}\SpecialCharTok{*}\NormalTok{m2 }\SpecialCharTok{+}\NormalTok{ f15}\SpecialCharTok{*}\NormalTok{m1 }\SpecialCharTok{+}\NormalTok{ f16}\SpecialCharTok{*}\NormalTok{m0}\OperatorTok{\}}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vars }\ExtensionTok{=} \OperatorTok{\{}\NormalTok{f1}\OperatorTok{,}\NormalTok{ f2}\OperatorTok{,}\NormalTok{ f3}\OperatorTok{,}\NormalTok{ f4}\OperatorTok{,}\NormalTok{ f5}\OperatorTok{,}\NormalTok{ f6}\OperatorTok{,}\NormalTok{ f7}\OperatorTok{,}\NormalTok{ f8}\OperatorTok{,}\NormalTok{ f9}\OperatorTok{,}\NormalTok{ f10}\OperatorTok{,}\NormalTok{ f11}\OperatorTok{,}\NormalTok{ f12}\OperatorTok{,}\NormalTok{ f13}\OperatorTok{,}\NormalTok{ f14}\OperatorTok{,} 
+\NormalTok{     f15}\OperatorTok{,}\NormalTok{ f16}\OperatorTok{\}}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sol1 }\ExtensionTok{=}\NormalTok{ FerSolve}\OperatorTok{[}\NormalTok{eqs}\OperatorTok{,}\NormalTok{ vars}\OperatorTok{]}\NormalTok{;}
+
+\CommentTok{(*FerRunScript: Running Fermat.}
+\CommentTok{FerRunScript: Done running Fermat, timing: 11.21}
+\CommentTok{FerSolve: Verifying the result.}
+\CommentTok{FerSolve: Done verifying the result, timing: 0.3670*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sol1}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{f1}\to -\frac{\text{M0} \;\text{m1}-\text{m0} \;\text{M1}}{\text{m0}^2}
+\end{dmath*}
+\end{document}

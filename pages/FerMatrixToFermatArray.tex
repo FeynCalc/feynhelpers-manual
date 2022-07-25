@@ -1,0 +1,33 @@
+% !TeX program = pdflatex
+% !TeX root = FerMatrixToFermatArray.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{fermatrixtofermatarray}{
+\section{FerMatrixToFermatArray}\label{fermatrixtofermatarray}\index{FerMatrixToFermatArray}}
+
+\texttt{FerMatrixToFermatArray[\allowbreak{}mat,\ \allowbreak{}varName]}
+is an auxiliary function that converts the matrix \texttt{mat} to a
+Fermat array named \texttt{varName}, where the latter must be a string.
+
+The function returns a string that represents the matrix, a list of
+auxiliary variables (introduced to be compatible with the restrictions
+of Fermat) and a replacement rule for converting auxiliary variables
+back into the original variables.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerMatrixToFermatArray}\OperatorTok{[\{\{}\FunctionTok{a}\OperatorTok{,} \FunctionTok{b}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{c}\OperatorTok{,} \FunctionTok{d}\OperatorTok{\}\},} \StringTok{"mat"}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\{\text{Array mat[2,2];$\backslash $n[mat]:=[[fv1, fv3, fv2, fv4]];},\{\text{fv1},\text{fv2},\text{fv3},\text{fv4}\},\{\text{fv1}\to a,\text{fv2}\to b,\text{fv3}\to c,\text{fv4}\to d\}\}
+\end{dmath*}
+\end{document}

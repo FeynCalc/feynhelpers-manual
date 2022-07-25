@@ -1,0 +1,114 @@
+% !TeX program = pdflatex
+% !TeX root = FerRowReduce.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{ferrowreduce}{
+\section{FerRowReduce}\label{ferrowreduce}\index{FerRowReduce}}
+
+\texttt{FerRowReduce[\allowbreak{}mat]}uses Fermat to obtain the
+row-reduced echelon form of matrix \texttt{mat}. An important difference
+to Mathematica's \texttt{RowReduce} is that Fermat does not assume all
+symbolic variables to be nonzero by default.
+
+The location of script, input and output files is controlled by the
+options \texttt{FerScriptFile}, \texttt{FerInputFile},
+\texttt{FerOutputFile}. When set to \texttt{Automatic} (default), these
+files will be automatically created via
+\texttt{CreateTemporary[\allowbreak{}]}. If the option \texttt{Delete}
+is set to \texttt{True} (default), the files will be deleted after a
+successful Fermat run.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{ferrowreduce}{FerRowReduce}.
+
+\subsection{Examples}
+
+The syntax of FerSolve is very similar to that of \texttt{Solve}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res1 }\ExtensionTok{=} \FunctionTok{RowReduce}\OperatorTok{[\{\{}\DecValTok{3}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \FunctionTok{a}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \FunctionTok{b}\OperatorTok{\}\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left(
+\begin{array}{ccc}
+ 1 & 0 & a-b \\
+ 0 & 1 & 3 b-2 a \\
+\end{array}
+\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res2 }\ExtensionTok{=}\NormalTok{ FerRowReduce}\OperatorTok{[\{\{}\DecValTok{3}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \FunctionTok{a}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \FunctionTok{b}\OperatorTok{\}\}]} \SpecialCharTok{//} \FunctionTok{Normal}
+
+\CommentTok{(*FerRunScript: Running Fermat.}
+\CommentTok{FerRunScript: Done running Fermat, timing: 0.5115*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left(
+\begin{array}{ccc}
+ 1 & 0 & a-b \\
+ 0 & 1 & 3 b-2 a \\
+\end{array}
+\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res1 }\ExtensionTok{===}\NormalTok{ res2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{True}
+\end{dmath*}
+
+This is an example for
+\href{https://mathematica.stackexchange.com/questions/228098/how-to-write-a-more-concise-rowreduce-function-that-can-deal-with-symbolic-mat?noredirect=1\&lq=1}{Mathematica
+SE}, where RowReduce assumes \(a \neq 0\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{RowReduce}\OperatorTok{[\{\{}\DecValTok{1}\OperatorTok{,} \FunctionTok{a}\OperatorTok{,} \DecValTok{2}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left(
+\begin{array}{ccc}
+ 1 & 0 & 0 \\
+ 0 & 1 & 0 \\
+ 0 & 0 & 1 \\
+\end{array}
+\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerRowReduce}\OperatorTok{[\{\{}\DecValTok{1}\OperatorTok{,} \FunctionTok{a}\OperatorTok{,} \DecValTok{2}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}\}]} \SpecialCharTok{//} \FunctionTok{Normal} 
+  
+ 
+
+
+\CommentTok{(*FerRunScript: Running Fermat.}
+\CommentTok{FerRunScript: Done running Fermat, timing: 0.1393*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left(
+\begin{array}{ccc}
+ 1 & 0 & 2-a \\
+ 0 & 1 & 1 \\
+ 0 & 0 & 2-a \\
+\end{array}
+\right)
+\end{dmath*}
+\end{document}

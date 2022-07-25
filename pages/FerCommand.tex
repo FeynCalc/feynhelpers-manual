@@ -1,0 +1,102 @@
+% !TeX program = pdflatex
+% !TeX root = FerCommand.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{fercommand}{
+\section{FerCommand}\label{fercommand}\index{FerCommand}}
+
+\texttt{FerCommand[\allowbreak{}str,\ \allowbreak{}args]} is an
+auxiliary function that returns a Fermat command corresponding to
+\texttt{str} (possibly using arguments \texttt{args}) as a list of
+strings.
+
+At the moment only a very limited set of Fermat instructions is
+implemented.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerCommand}\OperatorTok{[}\StringTok{"Quit"}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{$\&$q;}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerCommand}\OperatorTok{[}\StringTok{"StopReadingFromTheInputFile"}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{$\&$x;}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerCommand}\OperatorTok{[}\StringTok{"EnableUglyDisplay"}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{$\&$(U=1);}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerCommand}\OperatorTok{[}\StringTok{"ReadFromAnInputFile"}\OperatorTok{,} \StringTok{"myFile.txt"}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{$\&$(R='myFile.txt');}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerCommand}\OperatorTok{[}\StringTok{"SaveToAnOutputFile"}\OperatorTok{,} \StringTok{"myFile.txt"}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{$\&$(S='myFile.txt');}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerCommand}\OperatorTok{[}\StringTok{"SaveSpecifiedVariablesToAnOutputFile"}\OperatorTok{,} \OperatorTok{\{}\FunctionTok{x}\OperatorTok{,} \FunctionTok{y}\OperatorTok{,} \FunctionTok{z}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{!($\&$o, x, y, z);}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerCommand}\OperatorTok{[}\StringTok{"ReducedRowEchelonForm"}\OperatorTok{,} \StringTok{"mat"}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{Redrowech(mat);}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FerCommand}\OperatorTok{[}\StringTok{"AdjoinPolynomialVariable"}\OperatorTok{,} \FunctionTok{x}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{$\&$(J=x);}
+\end{dmath*}
+\end{document}
