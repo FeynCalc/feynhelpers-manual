@@ -1,0 +1,66 @@
+% !TeX program = pdflatex
+% !TeX root = KiraRunReduction.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\begin{Shaded}
+\begin{Highlighting}[]
+ 
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{kirarunreduction}{
+\section{KiraRunReduction}\label{kirarunreduction}\index{KiraRunReduction}}
+
+\texttt{KiraRunReduction[\allowbreak{}path]} runs Kira on the job file
+specified by path. To that aim the Kira binary is started in the
+background via \texttt{RunProcess}. The function returns \texttt{True}
+if the evaluation succeeds and \texttt{False} otherwise.
+
+If \texttt{path} represents a full path to a file, then this file is
+used as the .config file. If it is just a path to a directory, then
+\texttt{path/topoName/job.yaml} is assumed to be the full path.
+
+The default path to the Kira binary is just \texttt{kira}. It can be
+modified via the option \texttt{KiraBinaryPath}.
+
+Notice that in order to use this routine you must also specify the path
+to the FERMAT binary that Kira uses internally. This is done via the
+option \texttt{KiraFermatPath}. The default value is \texttt{Automatic}
+meaning that suitable binaries are expected to be located in
+\texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$FeynHelpersDirectory,\ \allowbreak{}"ExternalTools",\ \allowbreak{}"Fermat"\}]}
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{firecreateconfigfile}{FIRECreateConfigFile},
+\hyperlink{firecreatestartfile}{FIRECreateStartFile}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KiraRunReduction}\OperatorTok{[}\FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynHelpersDirectory}\OperatorTok{,} \StringTok{"Documentation"}\OperatorTok{,} \StringTok{"Examples"}\OperatorTok{,} \StringTok{"asyR1prop2Ltopo01310X11111N1"}\OperatorTok{\}],}\NormalTok{ FCVerbose }\OtherTok{{-}\textgreater{}} \DecValTok{3}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{KiraRunReduction: Path to the Fermat binary: }\;\text{/home/vs/.Mathematica/Applications/FeynCalc/AddOns/FeynHelpers/ExternalTools/Fermat/ferl6/fer64}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{KiraRunReduction: Path to the Kira binary: }\;\text{kira}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{KiraRunReduction: Working directory: }\;\text{/home/vs/.Mathematica/Applications/FeynCalc/AddOns/FeynHelpers/Documentation/Examples/asyR1prop2Ltopo01310X11111N1/}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{KiraRunReduction: Job file: }\;\text{job.yaml}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{True}
+\end{dmath*}
+\end{document}

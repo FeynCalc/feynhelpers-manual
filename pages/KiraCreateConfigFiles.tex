@@ -1,0 +1,225 @@
+% !TeX program = pdflatex
+% !TeX root = KiraCreateConfigFiles.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\begin{Shaded}
+\begin{Highlighting}[]
+ 
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{kiracreateconfigfiles}{
+\section{KiraCreateConfigFiles}\label{kiracreateconfigfiles}\index{KiraCreateConfigFiles}}
+
+\texttt{KiraCreateConfigFiles[\allowbreak{}topo,\ \allowbreak{}sectors,\ \allowbreak{}path]}
+can be used to generate Kira configuration files
+(\texttt{integralfamilies.yaml} and \texttt{kinematics.yaml}) from an
+FCTopology or list thereof. Here \texttt{sectors} is a list of sectors
+need to be reduced,
+e.g.~\texttt{\{\allowbreak{}\{\allowbreak{}1,\ \allowbreak{}0,\ \allowbreak{}0,\ \allowbreak{}0\},\ \allowbreak{}\{\allowbreak{}1,\ \allowbreak{}1,\ \allowbreak{}0,\ \allowbreak{}0\},\ \allowbreak{}\{\allowbreak{}1,\ \allowbreak{}1,\ \allowbreak{}1,\ \allowbreak{}0\}\}}
+etc.
+
+The functions creates the corresponding yaml files and saves them in
+path/topoName/config. Using
+\texttt{KiraCreateConfigFiles[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}sectors1,\ \allowbreak{}sectors2,\ \allowbreak{}...\},\ \allowbreak{} path]}
+will save the scripts to \texttt{path/topoName1},
+\texttt{path/topoName2} etc. The syntax
+\texttt{KiraCreateConfigFiles[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}sectors1,\ \allowbreak{}sectors2,\ \allowbreak{}...\},\ \allowbreak{} \{\allowbreak{}path1,\ \allowbreak{}path2,\ \allowbreak{}...\}]}
+is also possible.
+
+If the directory specified in \texttt{path/topoName} does not exist, it
+will be created automatically. If it already exists, its content will be
+automatically overwritten, unless the option \texttt{OverwriteTarget} is
+set to \texttt{False}.
+
+It is also possible to supply a list of \texttt{GLI}s instead of
+sectors. In that case \texttt{FCLoopFindSectors} will be used to
+determine the top sector for each topology.
+
+The syntax
+\texttt{KiraCreateConfigFiles[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}sectors1,\ \allowbreak{}sectors2,\ \allowbreak{}...\},\ \allowbreak{}path]}
+or
+\texttt{KiraCreateConfigFiles[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}glis1,\ \allowbreak{}glis2,\ \allowbreak{}...\},\ \allowbreak{} path]}
+is also allowed. This implies that all config files will go into the
+corresponding subdirectories of path,
+e.g.~\texttt{path/topoName1/config}, \texttt{path/topoName2/config} etc.
+
+The mass dimension of all kinematic variables should be specified via
+the option \texttt{KiraMassDimensions} e.g.~as in
+\texttt{\{\allowbreak{}\{\allowbreak{}m1->1\},\ \allowbreak{}\{\allowbreak{}M->1\},\ \allowbreak{}\{\allowbreak{}msq->2\}\}}.
+
+If the amplitude originally contained any external momenta that were
+eliminated using momentum conservation, .e.g. by replacing \(k_2\) by
+\(P-k_1\) for \(P=k_1+k_2\), those momenta must be nevertheless
+specified via the option \texttt{KiraImplicitIncomingMomenta}.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{kiramassdimensions}{KiraMassDimensions},
+\hyperlink{kiraimplicitincomingmomenta}{KiraImplicitIncomingMomenta}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\StringTok{"asyR1prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],} 
+\NormalTok{    SFAD}\OperatorTok{[\{}\NormalTok{p3}\OperatorTok{,}\NormalTok{ mg}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p3 . }\FunctionTok{q}\OperatorTok{\}\}],} 
+\NormalTok{    SFAD}\OperatorTok{[\{}\NormalTok{(p1 }\SpecialCharTok{+} \FunctionTok{q}\NormalTok{)}\OperatorTok{,}\NormalTok{ mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,}\NormalTok{ p1 . p3}\OperatorTok{\}\}]\},} 
+   \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{Hold}\OperatorTok{[}\NormalTok{SPD}\OperatorTok{][}\FunctionTok{q}\OperatorTok{,} \FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCTopology}\left(\text{asyR1prop2Ltopo01310X11111N1},\left\{\frac{1}{(\text{p1}^2+i \eta )},\frac{1}{(\text{p3}^2-\text{mg}^2+i \eta )},\frac{1}{(2 (\text{p3}\cdot q)+i \eta )},\frac{1}{((\text{p1}+q)^2-\text{mb}^2+i \eta )},\frac{1}{(\text{p1}\cdot \;\text{p3}+i \eta )}\right\},\{\text{p1},\text{p3}\},\{q\},\left\{\text{Hold}[\text{SPD}][q,q]\to \;\text{mb}^2\right\},\{\}\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fileName }\ExtensionTok{=}\NormalTok{ KiraCreateConfigFiles}\OperatorTok{[}\NormalTok{topo}\OperatorTok{,} \OperatorTok{\{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}\},} 
+    \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}],}\NormalTok{ KiraMassDimensions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{mb }\OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{,}\NormalTok{ mg }\OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fileName}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]]} \SpecialCharTok{//} \FunctionTok{FilePrint}
+
+\CommentTok{(*integralfamilies:}
+\CommentTok{  {-} name: asyR1prop2Ltopo01310X11111N1}
+\CommentTok{    loop\_momenta: [p1, p3]}
+\CommentTok{    top\_level\_sectors: [b11111]}
+\CommentTok{    propagators:}
+\CommentTok{      {-} [ "p1", 0]}
+\CommentTok{      {-} [ "p3", "mg\^{}2"]}
+\CommentTok{      {-} \{ bilinear: [ [ "2*p3", "q"], 0] \}}
+\CommentTok{      {-} [ "p1 + q", "mb\^{}2"]}
+\CommentTok{      {-} \{ bilinear: [ [ "p1", "p3"], 0] \}*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fileName}\OperatorTok{[[}\DecValTok{2}\OperatorTok{]]} \SpecialCharTok{//} \FunctionTok{FilePrint}
+
+\CommentTok{(*kinematics:}
+\CommentTok{  incoming\_momenta: [q]}
+\CommentTok{  outgoing\_momenta: [q]}
+\CommentTok{  momentum\_conservation: []}
+\CommentTok{  kinematic\_invariants:}
+\CommentTok{    {-} [mb, 1]}
+\CommentTok{    {-} [mg, 1]}
+\CommentTok{  scalarproduct\_rules:}
+\CommentTok{    {-} [ [ q, q],mb\^{}2]*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topos }\ExtensionTok{=} \OperatorTok{\{}
+\NormalTok{   FCTopology}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{\{}\SpecialCharTok{{-}}\NormalTok{p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\SpecialCharTok{{-}}\NormalTok{p3}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\NormalTok{mg}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p3 . }\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{     SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p1 . }\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\SpecialCharTok{{-}}\NormalTok{p1 }\SpecialCharTok{+}\NormalTok{ p3}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{Hold}\OperatorTok{[}\NormalTok{SPD}\OperatorTok{][}\FunctionTok{q}\OperatorTok{,} \FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{\}],} 
+\NormalTok{   FCTopology}\OperatorTok{[}\StringTok{"asyR1prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{\{}\SpecialCharTok{{-}}\NormalTok{p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\SpecialCharTok{{-}}\NormalTok{p3}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\NormalTok{mg}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p3 . }\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{      SFAD}\OperatorTok{[\{\{}\SpecialCharTok{{-}}\NormalTok{p1 }\SpecialCharTok{{-}} \FunctionTok{q}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\NormalTok{mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\NormalTok{p1 . p3}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{Hold}\OperatorTok{[}\NormalTok{SPD}\OperatorTok{][}\FunctionTok{q}\OperatorTok{,} \FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{\}]} 
+   \OperatorTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{\text{FCTopology}\left(\text{asyR3prop2Ltopo01310X11111N1},\left\{\frac{1}{(\text{p1}^2+i \eta )},\frac{1}{(\text{p3}^2-\text{mg}^2+i \eta )},\frac{1}{(2 (\text{p3}\cdot q)+i \eta )},\frac{1}{(2 (\text{p1}\cdot q)+i \eta )},\frac{1}{((\text{p3}-\text{p1})^2+i \eta )}\right\},\{\text{p1},\text{p3}\},\{q\},\left\{\text{Hold}[\text{SPD}][q,q]\to \;\text{mb}^2\right\},\{\}\right),\text{FCTopology}\left(\text{asyR1prop2Ltopo01310X11111N1},\left\{\frac{1}{(\text{p1}^2+i \eta )},\frac{1}{(\text{p3}^2-\text{mg}^2+i \eta )},\frac{1}{(2 (\text{p3}\cdot q)+i \eta )},\frac{1}{((-\text{p1}-q)^2-\text{mb}^2+i \eta )},\frac{1}{(-\text{p1}\cdot \;\text{p3}+i \eta )}\right\},\{\text{p1},\text{p3}\},\{q\},\left\{\text{Hold}[\text{SPD}][q,q]\to \;\text{mb}^2\right\},\{\}\right)\right\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{\{}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"asyR1prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{\}]\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{G^{\text{asyR3prop2Ltopo01310X11111N1}}(1,1,1,1,2),G^{\text{asyR1prop2Ltopo01310X11111N1}}(1,1,1,1,2)\right\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fileNames} \ExtensionTok{=}\NormalTok{ KiraCreateConfigFiles}\OperatorTok{[}\NormalTok{topos}\OperatorTok{,} \OperatorTok{\{}\NormalTok{GLI}\OperatorTok{[}\StringTok{"asyR3prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"asyR1prop2Ltopo01310X11111N1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{\}]\},} 
+   \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}],}\NormalTok{ KiraMassDimensions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{mb }\OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{,}\NormalTok{ mg }\OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left(
+\begin{array}{cc}
+ \;\text{/home/vs/.Mathematica/Applications/FeynCalc/Database/asyR3prop2Ltopo01310X11111N1/config/integralfamilies.yaml} & \;\text{/home/vs/.Mathematica/Applications/FeynCalc/Database/asyR3prop2Ltopo01310X11111N1/config/kinematics.yaml} \\
+ \;\text{/home/vs/.Mathematica/Applications/FeynCalc/Database/asyR1prop2Ltopo01310X11111N1/config/integralfamilies.yaml} & \;\text{/home/vs/.Mathematica/Applications/FeynCalc/Database/asyR1prop2Ltopo01310X11111N1/config/kinematics.yaml} \\
+\end{array}
+\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{FilePrint}\OperatorTok{[}\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]][[}\DecValTok{1}\OperatorTok{]]]}
+
+\CommentTok{(*integralfamilies:}
+\CommentTok{  {-} name: asyR3prop2Ltopo01310X11111N1}
+\CommentTok{    loop\_momenta: [p1, p3]}
+\CommentTok{    top\_level\_sectors: [b11111]}
+\CommentTok{    propagators:}
+\CommentTok{      {-} [ "p1", 0]}
+\CommentTok{      {-} [ "p3", "mg\^{}2"]}
+\CommentTok{      {-} \{ bilinear: [ [ "2*p3", "q"], 0] \}}
+\CommentTok{      {-} \{ bilinear: [ [ "2*p1", "q"], 0] \}}
+\CommentTok{      {-} [ "{-}p1 + p3", 0]*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{FilePrint}\OperatorTok{[}\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]][[}\DecValTok{2}\OperatorTok{]]]}
+
+\CommentTok{(*kinematics:}
+\CommentTok{  incoming\_momenta: [q]}
+\CommentTok{  outgoing\_momenta: [q]}
+\CommentTok{  momentum\_conservation: []}
+\CommentTok{  kinematic\_invariants:}
+\CommentTok{    {-} [mb, 1]}
+\CommentTok{    {-} [mg, 1]}
+\CommentTok{  scalarproduct\_rules:}
+\CommentTok{    {-} [ [ q, q],mb\^{}2]*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{FilePrint}\OperatorTok{[}\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{2}\OperatorTok{]][[}\DecValTok{1}\OperatorTok{]]]}
+
+\CommentTok{(*integralfamilies:}
+\CommentTok{  {-} name: asyR1prop2Ltopo01310X11111N1}
+\CommentTok{    loop\_momenta: [p1, p3]}
+\CommentTok{    top\_level\_sectors: [b11111]}
+\CommentTok{    propagators:}
+\CommentTok{      {-} [ "p1", 0]}
+\CommentTok{      {-} [ "p3", "mg\^{}2"]}
+\CommentTok{      {-} \{ bilinear: [ [ "2*p3", "q"], 0] \}}
+\CommentTok{      {-} [ "{-}p1 {-} q", "mb\^{}2"]}
+\CommentTok{      {-} \{ bilinear: [ [ "{-}p1", "p3"], 0] \}*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{FilePrint}\OperatorTok{[}\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{2}\OperatorTok{]][[}\DecValTok{2}\OperatorTok{]]]}
+
+\CommentTok{(*kinematics:}
+\CommentTok{  incoming\_momenta: [q]}
+\CommentTok{  outgoing\_momenta: [q]}
+\CommentTok{  momentum\_conservation: []}
+\CommentTok{  kinematic\_invariants:}
+\CommentTok{    {-} [mb, 1]}
+\CommentTok{    {-} [mg, 1]}
+\CommentTok{  scalarproduct\_rules:}
+\CommentTok{    {-} [ [ q, q],mb\^{}2]*)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{document}

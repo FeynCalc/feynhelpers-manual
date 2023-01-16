@@ -1,0 +1,88 @@
+% !TeX program = pdflatex
+% !TeX root = KiraCreateJobFile.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\begin{Shaded}
+\begin{Highlighting}[]
+ 
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{kiracreatejobfile}{
+\section{KiraCreateJobFile}\label{kiracreatejobfile}\index{KiraCreateJobFile}}
+
+KiraCreateJobFile{[}topo, sectors, \{r,s\}, path{]} can be used to
+generate Kira job files from an \texttt{FCTopology} or a list thereof.
+Here \texttt{sectors} is a list of sectors need to be reduced,
+e.g.~\texttt{\{\allowbreak{}\{\allowbreak{}1,\ \allowbreak{}0,\ \allowbreak{}0,\ \allowbreak{}0\},\ \allowbreak{}\{\allowbreak{}1,\ \allowbreak{}1,\ \allowbreak{}0,\ \allowbreak{}0\},\ \allowbreak{}\{\allowbreak{}1,\ \allowbreak{}1,\ \allowbreak{}1,\ \allowbreak{}0\}\}}
+etc. The values of \texttt{r} and \texttt{s} correspond to the maximal
+positive and negative powers that may appear in the loop integrals to be
+reduced.
+
+The functions creates the corresponding yaml files and saves them in
+\texttt{path/topoName}. Using
+\texttt{KiraCreateJobFile[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}sectors1,\ \allowbreak{}sectors2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}\{\allowbreak{}r1,\ \allowbreak{}s1\},\ \allowbreak{}\{\allowbreak{}r2,\ \allowbreak{}s2\},\ \allowbreak{}...\},\ \allowbreak{} path]}
+will save the scripts to \texttt{path/topoName1},
+\texttt{path/topoName2} etc. The syntax using
+\texttt{KiraCreateJobFile[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}sectors1,\ \allowbreak{}sectors2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}\{\allowbreak{}r1,\ \allowbreak{}s1\},\ \allowbreak{}\{\allowbreak{}r2,\ \allowbreak{}s2\},\ \allowbreak{}...\},\ \allowbreak{} \{\allowbreak{}path1,\ \allowbreak{}path2,\ \allowbreak{}...\}]}
+is also possible.
+
+It is also possible to supply a list of \texttt{GLI}s instead of
+sectors. In that case \texttt{FCLoopFindSectors} and \texttt{KiraGetRS}
+will be used to determine the top sector for each topology.
+
+The syntax
+\texttt{KiraCreateJobFile[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}sectors1,\ \allowbreak{}sectors2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}\{\allowbreak{}r1,\ \allowbreak{}s1\},\ \allowbreak{}\{\allowbreak{}r2,\ \allowbreak{}s2\},\ \allowbreak{}...\},\ \allowbreak{}path]}
+or
+\texttt{KiraCreateJobFile[\allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}glis1,\ \allowbreak{}glis2,\ \allowbreak{}...\},\ \allowbreak{} path]}
+is also allowed. This implies that all config files will go into the
+corresponding subdirectories of path,
+e.g.~\texttt{path/topoName1/config}, \texttt{path/topoName2/config} etc.
+
+The default name for job files is \texttt{job.yaml} and can be changed
+via the option \texttt{KiraJobFileName}.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{kiracreateconfigfiles}{KiraCreateConfigFiles},
+\hyperlink{kirajobfilename}{KiraJobFileName},
+\hyperlink{kiraintegrals}{KiraIntegrals}
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\NormalTok{prop3lX1}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[\{}\NormalTok{p3}\OperatorTok{,} \FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1 }\SpecialCharTok{{-}}\NormalTok{ p2 }\SpecialCharTok{{-}}\NormalTok{ p3}\OperatorTok{],} 
+\NormalTok{    SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1 }\SpecialCharTok{{-}}\NormalTok{ p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p1}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\FunctionTok{Q} \SpecialCharTok{{-}}\NormalTok{ p2}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p1 }\SpecialCharTok{+}\NormalTok{ p3}\OperatorTok{],}\NormalTok{ SFAD}\OperatorTok{[}\NormalTok{p2 }\SpecialCharTok{+}\NormalTok{ p3}\OperatorTok{]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p2}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{Q}\OperatorTok{\},} \OperatorTok{\{\},} \OperatorTok{\{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCTopology}\left(\text{prop3lX1},\left\{\frac{1}{(\text{p1}^2-m^2+i \eta )},\frac{1}{(\text{p2}^2+i \eta )},\frac{1}{(\text{p3}^2-m^2+i \eta )},\frac{1}{((-\text{p1}-\text{p2}-\text{p3}+Q)^2+i \eta )},\frac{1}{((-\text{p1}-\text{p2}+Q)^2+i \eta )},\frac{1}{((Q-\text{p1})^2+i \eta )},\frac{1}{((Q-\text{p2})^2+i \eta )},\frac{1}{((\text{p1}+\text{p3})^2+i \eta )},\frac{1}{((\text{p2}+\text{p3})^2+i \eta )}\right\},\{\text{p1},\text{p2},\text{p3}\},\{Q\},\{\},\{\}\right)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KiraCreateJobFile}\OperatorTok{[}\NormalTok{topo}\OperatorTok{,} \OperatorTok{\{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}\},} \OperatorTok{\{}\DecValTok{4}\OperatorTok{,} \DecValTok{4}\OperatorTok{\},} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{/home/vs/.Mathematica/Applications/FeynCalc/Database/prop3lX1/job.yaml}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KiraCreateJobFile}\OperatorTok{[}\NormalTok{topo}\OperatorTok{,} \OperatorTok{\{}
+\NormalTok{   GLI}\OperatorTok{[}\NormalTok{prop3lX1}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],} 
+\NormalTok{   GLI}\OperatorTok{[}\NormalTok{prop3lX1}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]\},} 
+  \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}],}\NormalTok{ KiraJobFileName }\OtherTok{{-}\textgreater{}} \StringTok{"job2.yaml"}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{/home/vs/.Mathematica/Applications/FeynCalc/Database/prop3lX1/job2.yaml}
+\end{dmath*}
+\end{document}

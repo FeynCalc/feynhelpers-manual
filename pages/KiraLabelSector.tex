@@ -1,0 +1,65 @@
+% !TeX program = pdflatex
+% !TeX root = KiraLabelSector.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\begin{Shaded}
+\begin{Highlighting}[]
+ 
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{kiralabelsector}{
+\section{KiraLabelSector}\label{kiralabelsector}\index{KiraLabelSector}}
+
+\texttt{KiraLabelSector[\allowbreak{}sec]} returns the standard Kira
+labelling \(S\) for the given sector \texttt{sec}
+(e.g.~\texttt{\{\allowbreak{}1,\ \allowbreak{}1,\ \allowbreak{}0,\ \allowbreak{}1,\ \allowbreak{}1\}}).
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{kiracreatejobfile}{KiraCreateJobFile}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KiraLabelSector}\OperatorTok{[\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+27
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KiraLabelSector}\OperatorTok{[\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+3
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KiraLabelSector}\OperatorTok{[\{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\{27,7\}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KiraLabelSector}\OperatorTok{[\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+3
+\end{dmath*}
+\end{document}
