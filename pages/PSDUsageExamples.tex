@@ -1,0 +1,116 @@
+% !TeX program = pdflatex
+% !TeX root = PSDUsageExamples.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{pysecdec usage examples}{
+\section{pySecDec usage examples}\label{pysecdec usage examples}\index{pySecDec usage examples}}
+
+The main idea behind the FeynHelpers interface to pySecDec is to
+facilitate the generation of pySecDec scripts for integrals written in
+the FeynCalc notation (i.e.~as \texttt{GLI}s with the corresponding
+lists of \texttt{FCTopology} symbols).
+
+The main high-level function of this interface is called
+\texttt{PSDCreatePythonScripts}. In the simplest case we need two
+provide following arguments and options
+
+\begin{itemize}
+\tightlist
+\item
+  the 1st argument is some \texttt{GLI}
+\item
+  the 2nd argument is the \texttt{FCTopology} to which this \texttt{GLI}
+  belongs
+\item
+  the 3rd argument is where to put the directory with pySecDec. For
+  quick tests one can simply use
+  \texttt{NotebookDirectory[\allowbreak{}]}
+\item
+  the option \texttt{PSDRequestedOrder} specifies the order in
+  \(\varepsilon\) to which the integral should be evaluated (default is
+  \texttt{0})
+\item
+  the option \texttt{PSDRealParameterRules} is a list of rules for
+  replacing kinematica invariants with numerical values which are real
+  numbers. For complex numbers you need to use
+  \texttt{PSDComplexParameterRules}
+\item
+  if the script directory already exists, the function will by default
+  refuse to overwrite it. Setting the option \texttt{OverwriteTarget} to
+  \texttt{True} you can tell the code that you do not care about that
+\end{itemize}
+
+Here is a simple 1-loop example that incorporates all of the above
+
+\begin{verbatim}
+int = GLI[prop1L, {1, 1}]
+topo = FCTopology[prop1L, {FAD[{p1, m1}], FAD[{p1 + q, m2}]}, {p1}, {q}, {Hold[SPD][q] -> qq}, {}]
+files = PSDCreatePythonScripts[int, topo, NotebookDirectory[], 
+  PSDRealParameterRules -> {qq -> 1., m1 -> 2., m2 -> 3.}, OverwriteTarget -> True]
+\end{verbatim}
+
+The output is a list containing two element which are full paths to the
+two pySecDec script files \texttt{generate_int.py} and
+\texttt{integrate_int.py}. You can now switch to the terminal, enter the
+corresponding directory and perform the integral evaluation by first
+running
+
+\begin{verbatim}
+python generate_int.py
+\end{verbatim}
+
+Here is a sample output of this script
+
+\begin{verbatim}
+running "sum_package" for loopint
+running "make_package" for "loopint_integral"
+computing Jacobian determinant for primary sector 0
+total number sectors before symmetry finding: 2
+total number sectors after symmetry finding (iterative): 2
+total number sectors after symmetry finding (light Pak): 2
+total number sectors after symmetry finding (full Pak): 2
+writing FORM files for sector 1
+writing FORM files for sector 2
+expanding the prefactor exp(EulerGamma*eps)*gamma(eps) (regulators: [eps] , orders: [0] )
+ + (1)*eps**-1 + (0)
+"loopint_integral" done
+\end{verbatim}
+
+Now you need to compile the generated library files. This can be done
+via
+
+\begin{verbatim}
+make -j8 -C loopint
+\end{verbatim}
+
+where 8 stands for the number threads to be run simultaneously. It
+depends on how powerful the CPU in your machine is.
+
+Finally, entering
+
+\begin{verbatim}
+python integrate_int.py
+\end{verbatim}
+
+will perform the actual numerical evaluation and save the obtained
+results to \texttt{numres_*_psd.txt}, \texttt{numres_*_mma.m} and
+\texttt{numres_*_maple.mpl}. Here \texttt{*} stands for the numerical
+values of kinematic invariants present in the integral. You can modify
+those values without the need to recompile the libraries by simply
+editing the arrays \texttt{num_params_real} and
+\texttt{num_params_complex} in \texttt{integrate_int.py}.
+
+For Mathematica users the file \texttt{numres_*_mma.m} is probably the
+most useful one. You can load the content of this file into your
+Mathematica session using the function \texttt{PSDLoadNumericalResults}.
+To that aim you just need to give it the output of
+\texttt{PSDCreatePythonScripts} and set the options
+\texttt{PSDRealParameterRules} and \texttt{PSDComplexParameterRules} to
+the same values that were used when invoking
+\texttt{PSDCreatePythonScripts}
+
+\begin{verbatim}
+PSDLoadNumericalResults[files, PSDRealParameterRules -> {qq -> 1., m1 -> 2., m2 -> 3.}]
+\end{verbatim}
+\end{document}
