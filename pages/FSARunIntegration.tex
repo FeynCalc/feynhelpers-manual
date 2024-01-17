@@ -1,0 +1,73 @@
+% !TeX program = pdflatex
+% !TeX root = FSARunIntegration.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\begin{Shaded}
+\begin{Highlighting}[]
+ 
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{fsarunintegration}{
+\section{FSARunIntegration}\label{fsarunintegration}\index{FSARunIntegration}}
+
+\texttt{FSARunIntegration[\allowbreak{}path]} evaluates a FIESTA script
+\texttt{FiestaScript.m} in \texttt{path}. To that aim a Mathematica
+kernel is started in the background via \texttt{RunProcess}. The
+function returns \texttt{True} if the evaluation succeeds and
+\texttt{False} otherwise.
+
+Alternatively, one can use
+\texttt{FSARunIntegration[\allowbreak{}path,\ \allowbreak{}topo]} where
+\texttt{topo} is an \texttt{FCTopology} symbol and the full path is
+implied to be \texttt{path/topoName/FiestaScript.m}.
+
+If you need to process a list of topologies, following syntaxes are
+possible
+\texttt{FiestaScript.m[\allowbreak{}\{\allowbreak{}path1,\ \allowbreak{}path2,\ \allowbreak{}...\}]},
+\texttt{FiestaScript.m[\allowbreak{}path,\ \allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\}]}
+
+The path to the Mathematica Kernel can be specified via
+\texttt{FSAMathematicaKernelPath}. The default value is
+\texttt{Automatic}.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{fsashowoutput}{FSAShowOutput},
+\hyperlink{fsamathematicakernelpath}{FSAMathematicaKernelPath}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topo1 }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\NormalTok{prop1L}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\NormalTok{ p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{m1}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],} \SpecialCharTok{{-}}\NormalTok{SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\NormalTok{ (p1 }\SpecialCharTok{+} \FunctionTok{q}\NormalTok{)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{m2}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{\},} \OperatorTok{\{\}]}
+\NormalTok{int1 }\ExtensionTok{=}\NormalTok{ GLI}\OperatorTok{[}\NormalTok{prop1L}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCTopology}\left(\text{prop1L},\left\{-\frac{1}{(-\text{p1}^2+\text{m1}^2-i \eta )},-\frac{1}{(-(\text{p1}+q)^2+\text{m2}^2-i \eta )}\right\},\{\text{p1}\},\{q\},\{\},\{\}\right)
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+G^{\text{prop1L}}(1,1)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fileNames} \ExtensionTok{=}\NormalTok{ FSAPrepareSDEvaluate}\OperatorTok{[}\NormalTok{int1}\OperatorTok{,}\NormalTok{ topo1}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}],} 
+\NormalTok{    FinalSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ qq}\OperatorTok{,}\NormalTok{ qq }\OtherTok{{-}\textgreater{}} \FloatTok{20.} \OperatorTok{,}\NormalTok{ m1 }\OtherTok{{-}\textgreater{}} \FloatTok{2.} \OperatorTok{,}\NormalTok{ m2 }\OtherTok{{-}\textgreater{}} \FloatTok{2.}\OperatorTok{\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FSARunIntegration}\OperatorTok{[}\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FSARunIntegration}\left(G^{\text{prop1L}}(1,1)\right)
+\end{dmath*}
+\end{document}

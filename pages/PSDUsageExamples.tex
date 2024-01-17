@@ -23,8 +23,8 @@ provide following arguments and options
   the 2nd argument is the \texttt{FCTopology} to which this \texttt{GLI}
   belongs
 \item
-  the 3rd argument is where to put the directory with pySecDec. For
-  quick tests one can simply use
+  the 3rd argument is where to put the directory with pySecDec scripts.
+  For quick tests one can simply use
   \texttt{NotebookDirectory[\allowbreak{}]}
 \item
   the option \texttt{PSDRequestedOrder} specifies the order in
@@ -32,7 +32,7 @@ provide following arguments and options
   \texttt{0})
 \item
   the option \texttt{PSDRealParameterRules} is a list of rules for
-  replacing kinematica invariants with numerical values which are real
+  replacing kinematic invariants with numerical values which are real
   numbers. For complex numbers you need to use
   \texttt{PSDComplexParameterRules}
 \item
@@ -50,7 +50,7 @@ files = PSDCreatePythonScripts[int, topo, NotebookDirectory[],
   PSDRealParameterRules -> {qq -> 1., m1 -> 2., m2 -> 3.}, OverwriteTarget -> True]
 \end{verbatim}
 
-The output is a list containing two element which are full paths to the
+The output is a list containing two elements which are full paths to the
 two pySecDec script files \texttt{generate_int.py} and
 \texttt{integrate_int.py}. You can now switch to the terminal, enter the
 corresponding directory and perform the integral evaluation by first

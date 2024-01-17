@@ -1,0 +1,213 @@
+% !TeX program = pdflatex
+% !TeX root = FSACreateMathematicaScripts.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\begin{Shaded}
+\begin{Highlighting}[]
+ 
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{fsacreatemathematicascripts}{
+\section{FSACreateMathematicaScripts}\label{fsacreatemathematicascripts}\index{FSACreateMathematicaScripts}}
+
+\texttt{FSACreateMathematicaScripts[\allowbreak{}int,\ \allowbreak{}topo,\ \allowbreak{}path]}
+creates a Mathematica script needed for the evaluation of the integral
+\texttt{int} (in the \texttt{GLI} representation) belonging to the
+topology \texttt{topo}. The files are saved to the directory
+\texttt{path/topoNameXindices}. The function returns a list of two
+strings that point to the script for FIESTA and the output file.
+
+One can also use the \texttt{FeynAmpDenominator}-representation as in
+\texttt{FSACreateMathematicaScripts[\allowbreak{}fadInt,\ \allowbreak{}lmoms,\ \allowbreak{}path]},
+where \texttt{lmoms} is the list of the loop momenta on which
+\texttt{fadInt} depends. In this case the FIESTA script will directly go
+into \texttt{path}.
+
+Another way to invoke the function would be
+\texttt{FSACreateMathematicaScripts[\allowbreak{}\{\allowbreak{}int1,\ \allowbreak{}int2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}path]}
+in which case the files will be saved to
+\texttt{path/topoName1Xindices1}, \texttt{path/topoName2Xindices2} etc.
+The syntax
+\texttt{FSACreateMathematicaScripts[\allowbreak{}\{\allowbreak{}int1,\ \allowbreak{}int2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}topo1,\ \allowbreak{}topo2,\ \allowbreak{}...\},\ \allowbreak{}\{\allowbreak{}path1,\ \allowbreak{}path2,\ \allowbreak{}...\}]}
+is also possible.
+
+Unless you are computing a single scale integral with the scale variable
+set to unity, you must specify all external parameters (e.g.~masses and
+scalar products of external momenta) and their numerical values via the
+option \texttt{FSAParameterRules}. The option
+\texttt{FinalSubstitutions} can be used to assign some kinematic
+parameters (e.g.~scalar products or masses) particular symbolic values.
+
+Another important option that you most likely would like to specify is
+\texttt{FSAOrderInEps} which specifies the order in \(\varepsilon\) up
+to which the integral should be evaluated.
+
+The names of the FIESTA script can be changed via the option
+\texttt{FSAScriptFileName with the default value being}FIESTAScript.m`.
+
+The integrator used for the numerical evaluation of the integral is set
+by the option \texttt{FSAIntegrator}, where \texttt{"quasiMonteCarlo"}
+is the default value. Accordingly, if you want to increase the number of
+iterations, you should use the option \texttt{FSAIntegratorOptions}.
+
+If you know in advance that the integral you are computing does not have
+cuts (i.e.~the result is purely real with no imaginary part), then it is
+highly recommended to disable the contour deformation. This will give
+you a huge performance boost. The option controlling this FIESTA
+parameter is called \texttt{FSAComplexMode} and is set to \texttt{True}
+by default.
+
+The prefactor of integrals evaluated by pySecDec is given by
+\(\frac{1}{i \pi^{D/2}} e^{\gamma_E \frac{4-D}{2}}\) per loop, which is
+the standard choice for multiloop calculations. An extra prefactor can
+be added using the option `FSAAdditionalPrefactor.
+
+If you want to compute an integral using asymptotic expansion, you need
+to set the option \texttt{FSASDExpandAsy} to \texttt{True} and specify
+the expansion order via \texttt{FSASDExpandAsyOrder}. Furthermore, the
+expansion parameter must be made known using \texttt{FSAExpandVar}.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{fsaorderineps}{FSAOrderInEps},
+\hyperlink{fsaintegrator}{FSAIntegrator},
+\hyperlink{fsacomplexmode}{FSAComplexMode},
+\hyperlink{fsasdexpandasy}{FSASDExpandAsy},
+\hyperlink{fsasdexpandasyorder}{FSASDExpandAsyOrder},
+\hyperlink{fsaexpandvar}{FSAExpandVar}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topo1 }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\NormalTok{prop1L}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\NormalTok{ p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{m1}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],} \SpecialCharTok{{-}}\NormalTok{SFAD}\OperatorTok{[\{\{}\FunctionTok{I}\NormalTok{ (p1 }\SpecialCharTok{+} \FunctionTok{q}\NormalTok{)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{m2}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{\},} \OperatorTok{\{\}]}
+\NormalTok{int1 }\ExtensionTok{=}\NormalTok{ GLI}\OperatorTok{[}\NormalTok{prop1L}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCTopology}\left(\text{prop1L},\left\{-\frac{1}{(-\text{p1}^2+\text{m1}^2-i \eta )},-\frac{1}{(-(\text{p1}+q)^2+\text{m2}^2-i \eta )}\right\},\{\text{p1}\},\{q\},\{\},\{\}\right)
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+G^{\text{prop1L}}(1,1)
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fileNames} \ExtensionTok{=}\NormalTok{ FSACreateMathematicaScripts}\OperatorTok{[}\NormalTok{int1}\OperatorTok{,}\NormalTok{ topo1}\OperatorTok{,} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}],} 
+\NormalTok{    FinalSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ qq}\OperatorTok{,}\NormalTok{ qq }\OtherTok{{-}\textgreater{}} \FloatTok{20.} \OperatorTok{,}\NormalTok{ m1 }\OtherTok{{-}\textgreater{}} \FloatTok{2.} \OperatorTok{,}\NormalTok{ m2 }\OtherTok{{-}\textgreater{}} \FloatTok{2.}\OperatorTok{\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/15bie2p9wh0uq.pdf}
+\end{figure}
+\FloatBarrier
+
+\begin{dmath*}\breakingcomma
+\text{\$Aborted}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]]} \SpecialCharTok{//} \FunctionTok{FilePrint}\OperatorTok{[}\NormalTok{\#}\OperatorTok{,} \DecValTok{1}\NormalTok{ ;; }\DecValTok{20}\OperatorTok{]}\NormalTok{ \&}
+\end{Highlighting}
+\end{Shaded}
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/17rauzqegivvs.pdf}
+\end{figure}
+\FloatBarrier
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/0jjbj48wa80cb.pdf}
+\end{figure}
+\FloatBarrier
+
+\begin{dmath*}\breakingcomma
+\text{FilePrint}[\text{fileNames}[[1]],1\text{;;}20]
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SFAD}\OperatorTok{[\{}\FunctionTok{I} \FunctionTok{p}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\}\}]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\frac{1}{(-p^2+m^2-i \eta )}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fileNames} \ExtensionTok{=}\NormalTok{ FSACreateMathematicaScripts}\OperatorTok{[}\NormalTok{SFAD}\OperatorTok{[\{}\FunctionTok{I} \FunctionTok{p}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\FunctionTok{m}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\}\}],} \OperatorTok{\{}\FunctionTok{p}\OperatorTok{\},} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{,} \StringTok{"tal1LInt"}\OperatorTok{\}],} 
+\NormalTok{    FinalSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{m} \OtherTok{{-}\textgreater{}} \FloatTok{1.}\OperatorTok{\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/1fewa4926cnb4.pdf}
+\end{figure}
+\FloatBarrier
+
+\begin{dmath*}\breakingcomma
+\text{\$Aborted}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fileNames}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]]} \SpecialCharTok{//} \FunctionTok{FilePrint}\OperatorTok{[}\NormalTok{\#}\OperatorTok{,} \DecValTok{1}\NormalTok{ ;; }\DecValTok{20}\OperatorTok{]}\NormalTok{ \&}
+\end{Highlighting}
+\end{Shaded}
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/0xax37b3to6o9.pdf}
+\end{figure}
+\FloatBarrier
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/0zgw7om8p0zoz.pdf}
+\end{figure}
+\FloatBarrier
+
+\begin{dmath*}\breakingcomma
+\text{FilePrint}[\text{fileNames}[[1]],1\text{;;}20]
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FSACreateMathematicaScripts}\OperatorTok{[}\NormalTok{GLI}\OperatorTok{[}\NormalTok{asyR2prop2Ltopo01013X11111N1}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{   FCTopology}\OperatorTok{[}\NormalTok{asyR2prop2Ltopo01013X11111N1}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{\{}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{I}\NormalTok{)}\SpecialCharTok{*}\NormalTok{p3}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{I}\NormalTok{)}\SpecialCharTok{*}\NormalTok{p1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{     SFAD}\OperatorTok{[\{\{}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{I}\NormalTok{)}\SpecialCharTok{*}\NormalTok{(p3 }\SpecialCharTok{+} \FunctionTok{q}\NormalTok{)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{I}\NormalTok{)}\SpecialCharTok{*}\NormalTok{(p1 }\SpecialCharTok{+} \FunctionTok{q}\NormalTok{)}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\SpecialCharTok{{-}}\NormalTok{mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{     GFAD}\OperatorTok{[\{\{}\NormalTok{SPD}\OperatorTok{[}\NormalTok{p1}\OperatorTok{,} \SpecialCharTok{{-}}\NormalTok{p1 }\SpecialCharTok{+} \DecValTok{2}\SpecialCharTok{*}\NormalTok{p3}\OperatorTok{]} \SpecialCharTok{{-}}\NormalTok{ SPD}\OperatorTok{[}\NormalTok{p3}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{],} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ p3}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\NormalTok{SPD}\OperatorTok{[}\FunctionTok{q}\OperatorTok{,} \FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ mb}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{\}],} 
+   \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,} \StringTok{"Database"}\OperatorTok{\}],} 
+\NormalTok{   FSAParameterRules }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{mb }\OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\},}\NormalTok{ FSAOrderInEps }\OtherTok{{-}\textgreater{}} \DecValTok{2}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\FloatBarrier
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.6\linewidth]{img/0iax3lha5f3x2.pdf}
+\end{figure}
+\FloatBarrier
+
+\begin{dmath*}\breakingcomma
+\text{\$Aborted}
+\end{dmath*}
+\end{document}
