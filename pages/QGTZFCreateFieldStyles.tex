@@ -1,0 +1,33 @@
+% !TeX program = pdflatex
+% !TeX root = QGTZFCreateFieldStyles.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{qgtzfcreatefieldstyles}{
+\section{QGTZFCreateFieldStyles}\label{qgtzfcreatefieldstyles}\index{QGTZFCreateFieldStyles}}
+
+\texttt{QGTZFCreateTeXFiles[\allowbreak{}model_,\ \allowbreak{}output_]}
+generates TikZ-Feynman stylings for the fields present in the QGRAF
+model file \texttt{model}. The resulting file containing the stylings
+set via \texttt{tikzset} and \texttt{tikzfeynmanset}is saved to
+\texttt{output}.
+
+It is also possible to invoke the function via
+\texttt{QGTZFCreateTeXFiles[\allowbreak{}model,\ \allowbreak{}qgOutput]}
+where qgOutput is the output \texttt{QGCreateAmp}.
+
+The stylings can be generated in a semi-automatic fashion but for higher
+quality results it is recommended to provide the necessary information
+for each field via the option \texttt{QGFieldStyles}. It is a list of
+lists, where each sublist contains the field name (e.g.~\texttt{El}),
+its type (e.g.~\texttt{photon}, \texttt{boson}, \texttt{fermion},
+\texttt{anti fermion} etc.) and its T EX label (e.g \texttt{\\gamma}).
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview}, \hyperlink{qgconverttofc}{QGConvertToFC},
+\hyperlink{qgcreateamp}{QGCreateAmp},
+\hyperlink{qgtzfcreatetexfiles}{QGTZFCreateTeXFiles}.
+
+\subsection{Examples}
+\end{document}

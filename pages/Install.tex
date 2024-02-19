@@ -30,28 +30,34 @@ corresponding developer team.}
 Run the following instruction in a Kernel or Notebook session of
 Mathematica to install the stable version
 
-\begin{verbatim}
-Import["https://raw.githubusercontent.com/FeynCalc/feynhelpers/master/install.m"]
-InstallFeynHelpers[]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Import}\OperatorTok{[}\StringTok{"https://raw.githubusercontent.com/FeynCalc/feynhelpers/master/install.m"}\OperatorTok{]}
+\NormalTok{InstallFeynHelpers}\OperatorTok{[]}
+\end{Highlighting}
+\end{Shaded}
 
 If you like the bleeding edge and you are already using the development
 version of FeynCalc, you can also install the development version of
 FeynHelpers
 
-\begin{verbatim}
-Import["https://raw.githubusercontent.com/FeynCalc/feynhelpers/master/install.m"]
-InstallFeynHelpers[InstallFeynHelpersDevelopmentVersion->True]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Import}\OperatorTok{[}\StringTok{"https://raw.githubusercontent.com/FeynCalc/feynhelpers/master/install.m"}\OperatorTok{]}
+\NormalTok{InstallFeynHelpers}\OperatorTok{[}\NormalTok{InstallFeynHelpersDevelopmentVersion}\OtherTok{{-}\textgreater{}}\ConstantTok{True}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{manual-installation}{%
 \subsubsection{Manual installation}\label{manual-installation}}
 
 Create a directory \emph{FeynHelpers} inside
 
-\begin{verbatim}
-FileNameJoin[{$UserBaseDirectory, "Applications", "FeynCalc", "AddOns"}]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{FileNameJoin}\OperatorTok{[\{}\VariableTok{$UserBaseDirectory}\OperatorTok{,} \StringTok{"Applications"}\OperatorTok{,} \StringTok{"FeynCalc"}\OperatorTok{,} \StringTok{"AddOns"}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
 
 and put the source code there.
 
@@ -91,9 +97,11 @@ The content should be extracted to
 We recommend to enable support for zstd, lthreads, tcmalloc, snappy and
 zlib via
 
-\begin{verbatim}
-./configure --enable_zlib --enable_snappy --enable_lthreads --enable_tcmalloc --enable_zstd
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{.}\SpecialCharTok{/}\NormalTok{configure }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{zlib }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{snappy }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{lthreads }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{tcmalloc }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{zstd}
+\end{Highlighting}
+\end{Shaded}
 
 If you compile FIRE without the zstd support, you should change the
 option \texttt{FIRECompressor} of \texttt{FIRECreateConfigFile} to
@@ -218,9 +226,11 @@ The compilation instructions can be found in the section ``Compiling''
 of the manual \texttt{qgraf-3.x.y.pdf} inside the tarball. For example,
 on a Linux system equipped with a GNU Fortran compiler something like
 
-\begin{verbatim}
-gfortran qgraf-3.6.3.f08 -o qgraf
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gfortran qgraf}\DecValTok{{-}3}\NormalTok{.}\DecValTok{6}\NormalTok{.}\FloatTok{3.}\NormalTok{f08 }\SpecialCharTok{{-}}\FunctionTok{o}\NormalTok{ qgraf}
+\end{Highlighting}
+\end{Shaded}
 
 should do the job. Having compiled the program you need to move the
 binary file \texttt{qgraf} to

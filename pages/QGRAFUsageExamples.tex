@@ -1,0 +1,114 @@
+% !TeX program = pdflatex
+% !TeX root = QGRAFUsageExamples.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{qgraf usage examples}{
+\section{QGRAF usage examples}\label{qgraf usage examples}\index{QGRAF usage examples}}
+
+The main idea behind the FeynHelpers interface to QGRAF is to facilitate
+the generation of Feynman diagrams using QGRAF and the subsequent
+conversion of the obtained amplitudes into the FeynCalc notation.
+
+The main high-level function of this interface is called
+\texttt{QGCreateAmp}. In the simplest case we need to provide following
+arguments and options
+
+\begin{itemize}
+\tightlist
+\item
+  the 1st argument is the number of loops, e.g.~\texttt{0}, \texttt{1}
+  or \texttt{2}
+\item
+  the 2nd argument is the process we are considering,
+  e.g.~\texttt{\{\allowbreak{}"El[\allowbreak{}p1]",\ \allowbreak{}"Ael[\allowbreak{}p2]"\}->\{\allowbreak{}"El[\allowbreak{}p3]",\ \allowbreak{}"Ael[\allowbreak{}p4]"\}}
+  for \(e^- (p_1) e^+ (p_2) \to e^- (p_3) e^+ (p_4)\)
+\item
+  the option \texttt{QGModel} specifies the QGRAF model used to generate
+  the diagrams. FeynHelpers has several simple built-in models such as
+  one flavor QED (\texttt{"QEDOneFlavor"}), one flavor QCD
+  (\texttt{"QCDOneFlavor"}) etc. To use a custom model this option
+  should be given the full path to the corresponding file.
+\item
+  the option \texttt{QGLoopMomentum} provides the naming scheme for the
+  loop momenta, e.g.~\texttt{l} or \texttt{q}
+\item
+  the option \texttt{QGOptions} is a list of string that will be passed
+  to the \texttt{options=} statement in the \texttt{qgraf.dat} file. The
+  most useful ones are \texttt{"notadpole"} and \texttt{"onshell"}
+\item
+  the option \texttt{QGOutputDirectory} specifies the path to the
+  directory containing the QGRAF output
+\end{itemize}
+
+Here is a simple 1-loop example that incorporates all of the above
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{qgOutput}\ExtensionTok{=}\NormalTok{QGCreateAmp}\OperatorTok{[}\DecValTok{1}\OperatorTok{,\{}\StringTok{"El[p1]"}\OperatorTok{,}\StringTok{"Ael[p2]"}\OperatorTok{\}}\OtherTok{{-}\textgreater{}}\OperatorTok{\{}\StringTok{"El[p3]"}\OperatorTok{,}\StringTok{"Ael[p4]"}\OperatorTok{\},}\NormalTok{QGModel}\OtherTok{{-}\textgreater{}}\StringTok{"QEDOneFlavor"}\OperatorTok{,}
+\NormalTok{QGLoopMomentum}\OtherTok{{-}\textgreater{}}\FunctionTok{l}\OperatorTok{,}\NormalTok{QGOptions}\OtherTok{{-}\textgreater{}}\OperatorTok{\{}\StringTok{"notadpole"}\OperatorTok{,}\StringTok{"onshell"}\OperatorTok{\},}
+\NormalTok{QGOutputDirectory}\OtherTok{{-}\textgreater{}}\FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,}\StringTok{"Database"}\OperatorTok{,}\StringTok{"ElAelToElAelAt1L"}\OperatorTok{\}]]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+The output is a list containing two elements which are full paths to the
+two files \texttt{amplitudes.m} and \texttt{diagrams-raw.tex}. Since
+QGRAF has no built-in capabilities for visualizing the generated Feynman
+diagrams, we need to use extra tools for this task. The most convenient
+way to do this is to employ \texttt{lualatex} together with the
+TikZ-Feyman package. By evaluating
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tikzStyles}\ExtensionTok{=}\NormalTok{QGTZFCreateFieldStyles}\OperatorTok{[}\NormalTok{qgModel}\OperatorTok{,}\StringTok{"QEDOneFlavor"}\OperatorTok{,}
+\NormalTok{QGFieldStyles}\OtherTok{{-}\textgreater{}}\OperatorTok{\{\{}\StringTok{"Ga"}\OperatorTok{,}\StringTok{"photon"}\OperatorTok{,}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{gamma"}\OperatorTok{\},}
+\OperatorTok{\{}\StringTok{"El"}\OperatorTok{,}\StringTok{"fermion"}\OperatorTok{,}\StringTok{"e\^{}{-}"}\OperatorTok{\},}
+\OperatorTok{\{}\StringTok{"Ael"}\OperatorTok{,}\StringTok{"anti fermion"}\OperatorTok{,}\StringTok{"e\^{}+"}\OperatorTok{\}\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+we can create a file containing the styling for the fields present in
+our model, so that the diagrams will look nice. Then,
+
+\begin{verbatim}
+QGTZFCreateTeXFiles[qgOutput,Split->True];
+\end{verbatim}
+
+will generate a TeX file for each of the diagrams located in
+\texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$FeynCalcDirectory,\ \allowbreak{}"Database",\ \allowbreak{}"ElAelToElAelAt1L",\ \allowbreak{}"TeX"\}]]}.
+Provided that we have \texttt{GNU parallel} and \texttt{pdfunite}
+installed, we can now switch to the terminal, enter the corresponding
+directory and generate the diagrams via
+
+\begin{verbatim}
+./makeDiagrams.sh
+./glueDiagrams.sh
+\end{verbatim}
+
+If everything goes as expected, this will give us a file
+\texttt{allDiagrams.pdf} containing all the generated diagrams.
+
+Coming back to the analytic part of the calculation, we need to load the
+list of Feynman rules for the vertices and propagators present in the
+generated amplitudes. Again, FeynHelpers contains a built-in collection
+of Feynman rules that can be loaded using
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{QGLoadInsertions}\OperatorTok{[}\StringTok{"QGCommonInsertions.m"}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+If we need to use some new rules for a custom model, then
+\texttt{QGLoadInsertions} should be given the full path to the
+corresponding insertions file. Finally, with
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{amps}\ExtensionTok{=}\NormalTok{QGConvertToFC}\OperatorTok{[}\NormalTok{qgOutput}\OperatorTok{,}\NormalTok{DiracChainJoin}\OtherTok{{-}\textgreater{}}\ConstantTok{True}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+we obtain the list of our amplitudes ready for a subsequent evaluation
+within FeynCalc.
+\end{document}

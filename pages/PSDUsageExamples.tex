@@ -43,12 +43,14 @@ provide following arguments and options
 
 Here is a simple 1-loop example that incorporates all of the above
 
-\begin{verbatim}
-int = GLI[prop1L, {1, 1}]
-topo = FCTopology[prop1L, {FAD[{p1, m1}], FAD[{p1 + q, m2}]}, {p1}, {q}, {Hold[SPD][q] -> qq}, {}]
-files = PSDCreatePythonScripts[int, topo, NotebookDirectory[], 
-  PSDRealParameterRules -> {qq -> 1., m1 -> 2., m2 -> 3.}, OverwriteTarget -> True]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{int }\ExtensionTok{=}\NormalTok{ GLI}\OperatorTok{[}\NormalTok{prop1L}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]}
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCTopology}\OperatorTok{[}\NormalTok{prop1L}\OperatorTok{,} \OperatorTok{\{}\NormalTok{FAD}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ m1}\OperatorTok{\}],}\NormalTok{ FAD}\OperatorTok{[\{}\NormalTok{p1 }\SpecialCharTok{+} \FunctionTok{q}\OperatorTok{,}\NormalTok{ m2}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{Hold}\OperatorTok{[}\NormalTok{SPD}\OperatorTok{][}\FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ qq}\OperatorTok{\},} \OperatorTok{\{\}]}
+\NormalTok{files }\ExtensionTok{=}\NormalTok{ PSDCreatePythonScripts}\OperatorTok{[}\NormalTok{int}\OperatorTok{,}\NormalTok{ topo}\OperatorTok{,} \FunctionTok{NotebookDirectory}\OperatorTok{[],} 
+\NormalTok{  PSDRealParameterRules }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{qq }\OtherTok{{-}\textgreater{}} \FloatTok{1.}\OperatorTok{,}\NormalTok{ m1 }\OtherTok{{-}\textgreater{}} \FloatTok{2.}\OperatorTok{,}\NormalTok{ m2 }\OtherTok{{-}\textgreater{}} \FloatTok{3.}\OperatorTok{\},}\NormalTok{ OverwriteTarget }\OtherTok{{-}\textgreater{}} \ConstantTok{True}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
 
 The output is a list containing two elements which are full paths to the
 two pySecDec script files \texttt{generate_int.py} and
@@ -56,42 +58,50 @@ two pySecDec script files \texttt{generate_int.py} and
 corresponding directory and perform the integral evaluation by first
 running
 
-\begin{verbatim}
-python generate_int.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{python }\AttributeTok{generate\_}\NormalTok{int.py}
+\end{Highlighting}
+\end{Shaded}
 
 Here is a sample output of this script
 
-\begin{verbatim}
-running "sum_package" for loopint
-running "make_package" for "loopint_integral"
-computing Jacobian determinant for primary sector 0
-total number sectors before symmetry finding: 2
-total number sectors after symmetry finding (iterative): 2
-total number sectors after symmetry finding (light Pak): 2
-total number sectors after symmetry finding (full Pak): 2
-writing FORM files for sector 1
-writing FORM files for sector 2
-expanding the prefactor exp(EulerGamma*eps)*gamma(eps) (regulators: [eps] , orders: [0] )
- + (1)*eps**-1 + (0)
-"loopint_integral" done
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{running }\StringTok{"sum\_package"} \FunctionTok{for}\NormalTok{ loopint}
+\NormalTok{running }\StringTok{"make\_package"} \FunctionTok{for} \StringTok{"loopint\_integral"}
+\NormalTok{computing Jacobian determinant }\FunctionTok{for}\NormalTok{ primary sector }\DecValTok{0}
+\FunctionTok{total} \FunctionTok{number}\NormalTok{ sectors before symmetry finding: }\DecValTok{2}
+\FunctionTok{total} \FunctionTok{number}\NormalTok{ sectors after symmetry finding (iterative): }\DecValTok{2}
+\FunctionTok{total} \FunctionTok{number}\NormalTok{ sectors after symmetry finding (light Pak): }\DecValTok{2}
+\FunctionTok{total} \FunctionTok{number}\NormalTok{ sectors after symmetry finding (}\ConstantTok{full}\NormalTok{ Pak): }\DecValTok{2}
+\NormalTok{writing FORM files }\FunctionTok{for}\NormalTok{ sector }\DecValTok{1}
+\NormalTok{writing FORM files }\FunctionTok{for}\NormalTok{ sector }\DecValTok{2}
+\NormalTok{expanding the prefactor }\FunctionTok{exp}\NormalTok{(}\FunctionTok{EulerGamma}\SpecialCharTok{*}\NormalTok{eps)}\SpecialCharTok{*}\FunctionTok{gamma}\NormalTok{(eps) (regulators: }\OperatorTok{[}\NormalTok{eps}\OperatorTok{]} \OperatorTok{,}\NormalTok{ orders: }\OperatorTok{[}\DecValTok{0}\OperatorTok{]}\NormalTok{ )}
+ \SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\NormalTok{)}\SpecialCharTok{*}\NormalTok{eps}\SpecialCharTok{**{-}}\DecValTok{1} \SpecialCharTok{+}\NormalTok{ (}\DecValTok{0}\NormalTok{)}
+\StringTok{"loopint\_integral"}\NormalTok{ done}
+\end{Highlighting}
+\end{Shaded}
 
 Now you need to compile the generated library files. This can be done
 via
 
-\begin{verbatim}
-make -j8 -C loopint
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{make }\SpecialCharTok{{-}}\NormalTok{j8 }\SpecialCharTok{{-}}\FunctionTok{C}\NormalTok{ loopint}
+\end{Highlighting}
+\end{Shaded}
 
 where 8 stands for the number threads to be run simultaneously. It
 depends on how powerful the CPU in your machine is.
 
 Finally, entering
 
-\begin{verbatim}
-python integrate_int.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{python }\AttributeTok{integrate\_}\NormalTok{int.py}
+\end{Highlighting}
+\end{Shaded}
 
 will perform the actual numerical evaluation and save the obtained
 results to \texttt{numres_*_psd.txt}, \texttt{numres_*_mma.m} and
@@ -110,7 +120,10 @@ To that aim you just need to give it the output of
 the same values that were used when invoking
 \texttt{PSDCreatePythonScripts}
 
-\begin{verbatim}
-PSDLoadNumericalResults[files, PSDRealParameterRules -> {qq -> 1., m1 -> 2., m2 -> 3.}]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PSDLoadNumericalResults}\OperatorTok{[}\NormalTok{files}\OperatorTok{,}\NormalTok{ PSDRealParameterRules }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{qq }\OtherTok{{-}\textgreater{}} \FloatTok{1.}\OperatorTok{,}\NormalTok{ m1 }\OtherTok{{-}\textgreater{}} \FloatTok{2.}\OperatorTok{,}\NormalTok{ m2 }\OtherTok{{-}\textgreater{}} \FloatTok{3.}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
 \end{document}

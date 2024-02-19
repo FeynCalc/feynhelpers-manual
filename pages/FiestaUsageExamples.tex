@@ -45,12 +45,14 @@ Here is a simple 1-loop example that incorporates all of the above.
 Notice that it is crucial to switch the \(i \eta\) sign of propagators
 from plus to minus, otherwise the result will be incorrect.
 
-\begin{verbatim}
-int = GLI[prop1L, {1, 1}]
-topo = FCLoopSwitchEtaSign[FCTopology[prop1L, {FAD[{p1, m1}], FAD[{p1 + q, m2}]}, {p1}, {q}, {}, {}], -1]
-files = FSACreateMathematicaScripts[int, topo, NotebookDirectory[], FinalSubstitutions -> {Hold[SPD][q] -> qq} , 
-  FSAParameterRules -> {qq -> 30., m1 -> 2., m2 -> 3.}, OverwriteTarget -> True]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{int }\ExtensionTok{=}\NormalTok{ GLI}\OperatorTok{[}\NormalTok{prop1L}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]}
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCLoopSwitchEtaSign}\OperatorTok{[}\NormalTok{FCTopology}\OperatorTok{[}\NormalTok{prop1L}\OperatorTok{,} \OperatorTok{\{}\NormalTok{FAD}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ m1}\OperatorTok{\}],}\NormalTok{ FAD}\OperatorTok{[\{}\NormalTok{p1 }\SpecialCharTok{+} \FunctionTok{q}\OperatorTok{,}\NormalTok{ m2}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{\},} \OperatorTok{\{\}],} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{]}
+\NormalTok{files }\ExtensionTok{=}\NormalTok{ FSACreateMathematicaScripts}\OperatorTok{[}\NormalTok{int}\OperatorTok{,}\NormalTok{ topo}\OperatorTok{,} \FunctionTok{NotebookDirectory}\OperatorTok{[],}\NormalTok{ FinalSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{Hold}\OperatorTok{[}\NormalTok{SPD}\OperatorTok{][}\FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ qq}\OperatorTok{\}} \OperatorTok{,} 
+\NormalTok{  FSAParameterRules }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{qq }\OtherTok{{-}\textgreater{}} \FloatTok{30.}\OperatorTok{,}\NormalTok{ m1 }\OtherTok{{-}\textgreater{}} \FloatTok{2.}\OperatorTok{,}\NormalTok{ m2 }\OtherTok{{-}\textgreater{}} \FloatTok{3.}\OperatorTok{\},}\NormalTok{ OverwriteTarget }\OtherTok{{-}\textgreater{}} \ConstantTok{True}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
 
 The output is a list containing two elements. The first one is the full
 path to the Mathematica script file \texttt{FiestaScript.m}, while the
@@ -58,9 +60,11 @@ second give the name of the output file containing numerical result for
 the given integral. For simple integrals you can evaluate the script
 directly in your Mathematica session by running
 
-\begin{verbatim}
-FSARunIntegration[files[[1]]]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FSARunIntegration}\OperatorTok{[}\NormalTok{files}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]]]}
+\end{Highlighting}
+\end{Shaded}
 
 Notice that the evaluation of sufficiently complicated integrals can
 take hours or even days so in general it is not recommended to use
@@ -68,48 +72,55 @@ take hours or even days so in general it is not recommended to use
 
 Here is a sample the script file
 
-\begin{verbatim}
-Get["/home/vs/.Mathematica/Applications/FIESTA5/FIESTA5.m"];
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Get}\OperatorTok{[}\StringTok{"/home/vs/.Mathematica/Applications/FIESTA5/FIESTA5.m"}\OperatorTok{]}\NormalTok{;}
 
 
-If[$FrontEnd===Null,
-  projectDirectory=DirectoryName[$InputFileName],
-  projectDirectory=NotebookDirectory[]
-];
-SetDirectory[projectDirectory];
-resFileName = "numres_" <> StringRiffle[ToString[#, InputForm] & /@ {15., 2., 3.}, "_"]<>"_fiesta.m";
-Print["Working directory: ", projectDirectory];
-Print["The results will be saved to: ", resFileName];
+\FunctionTok{If}\OperatorTok{[}\VariableTok{$FrontEnd}\ExtensionTok{===}\ConstantTok{Null}\OperatorTok{,}
+\NormalTok{  projectDirectory}\ExtensionTok{=}\FunctionTok{DirectoryName}\OperatorTok{[}\VariableTok{$InputFileName}\OperatorTok{],}
+\NormalTok{  projectDirectory}\ExtensionTok{=}\FunctionTok{NotebookDirectory}\OperatorTok{[]}
+\OperatorTok{]}\NormalTok{;}
+\FunctionTok{SetDirectory}\OperatorTok{[}\NormalTok{projectDirectory}\OperatorTok{]}\NormalTok{;}
+\NormalTok{resFileName }\ExtensionTok{=} \StringTok{"numres\_"}\NormalTok{ \textless{}\textgreater{} StringRiffle}\OperatorTok{[}\FunctionTok{ToString}\OperatorTok{[}\NormalTok{\#}\OperatorTok{,} \FunctionTok{InputForm}\OperatorTok{]}\NormalTok{ \& }\SpecialCharTok{/}\NormalTok{@ }\OperatorTok{\{}\FloatTok{15.}\OperatorTok{,} \FloatTok{2.}\OperatorTok{,} \FloatTok{3.}\OperatorTok{\},} \StringTok{"\_"}\OperatorTok{]}\NormalTok{\textless{}\textgreater{}}\StringTok{"\_fiesta.m"}\NormalTok{;}
+\FunctionTok{Print}\OperatorTok{[}\StringTok{"Working directory: "}\OperatorTok{,}\NormalTok{ projectDirectory}\OperatorTok{]}\NormalTok{;}
+\FunctionTok{Print}\OperatorTok{[}\StringTok{"The results will be saved to: "}\OperatorTok{,}\NormalTok{ resFileName}\OperatorTok{]}\NormalTok{;}
 
 
-uf = UF[{p1},{m1^2 - p1^2, m2^2 - (p1 + q)^2}, {q^2 -> qq, qq -> 15., m1 -> 2., m2 -> 3.}];
-SetOptions[FIESTA, "NumberOfSubkernels" -> 4,"ComplexMode" -> True,"ReturnErrorWithBrackets" -> True,
-"Integrator" -> "quasiMonteCarlo","IntegratorOptions" -> {{"maxeval", "50000"}, 
-{"epsrel", "1.000000E-05"}, {"epsabs", "1.000000E-12"}, {"integralTransform", "korobov"}}];
-pref = 1;
-resRaw = SDEvaluate[uf,{1, 1},0];
-res = resRaw*pref;
-Print["Final result: ", res];
-Put[res, resFileName];
-\end{verbatim}
+\NormalTok{uf }\ExtensionTok{=}\NormalTok{ UF}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{\},\{}\NormalTok{m1}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}}\NormalTok{ p1}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{,}\NormalTok{ m2}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{{-}}\NormalTok{ (p1 }\SpecialCharTok{+} \FunctionTok{q}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\SpecialCharTok{\^{}}\DecValTok{2} \OtherTok{{-}\textgreater{}}\NormalTok{ qq}\OperatorTok{,}\NormalTok{ qq }\OtherTok{{-}\textgreater{}} \FloatTok{15.}\OperatorTok{,}\NormalTok{ m1 }\OtherTok{{-}\textgreater{}} \FloatTok{2.}\OperatorTok{,}\NormalTok{ m2 }\OtherTok{{-}\textgreater{}} \FloatTok{3.}\OperatorTok{\}]}\NormalTok{;}
+\FunctionTok{SetOptions}\OperatorTok{[}\NormalTok{FIESTA}\OperatorTok{,} \StringTok{"NumberOfSubkernels"} \OtherTok{{-}\textgreater{}} \DecValTok{4}\OperatorTok{,}\StringTok{"ComplexMode"} \OtherTok{{-}\textgreater{}} \ConstantTok{True}\OperatorTok{,}\StringTok{"ReturnErrorWithBrackets"} \OtherTok{{-}\textgreater{}} \ConstantTok{True}\OperatorTok{,}
+\StringTok{"Integrator"} \OtherTok{{-}\textgreater{}} \StringTok{"quasiMonteCarlo"}\OperatorTok{,}\StringTok{"IntegratorOptions"} \OtherTok{{-}\textgreater{}} \OperatorTok{\{\{}\StringTok{"maxeval"}\OperatorTok{,} \StringTok{"50000"}\OperatorTok{\},} 
+\OperatorTok{\{}\StringTok{"epsrel"}\OperatorTok{,} \StringTok{"1.000000E{-}05"}\OperatorTok{\},} \OperatorTok{\{}\StringTok{"epsabs"}\OperatorTok{,} \StringTok{"1.000000E{-}12"}\OperatorTok{\},} \OperatorTok{\{}\StringTok{"integralTransform"}\OperatorTok{,} \StringTok{"korobov"}\OperatorTok{\}\}]}\NormalTok{;}
+\NormalTok{pref }\ExtensionTok{=} \DecValTok{1}\NormalTok{;}
+\NormalTok{resRaw }\ExtensionTok{=}\NormalTok{ SDEvaluate}\OperatorTok{[}\NormalTok{uf}\OperatorTok{,\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},}\DecValTok{0}\OperatorTok{]}\NormalTok{;}
+\NormalTok{res }\ExtensionTok{=}\NormalTok{ resRaw}\SpecialCharTok{*}\NormalTok{pref;}
+\FunctionTok{Print}\OperatorTok{[}\StringTok{"Final result: "}\OperatorTok{,}\NormalTok{ res}\OperatorTok{]}\NormalTok{;}
+\FunctionTok{Put}\OperatorTok{[}\NormalTok{res}\OperatorTok{,}\NormalTok{ resFileName}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
 
 To load the numerical results into your Mathematica session you can use
 the function \texttt{FSALoadNumericalResults}. To that aim you just need
 to give it \texttt{files} as input.
 
-\begin{verbatim}
-FSALoadNumericalResults[files]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FSALoadNumericalResults}\OperatorTok{[}\NormalTok{files}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
 
 If you want to perform an asymptotic expansion, you need to set the
 option \texttt{FSASDExpandAsy} to \texttt{True}, specify the expansion
 variable using \texttt{FSAExpandVar} and set the desired expansion order
 via \texttt{FSASDExpandAsyOrder}. For example,
 
-\begin{verbatim}
-int = GLI[prop1L, {1, 1}]
-topo = FCLoopSwitchEtaSign[FCTopology[prop1L, {FAD[{p1, m1}], FAD[{p1 + q, m2}]}, {p1}, {q}, {}, {}], -1]
-files = FSACreateMathematicaScripts[int, topo, NotebookDirectory[], FinalSubstitutions -> {Hold[SPD][q] -> qq} , 
-  FSAParameterRules -> {qq -> 30., m1 -> 2.}, OverwriteTarget -> True, FSASDExpandAsy->True, FSAExpandVar -> m2, FSASDExpandAsyOrder-> 4]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{int }\ExtensionTok{=}\NormalTok{ GLI}\OperatorTok{[}\NormalTok{prop1L}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]}
+\NormalTok{topo }\ExtensionTok{=}\NormalTok{ FCLoopSwitchEtaSign}\OperatorTok{[}\NormalTok{FCTopology}\OperatorTok{[}\NormalTok{prop1L}\OperatorTok{,} \OperatorTok{\{}\NormalTok{FAD}\OperatorTok{[\{}\NormalTok{p1}\OperatorTok{,}\NormalTok{ m1}\OperatorTok{\}],}\NormalTok{ FAD}\OperatorTok{[\{}\NormalTok{p1 }\SpecialCharTok{+} \FunctionTok{q}\OperatorTok{,}\NormalTok{ m2}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{p1}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{q}\OperatorTok{\},} \OperatorTok{\{\},} \OperatorTok{\{\}],} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{]}
+\NormalTok{files }\ExtensionTok{=}\NormalTok{ FSACreateMathematicaScripts}\OperatorTok{[}\NormalTok{int}\OperatorTok{,}\NormalTok{ topo}\OperatorTok{,} \FunctionTok{NotebookDirectory}\OperatorTok{[],}\NormalTok{ FinalSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\FunctionTok{Hold}\OperatorTok{[}\NormalTok{SPD}\OperatorTok{][}\FunctionTok{q}\OperatorTok{]} \OtherTok{{-}\textgreater{}}\NormalTok{ qq}\OperatorTok{\}} \OperatorTok{,} 
+\NormalTok{  FSAParameterRules }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{qq }\OtherTok{{-}\textgreater{}} \FloatTok{30.}\OperatorTok{,}\NormalTok{ m1 }\OtherTok{{-}\textgreater{}} \FloatTok{2.}\OperatorTok{\},}\NormalTok{ OverwriteTarget }\OtherTok{{-}\textgreater{}} \ConstantTok{True}\OperatorTok{,}\NormalTok{ FSASDExpandAsy}\OtherTok{{-}\textgreater{}}\ConstantTok{True}\OperatorTok{,}\NormalTok{ FSAExpandVar }\OtherTok{{-}\textgreater{}}\NormalTok{ m2}\OperatorTok{,}\NormalTok{ FSASDExpandAsyOrder}\OtherTok{{-}\textgreater{}} \DecValTok{4}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
 \end{document}
