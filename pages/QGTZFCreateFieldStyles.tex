@@ -14,14 +14,14 @@ set via \texttt{tikzset} and \texttt{tikzfeynmanset}is saved to
 
 It is also possible to invoke the function via
 \texttt{QGTZFCreateTeXFiles[\allowbreak{}model,\ \allowbreak{}qgOutput]}
-where qgOutput is the output \texttt{QGCreateAmp}.
+where \texttt{qgOutput} is the output \texttt{QGCreateAmp}.
 
 The stylings can be generated in a semi-automatic fashion but for higher
 quality results it is recommended to provide the necessary information
 for each field via the option \texttt{QGFieldStyles}. It is a list of
 lists, where each sublist contains the field name (e.g.~\texttt{El}),
 its type (e.g.~\texttt{photon}, \texttt{boson}, \texttt{fermion},
-\texttt{anti fermion} etc.) and its T EX label (e.g \texttt{\\gamma}).
+\texttt{anti fermion} etc.) and its T EX label.
 
 \subsection{See also}
 
@@ -30,4 +30,37 @@ its type (e.g.~\texttt{photon}, \texttt{boson}, \texttt{fermion},
 \hyperlink{qgtzfcreatetexfiles}{QGTZFCreateTeXFiles}.
 
 \subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{qgModel }\ExtensionTok{=} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynHelpersDirectory}\OperatorTok{,} \StringTok{"Documentation"}\OperatorTok{,} 
+     \StringTok{"Examples"}\OperatorTok{,} \StringTok{"Phi4"}\OperatorTok{,} \StringTok{"Phi4"}\OperatorTok{\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tikzStyles }\ExtensionTok{=}\NormalTok{ QGTZFCreateFieldStyles}\OperatorTok{[}\NormalTok{qgModel}\OperatorTok{,} \VariableTok{$TemporaryDirectory}\OperatorTok{,} 
+\NormalTok{    QGFieldStyles }\OtherTok{{-}\textgreater{}} \OperatorTok{\{\{}\StringTok{"Phi"}\OperatorTok{,} \StringTok{"scalar"}\OperatorTok{,} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{phi"}\OperatorTok{\}\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{FilePrint}\OperatorTok{[}\NormalTok{tikzStyles}\OperatorTok{]}
+
+\CommentTok{(*}
+
+\CommentTok{\textbackslash{}tikzfeynmanset\{}
+\CommentTok{qgPhiName/.style=\{particle=\textbackslash{}(\textbackslash{}phi\textbackslash{})\},}
+\CommentTok{qgPhiStyle/.style=\{scalar\}}
+\CommentTok{\}}
+
+
+\CommentTok{\textbackslash{}tikzset\{}
+\CommentTok{qgPhiEdgeName/.style=\{edge label=\textbackslash{}(\textbackslash{}phi\textbackslash{})\}}
+\CommentTok{\}*)}
+\end{Highlighting}
+\end{Shaded}
+
 \end{document}

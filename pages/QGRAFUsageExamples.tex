@@ -6,6 +6,9 @@
 \hypertarget{qgraf usage examples}{
 \section{QGRAF usage examples}\label{qgraf usage examples}\index{QGRAF usage examples}}
 
+\hypertarget{generic-approach}{%
+\subsection{Generic approach}\label{generic-approach}}
+
 The main idea behind the FeynHelpers interface to QGRAF is to facilitate
 the generation of Feynman diagrams using QGRAF and the subsequent
 conversion of the obtained amplitudes into the FeynCalc notation.
@@ -70,9 +73,11 @@ TikZ-Feyman package. By evaluating
 we can create a file containing the styling for the fields present in
 our model, so that the diagrams will look nice. Then,
 
-\begin{verbatim}
-QGTZFCreateTeXFiles[qgOutput,Split->True];
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{QGTZFCreateTeXFiles}\OperatorTok{[}\NormalTok{qgOutput}\OperatorTok{,}\FunctionTok{Split}\OtherTok{{-}\textgreater{}}\ConstantTok{True}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
 
 will generate a TeX file for each of the diagrams located in
 \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$FeynCalcDirectory,\ \allowbreak{}"Database",\ \allowbreak{}"ElAelToElAelAt1L",\ \allowbreak{}"TeX"\}]]}.
@@ -80,10 +85,12 @@ Provided that we have \texttt{GNU parallel} and \texttt{pdfunite}
 installed, we can now switch to the terminal, enter the corresponding
 directory and generate the diagrams via
 
-\begin{verbatim}
-./makeDiagrams.sh
-./glueDiagrams.sh
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{.}\SpecialCharTok{/}\NormalTok{makeDiagrams.sh}
+\NormalTok{.}\SpecialCharTok{/}\NormalTok{glueDiagrams.sh}
+\end{Highlighting}
+\end{Shaded}
 
 If everything goes as expected, this will give us a file
 \texttt{allDiagrams.pdf} containing all the generated diagrams.
@@ -111,4 +118,63 @@ corresponding insertions file. Finally, with
 
 we obtain the list of our amplitudes ready for a subsequent evaluation
 within FeynCalc.
+
+\hypertarget{custom-models}{%
+\subsection{Custom models}\label{custom-models}}
+
+The following example shows how to generate diagrams for a custom
+\(\phi^4\)-model, where we write our own model file and implement the
+corresponding Feynman rules.
+
+The process of writing new models is explained in the QGRAF manual. The
+only special feature required for a FeynCalc is a custom function in the
+propagators called \texttt{mass} that encodes the mass of the particles.
+A model for the real scalar field with quartic self-interactions can be
+implemented as follows
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{[}\NormalTok{ model }\ExtensionTok{=}\NormalTok{ \textquotesingle{}phi}\SpecialCharTok{\^{}}\DecValTok{4}\NormalTok{\textquotesingle{} }\OperatorTok{]}
+
+\SpecialCharTok{\%}\NormalTok{ Propagators:}
+\OperatorTok{[}\NormalTok{Phi}\OperatorTok{,}\NormalTok{ Phi}\OperatorTok{,} \SpecialCharTok{+}\NormalTok{; mass}\ExtensionTok{=}\NormalTok{\textquotesingle{}mphi\textquotesingle{}}\OperatorTok{]}
+
+\SpecialCharTok{\%}\NormalTok{ Vertices:}
+\OperatorTok{[}\NormalTok{Phi}\OperatorTok{,}\NormalTok{  Phi}\OperatorTok{,}\NormalTok{  Phi}\OperatorTok{,}\NormalTok{ Phi}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+We need to introduce Feynman rules for the external states, propagators
+and vertices. Notice that in the case of vertices all momenta should be
+ingoing. The corresponding model file and the collection of insertions
+are located in
+\texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$FeynHelpersDirectory,\ \allowbreak{}"Documentation",\ \allowbreak{}"Examples",\ \allowbreak{}"Phi4\}];}
+When using QGRAF via the FeynHelpers interface we need to specify the
+full path to those files. For example,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{qgModel}\ExtensionTok{=}\FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynHelpersDirectory}\OperatorTok{,}\StringTok{"Documentation"}\OperatorTok{,}
+\StringTok{"Examples"}\OperatorTok{,}\StringTok{"Phi4"}\OperatorTok{,}\StringTok{"Phi4"}\OperatorTok{\}]}\NormalTok{;}
+
+\NormalTok{qgInsertions}\ExtensionTok{=}\FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynHelpersDirectory}\OperatorTok{,}\StringTok{"Documentation"}\OperatorTok{,}
+\StringTok{"Examples"}\OperatorTok{,}\StringTok{"Phi4"}\OperatorTok{,}\StringTok{"Insertions{-}Phi4.m"}\OperatorTok{\}]}\NormalTok{;}
+
+\NormalTok{qgOutput}\ExtensionTok{=}\NormalTok{QGCreateAmp}\OperatorTok{[}\DecValTok{1}\OperatorTok{,\{}\StringTok{"Phi[p1]"}\OperatorTok{,}\StringTok{"Phi[p2]"}\OperatorTok{\}}\OtherTok{{-}\textgreater{}}\OperatorTok{\{}\StringTok{"Phi[p3]"}\OperatorTok{,}\StringTok{"Phi[p4]"}\OperatorTok{\},}
+\NormalTok{QGModel}\OtherTok{{-}\textgreater{}}\NormalTok{qgModel}\OperatorTok{,}\NormalTok{ QGLoopMomentum}\OtherTok{{-}\textgreater{}}\FunctionTok{l}\OperatorTok{,}\NormalTok{QGOptions}\OtherTok{{-}\textgreater{}}\OperatorTok{\{}\StringTok{"notadpole"}\OperatorTok{,}\StringTok{"onshell"}\OperatorTok{\},}
+\NormalTok{QGOutputDirectory}\OtherTok{{-}\textgreater{}}\FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynCalcDirectory}\OperatorTok{,}\StringTok{"Database"}\OperatorTok{,}\StringTok{"PhiPhiToPhiPhiAt1L"}\OperatorTok{\}]]}\NormalTok{;}
+
+\NormalTok{tikzStyles}\ExtensionTok{=}\NormalTok{QGTZFCreateFieldStyles}\OperatorTok{[}\NormalTok{qgModel}\OperatorTok{,}\NormalTok{qgOutput}\OperatorTok{,}
+\NormalTok{QGFieldStyles}\OtherTok{{-}\textgreater{}}\OperatorTok{\{\{}\StringTok{"Phi"}\OperatorTok{,}\StringTok{"scalar"}\OperatorTok{,}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{phi"}\OperatorTok{\}\}]}\NormalTok{;}
+
+\NormalTok{QGTZFCreateTeXFiles}\OperatorTok{[}\NormalTok{qgOutput}\OperatorTok{,}\FunctionTok{Split}\OtherTok{{-}\textgreater{}}\ConstantTok{True}\OperatorTok{]}\NormalTok{;}
+
+\NormalTok{QGLoadInsertions}\OperatorTok{[}\NormalTok{qgInsertions}\OperatorTok{]}
+
+\NormalTok{amps}\ExtensionTok{=}\NormalTok{QGConvertToFC}\OperatorTok{[}\NormalTok{qgOutput}\OperatorTok{,}\NormalTok{DiracChainJoin}\OtherTok{{-}\textgreater{}}\ConstantTok{True}\OperatorTok{,}\NormalTok{QGInsertionRule}\OtherTok{{-}\textgreater{}}\OperatorTok{\{}\FunctionTok{FileBaseName}\OperatorTok{[}\NormalTok{qgInsertions}\OperatorTok{]\}]}\SpecialCharTok{//}\NormalTok{SMPToSymbol;}
+
+\NormalTok{amps}
+\end{Highlighting}
+\end{Shaded}
+
 \end{document}
