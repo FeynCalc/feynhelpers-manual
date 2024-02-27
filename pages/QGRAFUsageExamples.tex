@@ -63,7 +63,7 @@ TikZ-Feyman package. By evaluating
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tikzStyles}\ExtensionTok{=}\NormalTok{QGTZFCreateFieldStyles}\OperatorTok{[}\NormalTok{qgModel}\OperatorTok{,}\StringTok{"QEDOneFlavor"}\OperatorTok{,}
+\NormalTok{tikzStyles}\ExtensionTok{=}\NormalTok{QGTZFCreateFieldStyles}\OperatorTok{[}\StringTok{"QEDOneFlavor"}\OperatorTok{,}\NormalTok{ qgOutput}\OperatorTok{,}
 \NormalTok{QGFieldStyles}\OtherTok{{-}\textgreater{}}\OperatorTok{\{\{}\StringTok{"Ga"}\OperatorTok{,}\StringTok{"photon"}\OperatorTok{,}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{gamma"}\OperatorTok{\},}
 \OperatorTok{\{}\StringTok{"El"}\OperatorTok{,}\StringTok{"fermion"}\OperatorTok{,}\StringTok{"e\^{}{-}"}\OperatorTok{\},}
 \OperatorTok{\{}\StringTok{"Ael"}\OperatorTok{,}\StringTok{"anti fermion"}\OperatorTok{,}\StringTok{"e\^{}+"}\OperatorTok{\}\}]}\NormalTok{;}
@@ -94,6 +94,11 @@ directory and generate the diagrams via
 
 If everything goes as expected, this will give us a file
 \texttt{allDiagrams.pdf} containing all the generated diagrams.
+
+If one wants to visualize the momentum flow through the diagrams, one
+can use a special style when calling \texttt{QGCreateAmp}. This is done
+by setting the option \texttt{QGDiagramStyle} to
+\texttt{tikz-feynman-momentumflow.sty}.
 
 Coming back to the analytic part of the calculation, we need to load the
 list of Feynman rules for the vertices and propagators present in the

@@ -1,0 +1,112 @@
+% !TeX program = pdflatex
+% !TeX root = FIREUsageExamples.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{fire usage examples}{
+\section{FIRE usage examples}\label{fire usage examples}\index{FIRE usage examples}}
+
+The main idea behind the FeynHelpers interface to FIRE is to facilitate
+the generation of FIRE scripts for reducing the given sets of loop
+integrals written in the FeynCalc notation (i.e.~as \texttt{GLI}s with
+the corresponding lists of \texttt{FCTopology} symbols) to masters.
+
+If needed, the reduction can be done by running the corresponding
+scripts from a Mathematica notebook, although we do not recommend using
+this approach for complicated calculations.
+
+Let us assume that upon simplifying some amplitude we have a list of
+topologies and the corresponding loop integrals that need to be reduced.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topos }\ExtensionTok{=} \OperatorTok{\{}\NormalTok{FCTopology}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{\{}\NormalTok{q2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\NormalTok{q1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\NormalTok{q1 }\SpecialCharTok{+}\NormalTok{ q2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{p} \SpecialCharTok{+}\NormalTok{ q1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{p} \SpecialCharTok{{-}}\NormalTok{ q2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{q1}\OperatorTok{,}\NormalTok{ q2}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{p}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{Hold}\OperatorTok{[}\NormalTok{Pair}\OperatorTok{][}\NormalTok{Momentum}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{D}\OperatorTok{],}\NormalTok{ Momentum}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{D}\OperatorTok{]]} \OtherTok{{-}\textgreater{}}\NormalTok{ pp}\OperatorTok{\},} \OperatorTok{\{\}]\}}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ints }\ExtensionTok{=} \OperatorTok{\{}\NormalTok{GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]\}}
+\end{Highlighting}
+\end{Shaded}
+
+The first step is to generate scripts for creating .sbases and .lbases
+files required by FIRE for the actual reduction. Those files are
+specific to the given topology, which is why we need to provide the list
+of the relevant topologies and as well as a path to the directory that
+will contain reductions files. Each topology will receive a separate
+subdirectory created from its name.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIREPrepareStartFile}\OperatorTok{[}\NormalTok{topos}\OperatorTok{,}\FunctionTok{NotebookDirectory}\OperatorTok{[]]}
+\end{Highlighting}
+\end{Shaded}
+
+If everything works as expected each topology directory will contain two
+Mathematica scripts, \texttt{CreateLiteRedFiles.m} and
+\texttt{CreateStartFile.m}. Both of them must be evaluated in the
+correct order. The first script analyzes the topology using LiteRed,
+while the second one uses this information to create .sbases and .lbases
+files. In the case of complicated topologies, running those scripts can
+take many minutes or even couple of hours. For simple topologies the
+process is usually so fast, that one can conveniently run it during the
+notebook evaluation. To this aim one may use
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIRECreateStartFile}\OperatorTok{[}\FunctionTok{NotebookDirectory}\OperatorTok{[],}\NormalTok{topos}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+The next step is to create a file containing the list of integrals and a
+configuration file for the reduction.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIRECreateConfigFile}\OperatorTok{[}\NormalTok{topos}\OperatorTok{,}\FunctionTok{NotebookDirectory}\OperatorTok{[]]}
+\NormalTok{FIRECreateIntegralFile}\OperatorTok{[}\NormalTok{ints}\OperatorTok{,}\NormalTok{topos}\OperatorTok{,}\FunctionTok{NotebookDirectory}\OperatorTok{[]]}
+\end{Highlighting}
+\end{Shaded}
+
+In particular, \texttt{FIRECreateConfigFile} offers a lot of options for
+fine-tuning the reduction parameters as one normally do it when writing
+such files by hand.
+
+Again, in the case of complicated topologies the reduction must be done
+on a powerful workstation or computer cluster and can take hours, days
+or even weeks. But as long as everything is simple enough, there should
+be no harm running it directly from the notebook via
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FIRERunReduction}\OperatorTok{[}\FunctionTok{NotebookDirectory}\OperatorTok{[],}\NormalTok{topos}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Notice, that in this case FeynHelpers runs the C++ version of FIRE via a
+shell script. To that aim FIRE must be properly compiled from source.
+
+Finally, in order to load the reduction tables into Mathematica it is
+convenient to use
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tables}\ExtensionTok{=}\NormalTok{FIREImportResults}\OperatorTok{[}\NormalTok{topos}\OperatorTok{,}\FunctionTok{NotebookDirectory}\OperatorTok{[]]}
+\end{Highlighting}
+\end{Shaded}
+
+which returns a list of replacement rules that can be directly applied
+to the given amplitude or perhaps exported to FORM.
+\end{document}

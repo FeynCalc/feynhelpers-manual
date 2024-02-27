@@ -1,0 +1,44 @@
+% !TeX program = pdflatex
+% !TeX root = LoopToolsUsageExamples.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{looptools usage examples}{
+\section{LoopTools usage examples}\label{looptools usage examples}\index{LoopTools usage examples}}
+
+The LoopTools interface allows to quickly evaluate Passarino-Veltman
+functions with suitable kinematics numerically using LoopTools.
+
+Given an amplitude written in terms of \texttt{PaVe}-functions
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{amp }\ExtensionTok{=} \FunctionTok{Get}\OperatorTok{[}\FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynHelpersDirectory}\OperatorTok{,} \StringTok{"Documentation"}\OperatorTok{,} \StringTok{"Examples"}\OperatorTok{,} \StringTok{"ampHToGG.m"}\OperatorTok{\}]]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+we can evaluate it by first loading LoopTools via
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LToolsLoadLibrary}\OperatorTok{[]}
+\end{Highlighting}
+\end{Shaded}
+
+and then running
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ampEval }\ExtensionTok{=}\NormalTok{ LToolsEvaluate}\OperatorTok{[}\NormalTok{amp}\OperatorTok{,}\NormalTok{ LToolsSetMudim }\OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{,}\NormalTok{ InitialSubstitutions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{mH }\OtherTok{{-}\textgreater{}} \DecValTok{125}\OperatorTok{,}\NormalTok{ mt }\OtherTok{{-}\textgreater{}} \DecValTok{173}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+where we set \(\mu = 1\). The resulting expression is then
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Collect2}\OperatorTok{[}\NormalTok{ampEval }\OtherTok{/.} \OperatorTok{\{}\FunctionTok{D} \OtherTok{{-}\textgreater{}} \DecValTok{4}\OperatorTok{,}\NormalTok{ mH }\OtherTok{{-}\textgreater{}} \DecValTok{125}\OperatorTok{,}\NormalTok{ mt }\OtherTok{{-}\textgreater{}} \DecValTok{173}\OperatorTok{\},}\NormalTok{ Pair}\OperatorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\end{document}
