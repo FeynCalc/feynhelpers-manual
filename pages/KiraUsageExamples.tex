@@ -1,0 +1,98 @@
+% !TeX program = pdflatex
+% !TeX root = KiraUsageExamples.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{kira usage examples}{
+\section{KIRA usage examples}\label{kira usage examples}\index{KIRA usage examples}}
+
+The main idea behind the FeynHelpers interface to KIRA is to facilitate
+the generation of KIRA config files for reducing the given sets of loop
+integrals written in the FeynCalc notation (i.e.~as \texttt{GLI}s with
+the corresponding lists of \texttt{FCTopology} symbols) to masters.
+
+If needed, the reduction can be done by running the corresponding
+scripts from a Mathematica notebook, although we do not recommend using
+this approach for complicated calculations.
+
+Let us assume that upon simplifying some amplitude we have a list of
+topologies and the corresponding loop integrals that need to be reduced.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topos }\ExtensionTok{=} \OperatorTok{\{}\NormalTok{FCTopology}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\NormalTok{SFAD}\OperatorTok{[\{\{}\NormalTok{q2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\NormalTok{q1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\NormalTok{q1 }\SpecialCharTok{+}\NormalTok{ q2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{p} \SpecialCharTok{+}\NormalTok{ q1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ SFAD}\OperatorTok{[\{\{}\FunctionTok{p} \SpecialCharTok{{-}}\NormalTok{ q2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\},} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\},} \DecValTok{1}\OperatorTok{\}]\},} \OperatorTok{\{}\NormalTok{q1}\OperatorTok{,}\NormalTok{ q2}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{p}\OperatorTok{\},} \OperatorTok{\{}\FunctionTok{Hold}\OperatorTok{[}\NormalTok{Pair}\OperatorTok{][}\NormalTok{Momentum}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{D}\OperatorTok{],}\NormalTok{ Momentum}\OperatorTok{[}\FunctionTok{p}\OperatorTok{,} \FunctionTok{D}\OperatorTok{]]} \OtherTok{{-}\textgreater{}}\NormalTok{ pp}\OperatorTok{\},} \OperatorTok{\{\}]\}}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ints }\ExtensionTok{=} \OperatorTok{\{}\NormalTok{GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{2}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}],} 
+\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \SpecialCharTok{{-}}\DecValTok{1}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{0}\OperatorTok{\}],}\NormalTok{ GLI}\OperatorTok{[}\StringTok{"fctopology1"}\OperatorTok{,} \OperatorTok{\{}\DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{,} \DecValTok{1}\OperatorTok{\}]\}}
+\end{Highlighting}
+\end{Shaded}
+
+The first step is to generate the job file.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KiraCreateJobFile}\OperatorTok{[}\NormalTok{topos}\OperatorTok{,}\NormalTok{ ints}\OperatorTok{,} \FunctionTok{NotebookDirectory}\OperatorTok{[]]}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that it is crucial to provide the list of integrals to be
+reduced, as the code will need some of their properties (top sectors)
+when writing the job file.
+
+The next steps are to create a file containing the list of integrals and
+a configuration file for the reduction. Notice that we must specify the
+mass dimension of all kinematic invariants appearing in the topology
+using the option \texttt{KiraMassDimensions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KiraCreateIntegralFile}\OperatorTok{[}\NormalTok{ints}\OperatorTok{,}\NormalTok{ topos}\OperatorTok{,} \FunctionTok{NotebookDirectory}\OperatorTok{[]]}
+\NormalTok{KiraCreateConfigFiles}\OperatorTok{[}\NormalTok{topos}\OperatorTok{,}\NormalTok{ ints}\OperatorTok{,} \FunctionTok{NotebookDirectory}\OperatorTok{[],} 
+\NormalTok{ KiraMassDimensions }\OtherTok{{-}\textgreater{}} \OperatorTok{\{}\NormalTok{pp }\OtherTok{{-}\textgreater{}} \DecValTok{1}\OperatorTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+In the case of complicated topologies the reduction must be done on a
+powerful workstation or computer cluster and can take hours, days or
+even weeks. But as long as everything is simple enough, there should be
+no harm running it directly from the notebook via
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KiraRunReduction}\OperatorTok{[}\FunctionTok{NotebookDirectory}\OperatorTok{[],}\NormalTok{ topos}\OperatorTok{,} 
+\NormalTok{ KiraBinaryPath }\OtherTok{{-}\textgreater{}} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\VariableTok{$HomeDirectory}\OperatorTok{,} \StringTok{"bin"}\OperatorTok{,} \StringTok{"kira"}\OperatorTok{\}],}
+\NormalTok{ KiraFermatPath }\OtherTok{{-}\textgreater{}} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\VariableTok{$HomeDirectory}\OperatorTok{,} \StringTok{"bin"}\OperatorTok{,} \StringTok{"ferl64"}\OperatorTok{,} \StringTok{"fer64"}\OperatorTok{\}]]}
+\end{Highlighting}
+\end{Shaded}
+
+Here it is important not only to specify the correct path to the KIRA
+binary (\texttt{KiraBinaryPath}) but also the one pointing to a suitable
+FERMAT binary (\texttt{KiraFermatPath}). The latter will be set via the
+shell environment variable \texttt{FERMATPATH}.
+
+Finally, in order to load the reduction tables into Mathematica it is
+convenient to use
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tables}\ExtensionTok{=}\NormalTok{KiraImportResults}\OperatorTok{[}\NormalTok{topos}\OperatorTok{,} \FunctionTok{NotebookDirectory}\OperatorTok{[]]}
+\end{Highlighting}
+\end{Shaded}
+
+which returns a list of replacement rules that can be directly applied
+to the given amplitude or perhaps exported to FORM.
+\end{document}
