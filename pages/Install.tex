@@ -21,11 +21,12 @@ warranty that this will work on your machine. \emph{If you are
 experiencing issues setting up a particular tools please contact the
 corresponding developer team.}
 
-\hypertarget{feynhelpers}{%
-\subsection{FeynHelpers}\label{feynhelpers}}
+\subsection{FeynHelpers}\label{feynhelpers}
 
-\hypertarget{automatic-installation}{%
-\subsubsection{Automatic installation}\label{automatic-installation}}
+\subsubsection{Automatic installation}\label{automatic-installation}
+
+\emph{Currently the stable version of FeynHelpers is not compatible with
+FeynCalc 10. Please use the development version instead!}
 
 Run the following instruction in a Kernel or Notebook session of
 Mathematica to install the stable version
@@ -48,8 +49,7 @@ FeynHelpers
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{manual-installation}{%
-\subsubsection{Manual installation}\label{manual-installation}}
+\subsubsection{Manual installation}\label{manual-installation}
 
 Create a directory \emph{FeynHelpers} inside
 
@@ -61,33 +61,28 @@ Create a directory \emph{FeynHelpers} inside
 
 and put the source code there.
 
-\hypertarget{fermat}{%
-\subsection{Fermat}\label{fermat}}
+\subsection{Fermat}\label{fermat}
 
 You can download FERMAT binaries for Linux or macOS from the
 \href{https://home.bway.net/lewis/zip.html}{developer's website}.
 
-\hypertarget{linux}{%
-\subsubsection{Linux}\label{linux}}
+\subsubsection{Linux}\label{linux}
 
 Copy the directory \texttt{ferl64} to
 \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"Fermat"\}]}.
 
-\hypertarget{macos}{%
-\subsubsection{macOS}\label{macos}}
+\subsubsection{macOS}\label{macos}
 
-Copy the directory \texttt{ferm64} to
+Copy the directory \texttt{ferm6} to
 \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"Fermat"\}]}.
 
-\hypertarget{windows}{%
-\subsubsection{Windows}\label{windows}}
+\subsubsection{Windows}\label{windows}
 
 Currently there is no native Windows version of FERMAT. The Linux
 version appears to be usable via WSL, but currently there is no support
 for that in FeynHelpers.
 
-\hypertarget{fire}{%
-\subsection{FIRE}\label{fire}}
+\subsection{FIRE}\label{fire}
 
 You can download the source code of FIRE from the
 \href{https://bitbucket.org/feynmanIntegrals/fire}{developer's website}.
@@ -108,27 +103,23 @@ option \texttt{FIRECompressor} of \texttt{FIRECreateConfigFile} to
 \texttt{"lz4"}. However, for performance reasons it is better to use the
 zstd compression algorithm.
 
-\hypertarget{linux-1}{%
-\subsubsection{Linux}\label{linux-1}}
+\subsubsection{Linux}\label{linux-1}
 
 The instructions for compiling FIRE from source on Linux are provided
 \href{https://bitbucket.org/feynmanIntegrals/fire/src/master/}{here}.
 
-\hypertarget{macos-1}{%
-\subsubsection{macOS}\label{macos-1}}
+\subsubsection{macOS}\label{macos-1}
 
 The instructions for compiling FIRE from source on macOS can be found
 \href{https://bitbucket.org/feynmanIntegrals/fire/issues/10/issue-of-the-installation-on-macos}{here}.
 
-\hypertarget{windows-1}{%
-\subsubsection{Windows}\label{windows-1}}
+\subsubsection{Windows}\label{windows-1}
 
 There is no native Windows port of FIRE. It should be possible to
 compile FIRE on WSL with an Ubuntu installation, but currently there is
 no support for that in FeynHelpers.
 
-\hypertarget{kira}{%
-\subsection{Kira}\label{kira}}
+\subsection{Kira}\label{kira}
 
 You can download the source code of Kira from the
 \href{https://gitlab.com/kira-pyred/kira}{developer's website}.
@@ -136,20 +127,17 @@ FeynHelpers does not require Kira to \emph{generate} the corresponding
 yaml files. However, in order to actually do the reduction one has to
 run those scripts, which is possible only when Kira is installed.
 
-\hypertarget{linux-and-macos}{%
-\subsubsection{Linux and macOS}\label{linux-and-macos}}
+\subsubsection{Linux and macOS}\label{linux-and-macos}
 
 The instructions for compiling Kira from source on Linux or macOS are
 provided \href{https://gitlab.com/kira-pyred/kira}{here}.
 
-\hypertarget{windows-2}{%
-\subsubsection{Windows}\label{windows-2}}
+\subsubsection{Windows}\label{windows-2}
 
 It should be possible to compile Kira on WSL with an Ubuntu
 installation, but currently there is no support for that in FeynHelpers.
 
-\hypertarget{package-x}{%
-\subsection{Package-X}\label{package-x}}
+\subsection{Package-X}\label{package-x}
 
 Package-X is not being developed or even maintained anymore. However,
 the author of the tool, Hiren H. Patel, kindly gave us permission to
@@ -164,8 +152,7 @@ of maintenance means that newly discovered bugs are not going to be
 fixed and there is no guarantee that it will continue to work with newer
 Mathematica versions.
 
-\hypertarget{pysecdec}{%
-\subsection{pySecDec}\label{pysecdec}}
+\subsection{pySecDec}\label{pysecdec}
 
 The installation instructions for pySecDec can be found
 \href{https://secdec.readthedocs.io/en/stable/installation.html\#download-the-program-and-install}{here}.
@@ -182,45 +169,38 @@ Please refer to the
 section} in the pySecDec manual for further details on setting
 \texttt{normaliz} up.
 
-\hypertarget{linux-or-macos}{%
-\subsubsection{Linux or macOS}\label{linux-or-macos}}
+\subsubsection{Linux or macOS}\label{linux-or-macos}
 
 It should be possible to install pySecDec via pip automatically.
 
-\hypertarget{windows-3}{%
-\subsubsection{Windows}\label{windows-3}}
+\subsubsection{Windows}\label{windows-3}
 
 It could be possible to set up pySecDec on WSL, but currently it is
 unclear whether this can work.
 
-\hypertarget{looptools}{%
-\subsection{LoopTools}\label{looptools}}
+\subsection{LoopTools}\label{looptools}
 
 On the \href{http://www.feynarts.de/looptools/}{developer's website} you
 can download not only the source code but also precompiled binaries
 
-\hypertarget{linux-or-macos-1}{%
-\subsubsection{Linux or macOS}\label{linux-or-macos-1}}
+\subsubsection{Linux or macOS}\label{linux-or-macos-1}
 
 Copy the self-compiled or precompiled MathLink executable
 \texttt{LoopTools} to
 \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"LoopTools"\}]}.
 
-\hypertarget{windows-4}{%
-\subsubsection{Windows}\label{windows-4}}
+\subsubsection{Windows}\label{windows-4}
 
 Rename the self-compiled or precompiled MathLink executable
 \texttt{LoopTools.exe} to \texttt{LoopTools} and copy it to
 \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"LoopTools"\}]}.
 
-\hypertarget{qgraf}{%
-\subsection{QGRAF}\label{qgraf}}
+\subsection{QGRAF}\label{qgraf}
 
 You can download the source code of QGRAF from the
 \href{http://cfif.ist.utl.pt/~paulo/qgraf.html}{developer's website}.
 
-\hypertarget{linux-and-macos-1}{%
-\subsubsection{Linux and macOS}\label{linux-and-macos-1}}
+\subsubsection{Linux and macOS}\label{linux-and-macos-1}
 
 The compilation instructions can be found in the section ``Compiling''
 of the manual \texttt{qgraf-3.x.y.pdf} inside the tarball. For example,
@@ -236,8 +216,7 @@ should do the job. Having compiled the program you need to move the
 binary file \texttt{qgraf} to
 \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FeynCalc",\ \allowbreak{}"AddOns",\ \allowbreak{}"FeynHelpers",\ \allowbreak{}"ExternalTools",\ \allowbreak{}"QGRAF",\ \allowbreak{}"Binary"\}]}.
 
-\hypertarget{windows-5}{%
-\subsubsection{Windows}\label{windows-5}}
+\subsubsection{Windows}\label{windows-5}
 
 To extract the source code tarball of QGRAF you need a tool that can
 deal with tar.gz archives, e.g. \href{https://www.7-zip.org/}{7-zip}.
