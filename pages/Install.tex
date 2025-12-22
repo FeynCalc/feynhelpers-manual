@@ -25,9 +25,6 @@ corresponding developer team.}
 
 \subsubsection{Automatic installation}\label{automatic-installation}
 
-\emph{Currently the stable version of FeynHelpers is not compatible with
-FeynCalc 10. Please use the development version instead!}
-
 Run the following instruction in a Kernel or Notebook session of
 Mathematica to install the stable version
 
@@ -85,16 +82,16 @@ for that in FeynHelpers.
 \subsection{FIRE}\label{fire}
 
 You can download the source code of FIRE from the
-\href{https://bitbucket.org/feynmanIntegrals/fire}{developer's website}.
-The content should be extracted to
+\href{https://gitlab.srcc.msu.ru/feynmanintegrals/fire}{developer's
+website}. The content should be extracted to
 \texttt{FileNameJoin[\allowbreak{}\{\allowbreak{}\$UserBaseDirectory,\ \allowbreak{}"Applications",\ \allowbreak{}"FIRE"\}]}.
 
-We recommend to enable support for zstd, lthreads, tcmalloc, snappy and
-zlib via
+We recommend to enable support for flint, zstd, lthreads, tcmalloc,
+snappy and zlib via
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{.}\SpecialCharTok{/}\NormalTok{configure }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{zlib }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{snappy }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{lthreads }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{tcmalloc }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{zstd}
+\NormalTok{.}\SpecialCharTok{/}\NormalTok{configure }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{zlib }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{snappy }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{lthreads }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{tcmalloc }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{zstd }\SpecialCharTok{{-}{-}}\AttributeTok{enable\_}\NormalTok{flint}
 \end{Highlighting}
 \end{Shaded}
 
@@ -198,7 +195,8 @@ Rename the self-compiled or precompiled MathLink executable
 \subsection{QGRAF}\label{qgraf}
 
 You can download the source code of QGRAF from the
-\href{http://cfif.ist.utl.pt/~paulo/qgraf.html}{developer's website}.
+\href{http://cefema-gt.tecnico.ulisboa.pt/~paulo/qgraf.html}{developer's
+website}.
 
 \subsubsection{Linux and macOS}\label{linux-and-macos-1}
 
@@ -208,7 +206,7 @@ on a Linux system equipped with a GNU Fortran compiler something like
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gfortran qgraf}\DecValTok{{-}3}\NormalTok{.}\DecValTok{6}\NormalTok{.}\FloatTok{3.}\NormalTok{f08 }\SpecialCharTok{{-}}\FunctionTok{o}\NormalTok{ qgraf}
+\NormalTok{gfortran qgraf}\FloatTok{{-}3.}\FunctionTok{x}\NormalTok{.}\FunctionTok{y}\NormalTok{.f08 }\SpecialCharTok{{-}}\FunctionTok{o}\NormalTok{ qgraf}
 \end{Highlighting}
 \end{Shaded}
 
