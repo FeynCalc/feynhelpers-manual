@@ -1,0 +1,140 @@
+% !TeX program = pdflatex
+% !TeX root = FIREReduceLoopIntegrals.tex
+
+\documentclass[../FeynHelpersManual.tex]{subfiles}
+\begin{document}
+\hypertarget{firereduceloopintegrals}{
+\section{FIREReduceLoopIntegrals}\label{firereduceloopintegrals}\index{FIREReduceLoopIntegrals}}
+
+\texttt{FIREReduceLoopIntegrals[\allowbreak{}glis,\ \allowbreak{}topos,\ \allowbreak{}path]}
+performs IBP reduction of loop integral listed in \texttt{glis} from the
+families given in \texttt{topos} using C++ FIRE. It returns reduction
+tables obtained from FIRE.
+
+Since all processes are started from the current Mathematica notebook,
+it can be reliably used only for simple integrals and topologies.
+
+\subsection{See also}
+
+\hyperlink{toc}{Overview},
+\hyperlink{firerunreduction}{FIRERunReduction}.
+
+\subsection{Examples}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glis }\ExtensionTok{=} \FunctionTok{Get}\OperatorTok{[}\FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynHelpersDirectory}\OperatorTok{,} \StringTok{"Documentation"}\OperatorTok{,} \StringTok{"Examples"}\OperatorTok{,} \StringTok{"glglToHH1L"}\OperatorTok{,} \StringTok{"glis.m"}\OperatorTok{\}]]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glis }\SpecialCharTok{//} \FunctionTok{Length}
+
+\CommentTok{(*79*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glis}\OperatorTok{[[}\DecValTok{1}\NormalTok{ ;; }\DecValTok{5}\OperatorTok{]]}
+
+\CommentTok{(*\{GLI[glglToHH1Ltopo1, \{{-}1, 1, 1, 1\}], GLI[glglToHH1Ltopo1, \{0, 0, 1, 1\}], GLI[glglToHH1Ltopo1, \{0, 1, 0, 1\}],GLI[glglToHH1Ltopo1, \{0, 1, 1, 0\}], GLI[glglToHH1Ltopo1, \{0, 1, 1, 1\}]\}*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topos }\ExtensionTok{=} \FunctionTok{Get}\OperatorTok{[}\FunctionTok{FileNameJoin}\OperatorTok{[\{}\NormalTok{$FeynHelpersDirectory}\OperatorTok{,} \StringTok{"Documentation"}\OperatorTok{,} \StringTok{"Examples"}\OperatorTok{,} \StringTok{"glglToHH1L"}\OperatorTok{,} \StringTok{"topos.m"}\OperatorTok{\}]]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topos}\OperatorTok{[[}\DecValTok{1}\OperatorTok{]]} \SpecialCharTok{//}\NormalTok{ FCE}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FCTopology}\left[\text{glglToHH1Ltopo1},\left\{\text{SFAD}\left[\left\{\{k,0\},\left\{\text{mt}^2,1\right\},1\right\}\right],\text{SFAD}\left[\left\{\{k+\text{q1},0\},\left\{\text{mt}^2,1\right\},1\right\}\right],\text{SFAD}\left[\left\{\{k+\text{p2}+\text{q1},0\},\left\{\text{mt}^2,1\right\},1\right\}\right],\text{SFAD}\left[\left\{\{k+\text{p2}+\text{q1}+\text{q2},0\},\left\{\text{mt}^2,1\right\},1\right\}\right]\right\},\{k\},\{\text{p2},\text{q1},\text{q2}\},\left\{s\to 2 \;\text{mh}^2-t-u,\text{Hold}[\text{Pair}][\text{Momentum}[\text{p1},D],\text{Momentum}[\text{p2},D]]\to \frac{1}{2} \left(2 \;\text{mh}^2-t-u\right),\text{Hold}[\text{Pair}][\text{Momentum}[\text{p1},D],\text{Momentum}[\text{q1},D]]\to -\frac{\text{mh}^2}{2}+\frac{t}{2},\text{Hold}[\text{Pair}][\text{Momentum}[\text{p1},D],\text{Momentum}[\text{q2},D]]\to -\frac{\text{mh}^2}{2}+\frac{u}{2},\text{Hold}[\text{Pair}][\text{Momentum}[\text{p2},D],\text{Momentum}[\text{p2},D]]\to 0,\text{Hold}[\text{Pair}][\text{Momentum}[\text{p2},D],\text{Momentum}[\text{q1},D]]\to -\frac{\text{mh}^2}{2}+\frac{u}{2},\text{Hold}[\text{Pair}][\text{Momentum}[\text{p2},D],\text{Momentum}[\text{q2},D]]\to -\frac{\text{mh}^2}{2}+\frac{t}{2},\text{Hold}[\text{Pair}][\text{Momentum}[\text{q1},D],\text{Momentum}[\text{q1},D]]\to \;\text{mh}^2,\text{Hold}[\text{Pair}][\text{Momentum}[\text{q1},D],\text{Momentum}[\text{q2},D]]\to -\text{mh}^2+\frac{1}{2} \left(2 \;\text{mh}^2-t-u\right),\text{Hold}[\text{Pair}][\text{Momentum}[\text{q2},D],\text{Momentum}[\text{q2},D]]\to \;\text{mh}^2\right\},\{\}\right]
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dir }\ExtensionTok{=} \FunctionTok{FileNameJoin}\OperatorTok{[\{}\VariableTok{$TemporaryDirectory}\OperatorTok{,} \StringTok{"Docu{-}Reduction{-}glglToHH{-}1L"}\OperatorTok{\}]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tables }\ExtensionTok{=}\NormalTok{ FIREReduceLoopIntegrals}\OperatorTok{[}\NormalTok{glis}\OperatorTok{,}\NormalTok{ topos}\OperatorTok{,}\NormalTok{ dir}\OperatorTok{]}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FIREPrepareStartFile: }\;\text{Created }3\text{ script files.}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{(*Creating config file (1/3) for glglToHH1Ltopo1 (glglToHH1Ltopo1.config)... done.}
+\CommentTok{Creating config file (2/3) for glglToHH1Ltopo2 (glglToHH1Ltopo2.config)... done.}
+\CommentTok{Creating config file (3/3) for glglToHH1Ltopo3 (glglToHH1Ltopo3.config)... done.}
+
+\CommentTok{glglToHH1Ltopo1, number of loop integrals: 15}
+\CommentTok{glglToHH1Ltopo2, number of loop integrals: 32}
+\CommentTok{glglToHH1Ltopo3, number of loop integrals: 32}
+
+\CommentTok{Creating LiteRed files (1/3) for glglToHH1Ltopo1... done, timing: 3.369}
+\CommentTok{Creating LiteRed files (2/3) for glglToHH1Ltopo2... done, timing: 3.343}
+\CommentTok{Creating LiteRed files (3/3) for glglToHH1Ltopo3... done, timing: 3.346}
+
+\CommentTok{Creating FIRE files (1/3) for glglToHH1Ltopo1... done, timing: 6.265}
+\CommentTok{Creating FIRE files (2/3) for glglToHH1Ltopo2... done, timing: 6.150}
+\CommentTok{Creating FIRE files (3/3) for glglToHH1Ltopo3... done, timing: 6.392}
+
+\CommentTok{Running reduction (1/3) for glglToHH1Ltopo1... done, timing: 0.8302}
+\CommentTok{Running reduction (2/3) for glglToHH1Ltopo2... done, timing: 4.168}
+\CommentTok{Running reduction (3/3) for glglToHH1Ltopo3... done, timing: 4.170}
+
+\CommentTok{Importing reduction tables (1/3) for FileBaseName[glglToHH1Ltopo1]... done.}
+\CommentTok{Importing reduction tables (2/3) for FileBaseName[glglToHH1Ltopo2]... done.}
+\CommentTok{Importing reduction tables (3/3) for FileBaseName[glglToHH1Ltopo3]... done.}
+\CommentTok{*)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateConfigFile: }\;\text{Created }3\text{ .config files.}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateIntegralFile: }\;\text{Created }3\text{ integral files.}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateLiteRedFiles: }\;\text{Run }3\text{ script files.}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FIRECreateStartFile: }\;\text{Run }3\text{ script files.}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FIRERunReduction: }\;\text{Reduced }3\text{ topologies.}
+\end{dmath*}
+
+\begin{dmath*}\breakingcomma
+\text{FIREImportResults: }\;\text{Imported }3\text{ reduction tables.}
+\end{dmath*}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tables}\OperatorTok{[[}\DecValTok{1}\NormalTok{ ;; }\DecValTok{3}\OperatorTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{dmath*}\breakingcomma
+\left\{G^{\text{glglToHH1Ltopo1}}(1,1,1,1)\to G^{\text{glglToHH1Ltopo1}}(1,1,1,1),G^{\text{glglToHH1Ltopo1}}(1,1,-1,1)\to \frac{G^{\text{glglToHH1Ltopo1}}(0,0,0,1) \left(-D \;\text{mh}^2+D u+2 \;\text{mh}^2-2 u\right)}{2 \;\text{mh}^2 \;\text{mt}^2-2 \;\text{mt}^2 t}+\frac{G^{\text{glglToHH1Ltopo1}}(0,0,1,1) \left(3 \;\text{mh}^4-\text{mh}^2 t-\text{mh}^2 u-t u\right)}{\text{mh}^4-2 \;\text{mh}^2 t+t^2}+\frac{G^{\text{glglToHH1Ltopo1}}(0,1,0,1) \left(-\text{mh}^4-2 \;\text{mh}^2 t+t^2+2 t u\right)}{\text{mh}^4-2 \;\text{mh}^2 t+t^2}+\frac{G^{\text{glglToHH1Ltopo1}}(0,1,1,1) \left(\text{mh}^4-t u\right)}{\text{mh}^2-t},G^{\text{glglToHH1Ltopo1}}(1,1,0,1)\to G^{\text{glglToHH1Ltopo1}}(0,1,1,1)\right\}
+\end{dmath*}
+\end{document}
